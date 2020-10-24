@@ -20,7 +20,7 @@ public class LevelCreator : Singleton<LevelCreator>
 
    public EnemyList.EnemyTypes m_EnemyTypes;
    public Node.NodeTypes m_NodeType;
-   public CombatNode.CombatNodeTypes m_CombatNodeTypes;
+   public LevelNode.CombatNodeTypes m_CombatNodeTypes;
    public PropList.NodeReplacements m_NodeReplacements;
    public PropList.Props m_PropIndex;
    
@@ -30,7 +30,7 @@ public class LevelCreator : Singleton<LevelCreator>
    
    
    public  GameObject m_Selector;
-   private CombatNode m_CurrentNode;
+   private LevelNode m_CurrentNode;
    private int layerMask;
     
     public void StartEditor()

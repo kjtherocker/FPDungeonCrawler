@@ -18,9 +18,9 @@ public class GridFormations : MonoBehaviour
     public Vector2Int m_GridDimensions;
 
     public GameObject m_PrefabNode;
-    public CombatNode[,] m_GridPathArray;
+    public LevelNode[,] m_GridPathArray;
 
-    public List<CombatNode> m_ListToConvert;
+    public List<LevelNode> m_ListToConvert;
     public Material m_SelectedMaterial;
     public Grid m_Grid;
 
@@ -50,7 +50,7 @@ public class GridFormations : MonoBehaviour
     public void CreateGrid(Vector2Int grid)
     {
 
-        m_GridPathArray = new CombatNode[m_GridDimensions.x, m_GridDimensions.y];
+        m_GridPathArray = new LevelNode[m_GridDimensions.x, m_GridDimensions.y];
 
         for (int x = 0; x < grid.x; x++)
         {
@@ -62,7 +62,7 @@ public class GridFormations : MonoBehaviour
 
                 tempCombatnode.gameObject.transform.parent = Node.transform;
                 
-                m_GridPathArray[x, y] = tempCombatnode.GetComponent<CombatNode>();
+                m_GridPathArray[x, y] = tempCombatnode.GetComponent<LevelNode>();
 
                 m_GridPathArray[x, y].gameObject.name  = x + " " + y;
                 

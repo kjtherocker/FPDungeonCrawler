@@ -6,8 +6,17 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 
-public class CombatNode : Cell
+public class LevelNode : Cell
 {
+
+    public enum NodeDirections
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+
     public enum CombatNodeTypes
     {
         Normal,
@@ -36,14 +45,11 @@ public class CombatNode : Cell
     public Vector2Int m_PositionInGrid;
 
     public int m_MovementCost;
-    
-
     public int m_NodeHeight;
-
     public float m_NodeHeightOffset;
-    
     public bool m_IsGoal;
     public bool m_HeuristicCalculated;
+    
     public bool m_IsWalkable;
     public bool m_IsCovered;
     public DomainCombatNode m_DomainCombatNode;
@@ -51,13 +57,9 @@ public class CombatNode : Cell
 
     
     public NodeReplacement m_NodeReplacement;
-    
-
     public Creatures m_CreatureOnGridPoint;
 
-    List<CombatNode> neighbours = null;
-    
-
+    List<LevelNode> neighbours = null;
     public Grid m_Grid;
 
 
@@ -71,46 +73,39 @@ public class CombatNode : Cell
 
     public PropList.NodeReplacements m_NodeReplacementOnNode;
 
-    public GridFormations NodesGridFormation;
-    
+    public List<NodeDirections> m_WalkableDirections;
 
-    public Memoria m_MemoriaOnTop;
+    public List<GameObject> NodeWalls;
     
-    private float m_DomainSwapAmount;
+    public GridFormations NodesGridFormation;
+    public Memoria m_MemoriaOnTop;
+
     // Use this for initialization
+
+    public void Start()
+    {
+        SetLevelNode();
+    }
+
     public void Initialize()
     {
         m_MovementCost = 1;
 
         m_Grid = Grid.Instance;
         
+        m_DomainCombatNode = LevelNode.DomainCombatNode.None;
 
-        m_DomainCombatNode = CombatNode.DomainCombatNode.None;
-
-
-
-
+        SetLevelNode();
     }
-    
-    
-    //Regioned the function since it was long and ugly
-    
 
-    public void DestroyNodeReplacement()
+    public void SetLevelNode()
     {
-       // DestroyImmediate(m_NodeReplacement.gameObject);
-       // m_CurrentWalkablePlaneBeingUsed = m_WalkablePlane;
-    }
-
-    public void SetCombatNode(CombatNode aCombatnode)
-    {
-        m_CombatsNodeType = aCombatnode.m_CombatsNodeType;
-   
-        m_PropOnNode = aCombatnode.m_PropOnNode;
-        m_NodeReplacementOnNode = aCombatnode.m_NodeReplacementOnNode;
+        foreach(NodeDirections node in m_WalkableDirections)
+        {
+            NodeWalls[(int)node].SetActive(false);
+        }
 
     }
-
 
 
     public void DestroyEnemy()
@@ -225,11 +220,11 @@ public class CombatNode : Cell
         new Vector2(1, 0), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(0, -1)
     };
     
-    public override List<CombatNode> GetNeighbours(List<CombatNode> cells)
+    public override List<LevelNode> GetNeighbours(List<LevelNode> cells)
     {
         if (neighbours == null)
         {
-            neighbours = new List<CombatNode>(4);
+            neighbours = new List<LevelNode>(4);
             foreach (var direction in _directions)
             {
                 var neighbour = cells.Find(c => c.m_PositionInGrid == m_PositionInGrid + direction);

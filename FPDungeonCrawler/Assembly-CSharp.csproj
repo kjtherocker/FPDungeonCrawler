@@ -98,7 +98,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\SkillList.cs" />
      <Compile Include="Assets\Scripts\Game\Props\NodeReplacement.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Enemys\Forest Enemys\RedKnight\RedKnightPhase4.cs" />
-     <Compile Include="Assets\Scripts\Game\TerrainScripts\CombatNode.cs" />
+     <Compile Include="Assets\Scripts\Game\TerrainScripts\LevelNode.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\GridEditor.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueTrack.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Domain\DomainList.cs" />
@@ -163,6 +163,7 @@
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
+     <Compile Include="Assets\Scripts\Game\MapEditor\Level.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>F:/FPDungeonCrawlerUnitty/FPDungeonCrawler/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

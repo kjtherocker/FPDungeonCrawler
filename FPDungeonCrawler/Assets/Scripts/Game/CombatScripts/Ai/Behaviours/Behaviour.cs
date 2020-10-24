@@ -31,7 +31,7 @@ public class Behaviour
         yp = temp;
     }
     
-    public virtual bool CheckIfNodeIsClearForRange(CombatNode aNode)
+    public virtual bool CheckIfNodeIsClearForRange(LevelNode aNode)
     {
         // if the node is out of bounds, return -1 (an invalid tile index)
 
@@ -40,7 +40,7 @@ public class Behaviour
             Debug.Log("YOU BROKE " + aNode.m_PositionInGrid.ToString());
         }
 
-        CombatNode nodeIndex = aNode;
+        LevelNode nodeIndex = aNode;
 
         // if the node is already closed, return -1 (an invalid tile index)
         if (nodeIndex.m_HeuristicCalculated == true)
@@ -49,12 +49,12 @@ public class Behaviour
         }
         // if the node can't be walked on, return -1 (an invalid tile index)
 
-        if (nodeIndex.m_CombatsNodeType == CombatNode.CombatNodeTypes.Wall)
+        if (nodeIndex.m_CombatsNodeType == LevelNode.CombatNodeTypes.Wall)
         {
             return false;
         }
         
-        if (nodeIndex.m_CombatsNodeType == CombatNode.CombatNodeTypes.Empty)
+        if (nodeIndex.m_CombatsNodeType == LevelNode.CombatNodeTypes.Empty)
         {
             return false;
         }
@@ -67,16 +67,16 @@ public class Behaviour
         return true;
     }
     
-    public virtual Dictionary<CombatNode, Dictionary<CombatNode, int>> GetGraphRangeEdges(List<CombatNode> NodeList, CombatNode ANodeObjectIsOn)
+    public virtual Dictionary<LevelNode, Dictionary<LevelNode, int>> GetGraphRangeEdges(List<LevelNode> NodeList, LevelNode ANodeObjectIsOn)
     {
-        Dictionary<CombatNode, Dictionary<CombatNode, int>> ret = new Dictionary<CombatNode, Dictionary<CombatNode, int>>();
+        Dictionary<LevelNode, Dictionary<LevelNode, int>> ret = new Dictionary<LevelNode, Dictionary<LevelNode, int>>();
 
-        foreach (CombatNode Node in NodeList)
+        foreach (LevelNode Node in NodeList)
         {
             if (CheckIfNodeIsClearForRange(Node) == true || Node.Equals(ANodeObjectIsOn))
             {
-                ret[Node] = new Dictionary<CombatNode, int>();
-                foreach (CombatNode neighbour in Node.GetNeighbours(NodeList))
+                ret[Node] = new Dictionary<LevelNode, int>();
+                foreach (LevelNode neighbour in Node.GetNeighbours(NodeList))
                 {
                     if (CheckIfNodeIsClearForRange(neighbour) == true)
                     {

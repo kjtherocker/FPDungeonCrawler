@@ -12,7 +12,7 @@ public class EnemyAiController : AiController
     public bool m_EndMovement;
     public int m_EnemyRange;
     public Behaviour m_Behaviour;
-    public Dictionary<CombatNode, List<CombatNode>> cacheRangePath;
+    public Dictionary<LevelNode, List<LevelNode>> cacheRangePath;
 
     public bool DoNothing;
     
@@ -37,10 +37,10 @@ public class EnemyAiController : AiController
 
     }
 
-    public HashSet<CombatNode> GetAvailableEnemysInRange(List<CombatNode> Acells, CombatNode ANodeHeuristicIsBasedOff,
+    public HashSet<LevelNode> GetAvailableEnemysInRange(List<LevelNode> Acells, LevelNode ANodeHeuristicIsBasedOff,
         int ARange)
     {
-        cacheRangePath = new Dictionary<CombatNode, List<CombatNode>>();
+        cacheRangePath = new Dictionary<LevelNode, List<LevelNode>>();
 
         var paths = cacheRangePaths(Acells, ANodeHeuristicIsBasedOff);
         foreach (var key in paths.Keys)
@@ -56,10 +56,10 @@ public class EnemyAiController : AiController
             }
         }
 
-        return new HashSet<CombatNode>(cacheRangePath.Keys);
+        return new HashSet<LevelNode>(cacheRangePath.Keys);
     }
 
-    public override IEnumerator GetToGoal(List<CombatNode> aListOfNodes)
+    public override IEnumerator GetToGoal(List<LevelNode> aListOfNodes)
     {
 
         if (aListOfNodes == null)
@@ -143,8 +143,8 @@ public class EnemyAiController : AiController
     }
 
 
-    public Dictionary<CombatNode, List<CombatNode>> cacheRangePaths(List<CombatNode> cells,
-        CombatNode aNodeHeuristicIsBasedOn)
+    public Dictionary<LevelNode, List<LevelNode>> cacheRangePaths(List<LevelNode> cells,
+        LevelNode aNodeHeuristicIsBasedOn)
     {
         var edges = m_Behaviour.GetGraphRangeEdges(cells, Node_ObjectIsOn);
         var paths = _Pathfinder.findAllPaths(edges, aNodeHeuristicIsBasedOn,m_Movement);
@@ -157,7 +157,7 @@ public class EnemyAiController : AiController
         m_NodeInWalkableRange = GetAvailableEnemysInRange(m_Grid.m_GridPathList, Node_ObjectIsOn, m_EnemyRange);
 
         List<Creatures> m_AllysInRange = new List<Creatures>();
-        foreach (CombatNode node in m_NodeInWalkableRange)
+        foreach (LevelNode node in m_NodeInWalkableRange)
         {
             if (CheckIfAllyIsOnNode(node))
             {
@@ -170,7 +170,7 @@ public class EnemyAiController : AiController
 
             Creatures CharacterInRange = m_Behaviour.AllyToAttack(m_AllysInRange);
 
-            CombatNode NodeNeightboringAlly =
+            LevelNode NodeNeightboringAlly =
                 Grid.instance.CheckNeighborsForLowestNumber(CharacterInRange.m_CreatureAi.m_Position);
 
 
@@ -196,7 +196,7 @@ public class EnemyAiController : AiController
         
 
         List<Creatures> m_AllysInRange = new List<Creatures>();
-        foreach (CombatNode node in m_NodeInWalkableRange)
+        foreach (LevelNode node in m_NodeInWalkableRange)
         {
             if (CheckIfAllyIsOnNode(node))
             {
@@ -222,7 +222,7 @@ public class EnemyAiController : AiController
         return;
     }
 
-    public bool CheckIfAllyIsOnNode(CombatNode aNode)
+    public bool CheckIfAllyIsOnNode(LevelNode aNode)
     {
         if (aNode.m_CreatureOnGridPoint != null && m_Creature != aNode.m_CreatureOnGridPoint)
         {
