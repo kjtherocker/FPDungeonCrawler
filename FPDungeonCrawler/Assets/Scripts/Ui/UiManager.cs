@@ -8,7 +8,6 @@ public class UiManager : Singleton<UiManager>
     {
         CommandBoard,
         SkillBoard,
-        ArenaMenu,
         DomainBoard,
         DomainClash,
         Memoria,

@@ -33,7 +33,7 @@ public class InitializeCombatArena : MonoBehaviour
         
         Debug.Log("Preload Is Initialized");
     
-        TacticsManager.Instance.CombatStart(m_CurrentLevel);
+        TacticsManager.Instance.CombatStart();
     }
 
 }

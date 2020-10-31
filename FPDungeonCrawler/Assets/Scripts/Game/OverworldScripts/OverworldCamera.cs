@@ -16,15 +16,9 @@ public class OverworldCamera : MonoBehaviour
             SceneManager.LoadScene("PreloadScene", LoadSceneMode.Additive);
         }
 #endif
-        StartCoroutine(Testo());
+   
     }
 
-    public IEnumerator Testo()
-    {
-        
-        yield return new WaitForSeconds(0.1f);
-        UiManager.Instance.PushScreen(UiManager.Screen.ArenaMenu);
-        
-    }
+
 
 }

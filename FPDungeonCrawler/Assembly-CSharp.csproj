@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Ui\UiManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\Attack.cs" />
      <Compile Include="Assets\Scripts\Game\JsonHelper.cs" />
+     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiScreenCommandBoard.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\NodeFormations.cs" />
      <Compile Include="Assets\Scripts\Input\InputManager.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\LevelCreator.cs" />
@@ -77,7 +78,7 @@
      <Compile Include="Assets\Scripts\Ui\ButtonWrappers\DomainWrapper.cs" />
      <Compile Include="Assets\Scripts\Input\BaseInput.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\Devour\Devour.cs" />
-     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\ArenaButton.cs" />
+     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\HighlightButton.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Domain\Fire\CrystalFool.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Enemys\Enemy.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\Skills.cs" />
@@ -136,6 +137,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\AiFlying.cs" />
      <Compile Include="Assets\Scripts\Ui\ButtonWrappers\DomainClashTabs.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueClip.cs" />
+     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiSkillBoard.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AilmentSkills\Poison.cs" />
      <Compile Include="Assets\Scripts\Game\Props\Prop.cs" />
      <Compile Include="Assets\Scripts\Game\OverworldScripts\OverWorldPlayer.cs" />
@@ -144,6 +146,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\ResurrectSkills\PhoenixSpirit.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiStatus.cs" />
      <Compile Include="Assets\Scripts\Input\PlayerInput.cs" />
      <Compile Include="Assets\Scripts\Game\Initializer\MainMenuInitialize.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\GridFormations.cs" />
@@ -164,7 +167,7 @@
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
-     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiStatus.cs" />
+     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiArenaList.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

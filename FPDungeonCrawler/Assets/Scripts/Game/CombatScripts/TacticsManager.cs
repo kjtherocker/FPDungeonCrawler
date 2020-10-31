@@ -24,19 +24,14 @@ public class TacticsManager : Singleton<TacticsManager>
 
     public Vector3 CreatureOffset;
 
-    private GridFormations m_Gridformation;
-
     public HealthBar m_Healthbar;
     
 
     public TextMeshProUGUI m_TurnSwitchText;
     
-
     public List<Creatures> DeadAllys;
     public List<Creatures> TurnOrderAlly;
     public List<Creatures> TurnOrderEnemy;
-
-    public List<Memoria> m_MemoriaPool;
 
     private GameObject m_MemoriaPrefab;
     
@@ -66,50 +61,29 @@ public class TacticsManager : Singleton<TacticsManager>
         PartyManager = PartyManager.Instance;
     }
 
-    public void CombatStart(GridFormations aGridFormations)
+    public void CombatStart()
     {
 
          m_Grid = Grid.Instance;
-        
-         m_Gridformation = aGridFormations;
 
          PartyManager = PartyManager.Instance;
          
-         GridFormations tempGridFormations = m_Gridformation;
-         m_Grid.Convert1DArrayto2D(tempGridFormations.m_ListToConvert, tempGridFormations.m_GridDimensions);
-   
-         
-         TurnOrderEnemy = tempGridFormations.m_EnemysInGrid;
-
-         foreach (Creatures aEnemys in TurnOrderEnemy)
-         {
-             AddHealthbar(aEnemys);
-         }
-         
-         
-        AddCreatureToCombat(PartyManager.m_CurrentParty[0], new Vector2Int(3, 2), TurnOrderAlly);
+         AddCreatureToCombat(PartyManager.m_CurrentParty[0],TurnOrderAlly);
         
-        AddCreatureToCombat(PartyManager.m_CurrentParty[1], new Vector2Int(3, 6), TurnOrderAlly);
+         AddCreatureToCombat(PartyManager.m_CurrentParty[1], TurnOrderAlly);
         
-        AddCreatureToCombat(PartyManager.m_CurrentParty[2], new Vector2Int(17, 16), TurnOrderAlly);
+         AddCreatureToCombat(PartyManager.m_CurrentParty[2], TurnOrderAlly);
                                                                             
-        AddCreatureToCombat(PartyManager.m_CurrentParty[3], new Vector2Int(12, 5), TurnOrderAlly);
-         
-        m_Gridformation.InitializeEnemys();
+         AddCreatureToCombat(PartyManager.m_CurrentParty[3], TurnOrderAlly);
+        
         CombatHasStarted = true;
 
         m_BattleStates = CombatStates.AllyTurn;
          
          WhichSidesTurnIsIt = false;
 
-         if (tempGridFormations.m_StartDialogueTrigger != null)
-         {
-           //  tempGridFormations.m_StartDialogueTrigger.TriggerDialogue();
-         }
-
          m_CreaturesWhosDomainHaveClashed = new Dictionary<Creatures, Creatures>();
-         
-         Addressables.LoadAssetAsync<GameObject>("Memoria").Completed += OnLoadMemoria;
+
     }
 
 
@@ -126,47 +100,27 @@ public class TacticsManager : Singleton<TacticsManager>
 
 
 
-    public void AddCreatureToCombat(Creatures aCreature, Vector2Int aPosition, List<Creatures> aList)
+    public void AddCreatureToCombat(Creatures aCreature,List<Creatures> aList)
     {
         if (aCreature == null)
         {
-            Debug.Log("Creature does not exist Position at " + aPosition.ToString());
             return;
-
         }
 
         aList.Add(aCreature);
 
         int TopElement = aList.Count - 1;
 
-
-        
         //Model
-        
         aList[TopElement].ModelInGame = Instantiate<GameObject>(aList[TopElement].Model);
-        aList[TopElement].ModelInGame.transform.position = m_Grid.GetNode(aPosition.x, aPosition.y).gameObject.transform.position + CreatureOffset;
+        //aList[TopElement].ModelInGame.transform.position = // m_Grid.GetNode(aPosition.x, aPosition.y).gameObject.transform.position + CreatureOffset;
         aList[TopElement].ModelInGame.transform.rotation = Quaternion.Euler(0.0f, 180, 0.0f);
         
         
-        //Ai
-        aList[TopElement].m_CreatureAi = aList[aList.Count - 1].ModelInGame.GetComponent<AiController>();
-        aList[TopElement].m_CreatureAi.m_Position = aPosition;
-        aList[TopElement].m_CreatureAi.m_Grid = m_Grid;
-        aList[TopElement].m_CreatureAi.m_Movement = aCreature.m_CreatureMovement;
-        aList[TopElement].m_CreatureAi.m_MovementType = aCreature.m_CreaturesMovementType;
-        aList[TopElement].m_CreatureAi.m_Creature = aList[aList.Count - 1];
-        aList[TopElement].m_CreatureAi.Initialize();
-        
         //Healthbar
 
-        aList[TopElement].m_CreatureAi.m_Healthbar = Instantiate<HealthBar>(m_Healthbar, aList[TopElement].m_CreatureAi.transform);
-        AddHealthbar(aList[TopElement]);
-        
-
-        //Node
-        m_Grid.GetNode(aPosition.x, aPosition.y).m_CreatureOnGridPoint = aList[TopElement];
-        m_Grid.GetNode(aPosition.x, aPosition.y).m_IsCovered = true;
-        
+     //   aList[TopElement].m_CreatureAi.m_Healthbar = Instantiate<HealthBar>(m_Healthbar, aList[TopElement].m_CreatureAi.transform);
+     //   AddHealthbar(aList[TopElement]);
     }
 
 
@@ -199,17 +153,12 @@ public class TacticsManager : Singleton<TacticsManager>
                break;
 
            case CombatStates.AllyTurn:
-
-               if (Input.GetKeyDown("i"))
-               {
-                   StartCoroutine(EnemyTurn());
-               }
+               
 
                 break;
 
             case CombatStates.EnemyTurn:
-
-
+                
 
                 break;
 
@@ -233,45 +182,7 @@ public class TacticsManager : Singleton<TacticsManager>
 
        }
     }
-
     
-    public void OnLoadMemoria(UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationHandle<GameObject> obj)
-    {
-        m_MemoriaPrefab = obj.Result;
-        SpawnMemoriaPool(m_MemoriaPrefab.GetComponent<Memoria>());
-
-    }
-
-    public void SpawnMemoriaPool(Memoria aMemoria)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            m_MemoriaPool.Add(Instantiate(aMemoria));
-            m_MemoriaPool[i].Initialize();
-        }
-    }
-
-    public Memoria ReturnMemoria()
-    {
-        Memoria TempMemoria = null;
-        
-        foreach (Memoria aMemoria in m_MemoriaPool)
-        {
-            if (aMemoria.InUse == false)
-            {
-                TempMemoria = aMemoria;
-            }
-        }
-
-        if (TempMemoria != null)
-        {
-            m_MemoriaPool.Add(Instantiate(m_MemoriaPrefab.GetComponent<Memoria>()));
-            TempMemoria =  m_MemoriaPool[m_MemoriaPool.Count - 1];
-        }
-
-        TempMemoria.InUse = true;
-        return TempMemoria;
-    }
     
     public void RemoveDeadFromList(Creatures.Charactertype aCharactertype)
     {
