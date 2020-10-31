@@ -72,6 +72,9 @@ public class Creatures : MonoBehaviour
     
     public int CurrentHealth;
     public int MaxHealth;
+
+    public int CurrentMana;
+    public int MaxMana;
     
     
     public int BaseStrength;

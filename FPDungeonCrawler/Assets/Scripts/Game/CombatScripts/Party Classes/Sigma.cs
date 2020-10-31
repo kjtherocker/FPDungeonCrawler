@@ -9,9 +9,14 @@ public class Sigma : Ally {
 
 	// Use this for initialization
 	public override void Initialize ()
-    {
-        CurrentHealth = 50;
-        MaxHealth = 50;
+	{
+
+		MaxHealth = 50;
+		CurrentHealth = MaxHealth;
+
+        MaxMana = 100;
+        CurrentMana = MaxMana;
+        
         BaseStrength = 75;
         BaseMagic = 40;
         BaseHit = 20;
