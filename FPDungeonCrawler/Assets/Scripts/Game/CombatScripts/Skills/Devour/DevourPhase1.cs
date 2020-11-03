@@ -15,8 +15,8 @@ public class DevourPhase1 : Skills
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/FireWave/ParticleEffect_FireWave", typeof(ParticleSystem));
         m_Damage = 10;
         m_SkillRange = 1;
-        SkillName = "Devour Phase 1";
-        SkillDescription = "Devour the domain directly around creature";
+        m_SkillName = "Devour Phase 1";
+        m_SkillDescription = "Devour the domain directly around creature";
     }
 
     // Update is called once per frame

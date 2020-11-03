@@ -16,8 +16,8 @@ public class Poison : Skills
         m_Damagetype = DamageType.Magic;
         m_SkillAilment = SkillAilment.Poison;
         m_Damage = 0;
-        SkillName = "Poison";
-        SkillDescription = "Try to Poison the enemy";
+        m_SkillName = "Poison";
+        m_SkillDescription = "Try to Poison the enemy";
     }
 
     // Update is called once per frame

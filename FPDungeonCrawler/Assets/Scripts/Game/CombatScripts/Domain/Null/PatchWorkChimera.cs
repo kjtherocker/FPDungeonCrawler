@@ -14,8 +14,8 @@ public class PatchWorkChimera : Domain
 
 
         m_SkillRange = 4;
-        SkillName = "Patchwork Chimera";
-        SkillDescription = "Steal the effect of another Domain";
+        m_SkillName = "Patchwork Chimera";
+        m_SkillDescription = "Steal the effect of another Domain";
         DomainUser = "";
         Domaintype = DomainType.OneTime;
 

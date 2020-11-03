@@ -9,8 +9,8 @@ public class Devour : Domain
     void Start()
     {
         m_SkillType = SkillType.Domain;
-        SkillName = "Devour";
-        SkillDescription = "Consume Domain tiles";
+        m_SkillName = "Devour";
+        m_SkillDescription = "Consume Domain tiles";
     }
 
     public override bool CheckIfNodeIsClearAndReturnNodeIndex(LevelNode aNode, Vector2Int m_Position)

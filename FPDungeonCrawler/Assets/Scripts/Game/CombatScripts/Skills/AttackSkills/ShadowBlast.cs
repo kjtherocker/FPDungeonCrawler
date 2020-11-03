@@ -16,8 +16,8 @@ public class ShadowBlast : Skills
         m_Damagetype = DamageType.Magic;
 
         m_Damage = 10;
-        SkillName = "Shadow Blast";
-        SkillDescription = "Blast that will hit the whole enemy team";
+        m_SkillName = "Shadow Blast";
+        m_SkillDescription = "Blast that will hit the whole enemy team";
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/DarkWave/ParticleEffect_DarkWave", typeof(ParticleSystem));
     }
 

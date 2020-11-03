@@ -15,8 +15,8 @@ public class HolyWater : Skills
         m_SkillFormation = SkillFormation.SingleNode;
         m_Damagetype = DamageType.Magic;
         m_Damage = 300;
-        SkillName = "Holy Water";
-        SkillDescription = "Heals the whole party a small amount";
+        m_SkillName = "Holy Water";
+        m_SkillDescription = "Heals the whole party a small amount";
 
     }
 

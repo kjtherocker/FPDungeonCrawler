@@ -17,8 +17,8 @@ public class IceRain : Skills
         m_Damagetype = DamageType.Magic;
         m_Damage = 5;
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/IceWave/ParticleEffect_IceWave", typeof(ParticleSystem));
-        SkillName = "Ice Rain";
-        SkillDescription = "IceRain that will hit the whole enemy team";
+        m_SkillName = "Ice Rain";
+        m_SkillDescription = "IceRain that will hit the whole enemy team";
     }
 
     // Update is called once per frame

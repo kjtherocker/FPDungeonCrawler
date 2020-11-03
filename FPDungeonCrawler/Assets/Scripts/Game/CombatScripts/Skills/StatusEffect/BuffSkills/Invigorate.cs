@@ -15,8 +15,8 @@ public class Invigorate : StatusEffects
         m_SkillType = SkillType.Defence;
         m_SkillFormation = SkillFormation.SingleNode;
         m_Damagetype = DamageType.Magic;
-        SkillName = "Invigorate";
-        SkillDescription = "A buff that greatly increases damage";
+        m_SkillName = "Invigorate";
+        m_SkillDescription = "A buff that greatly increases damage";
     }
     
 

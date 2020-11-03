@@ -74,7 +74,7 @@ public class UiMemoria : UiScreen
         
         SetCardHighlight(m_MemoriaSkills[m_SkillBoardPointerPosition].gameObject);
         
-        m_DescriptionText.text = m_MemoriaSkills[m_SkillBoardPointerPosition].m_ButtonSkill.SkillDescription;
+        m_DescriptionText.text = m_MemoriaSkills[m_SkillBoardPointerPosition].m_ButtonSkill.m_SkillDescription;
     }
 
     IEnumerator MoveCardIntoDeck(GameObject aCard)
@@ -178,7 +178,7 @@ public class UiMemoria : UiScreen
         
         SetCardHighlight(m_MemoriaSkills[0].gameObject);
 
-        m_DescriptionText.text = m_MemoriaSkills[0].m_ButtonSkill.SkillDescription;
+        m_DescriptionText.text = m_MemoriaSkills[0].m_ButtonSkill.m_SkillDescription;
     }
     
 }

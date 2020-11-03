@@ -14,8 +14,9 @@ public class FireBall : Skills
         m_Damagetype = DamageType.Magic;
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/FireWave/ParticleEffect_FireWave", typeof(ParticleSystem));
         m_Damage = 10;
-        SkillName = "Fire Ball";
-        SkillDescription = "FireBall that will hit the whole enemy team";
+        m_Cost = 10;
+        m_SkillName = "Fire Ball";
+        m_SkillDescription = "FireBall that will hit the whole enemy team";
     }
     public override IEnumerator UseSkill(Creatures aVictum, Creatures aAttacker )
     {

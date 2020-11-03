@@ -16,8 +16,8 @@ public class Restrict : Skills
         m_SkillFormation = SkillFormation.SingleNode;
         m_Damagetype = DamageType.Magic;
         m_Damage = 3;
-        SkillName = "Restrict";
-        SkillDescription = "Make the enemies damage be weaker";
+        m_SkillName = "Restrict";
+        m_SkillDescription = "Make the enemies damage be weaker";
     }
 
     // Update is called once per frame

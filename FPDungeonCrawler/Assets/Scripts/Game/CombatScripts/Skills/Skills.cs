@@ -66,10 +66,12 @@ public class Skills
     [SerializeField]
     public SkillAilment m_SkillAilment;
 
+    public int m_Cost;
+    
     [SerializeField]
-    public string SkillName;
+    public string m_SkillName;
     [SerializeField]
-    public string SkillDescription;
+    public string m_SkillDescription;
 
     [SerializeField]
     public ParticleSystem m_SkillParticleEffect;
@@ -99,12 +101,12 @@ public class Skills
 
     public string GetSkillName()
     {
-        return SkillName;
+        return m_SkillName;
     }
 
     public string GetSkillDescription()
     {
-        return SkillDescription;
+        return m_SkillDescription;
     }
 
     public DamageType GetDamageType()

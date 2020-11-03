@@ -145,6 +145,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\LightRay.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\ResurrectSkills\PhoenixSpirit.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\DialogueManager.cs" />
+     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiArenaList.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiStatus.cs" />
      <Compile Include="Assets\Scripts\Input\PlayerInput.cs" />
@@ -167,7 +168,6 @@
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
-     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiArenaList.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -17,8 +17,8 @@ public class LightRay : Skills
         m_Damagetype = DamageType.Magic;
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/LightWave/ParticleEffect_LightWave", typeof(ParticleSystem));
         m_Damage = 10;
-        SkillName = "Light Ray";
-        SkillDescription = "a Ray that will hit the whole enemy team";
+        m_SkillName = "Light Ray";
+        m_SkillDescription = "a Ray that will hit the whole enemy team";
     }
 
     // Update is called once per frame

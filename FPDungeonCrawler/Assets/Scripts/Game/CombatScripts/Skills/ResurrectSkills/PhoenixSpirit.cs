@@ -16,8 +16,8 @@ public class PhoenixSpirit : Skills
         m_SkillFormation = SkillFormation.SingleNode;
         m_Damagetype = DamageType.Magic;
         m_Damage = 0;
-        SkillName = "Phoenix Spirit";
-        SkillDescription = "Resurrect one dead party member";
+        m_SkillName = "Phoenix Spirit";
+        m_SkillDescription = "Resurrect one dead party member";
     }
 
 }

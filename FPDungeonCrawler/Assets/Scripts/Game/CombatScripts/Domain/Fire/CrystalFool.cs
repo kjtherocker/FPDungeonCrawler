@@ -13,8 +13,8 @@ public class CrystalFool : Domain
 
 
         m_SkillRange = 4;
-        SkillName = "CrystalFool";
-        SkillDescription = "Increased Physical Attack damage";
+        m_SkillName = "CrystalFool";
+        m_SkillDescription = "Increased Physical Attack damage";
         DomainUser = "";
         Domaintype = DomainType.OneTime;
 
