@@ -17,10 +17,12 @@ public class UiScreenCommandBoard : UiScreen
     {
         m_MenuControls = new PlayerInput();
         m_MenuControls.Player.Movement.performed += movement => MoveMenuCursorPosition(movement.ReadValue<Vector2>());
-        m_MenuControls.Player.SquareButton.performed += SquareButton => SelectCommand();
+        m_MenuControls.Player.XButton.performed += xButton => SelectCommand();
       // m_MenuControls.Player.TriangleButton.performed += TriangleButton => SpawnDomainBoard();
        // m_MenuControls.Player.CircleButton.performed += CircleButton => ReturnToLastScreen();
 
+       
+       m_Commands = new List<CommandOptions>();
        m_Commands.Add(AttackCommand);
        m_Commands.Add(SkillCommand);
        m_Commands.Add(DomainCommand);
@@ -74,7 +76,14 @@ public class UiScreenCommandBoard : UiScreen
         base.OnPush();
     }
 
-
+    public override void MoveMenuCursorPosition(Vector2 aMovement)
+    {
+        m_CursorXPrevious = m_CursorXCurrent;
+        m_CursorYPrevious = m_CursorYCurrent;
+        
+        m_CursorYCurrent = MenuDirectionCalculationLooping(aMovement.y, m_CursorYCurrent, m_CursorYMax, m_CursorYMin);
+        MenuSelection(m_CursorXCurrent, m_CursorYCurrent);
+    }
 
     public override void MenuSelection(int aCursorX, int aCursorY)
     {
@@ -90,16 +99,9 @@ public class UiScreenCommandBoard : UiScreen
 
     public void SkillCommand()
     {
-        if (m_CommandboardCreature.m_CreatureAi.m_HasAttackedForThisTurn)
-        {
-            return;
-        }
-
         m_MenuControls.Disable();
-        
-        m_CommandboardCreature.m_CreatureAi.DeselectAllPaths();
-        
-        UiManager.Instance.PopScreen();
+
+        //UiManager.Instance.PopScreen();
         UiManager.Instance.PushScreen(UiManager.Screen.SkillBoard);
 
         UiSkillBoard ScreenTemp =

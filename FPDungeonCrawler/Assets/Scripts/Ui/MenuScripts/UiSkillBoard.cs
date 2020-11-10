@@ -7,24 +7,16 @@ public class UiSkillBoard : UiScreen
 {
 
     public Creatures m_SkillBoardCreature;
-    public ButtonSkillWrapper m_ButtonReference;
     public List<ButtonSkillWrapper> m_CurrentSkillMenuButtonsMenu;
-    public Animator m_Animator_SkillGroup;
-    public ButtonSkillWrapper m_DomainButton;
 
     public TextMeshProUGUI m_DescriptionText;
     public int m_SkillBoardPointerPosition;
-    
-    public bool m_SwapBetweenSkillDomain;
-    
-    public Vector3 m_CenterCardPosition;
 
     public int m_CreatureSkillCount;
     // Use this for initialization
     public override void Initialize()
     {
         m_SkillBoardPointerPosition = 0;
-        m_CenterCardPosition = new Vector3(-38, -211, 0);
         m_MenuControls = new PlayerInput();
 
         m_MenuControls.Player.Movement.performed += movement => MoveMenuCursorPosition(movement.ReadValue<Vector2>());
@@ -36,11 +28,10 @@ public class UiSkillBoard : UiScreen
     
     public override void ResetCursorPosition()
     {
+        m_CursorYMax = m_CreatureSkillCount;
+        m_CursorYCurrent = 0;
+        m_CurrentSkillMenuButtonsMenu[m_CursorYCurrent].SkillHoveredOver(true);
         
-        
-        m_CursorXMax = m_CreatureSkillCount;
-        m_CursorXCurrent = 0;
-
     }
     public  override void MoveMenuCursorPosition(Vector2 aMovement)
     {
@@ -56,7 +47,10 @@ public class UiSkillBoard : UiScreen
     
     public override void MenuSelection(int aCursorX, int aCursorY)
     {
-        m_SkillBoardPointerPosition = aCursorX;
+        m_SkillBoardPointerPosition = aCursorY;
+
+        m_CurrentSkillMenuButtonsMenu[m_CursorYCurrent].SkillHoveredOver(false);
+        m_CurrentSkillMenuButtonsMenu[m_CursorYPrevious].SkillHoveredOver(true);
         
         m_DescriptionText.text =
             m_CurrentSkillMenuButtonsMenu[m_SkillBoardPointerPosition].m_ButtonSkill.m_SkillDescription;
@@ -78,7 +72,7 @@ public class UiSkillBoard : UiScreen
     public override void OnPush()
     {
         gameObject.SetActive((true));
-        InputManager.Instance.m_MovementControls.Disable();
+     //   InputManager.Instance.m_MovementControls.Disable();
         m_MenuControls.Enable();
     }
 
@@ -92,6 +86,7 @@ public class UiSkillBoard : UiScreen
         for (int i = 0; i < m_CurrentSkillMenuButtonsMenu.Count; i++)
         {
             m_CurrentSkillMenuButtonsMenu[i].gameObject.SetActive(false);
+            m_CurrentSkillMenuButtonsMenu[i].SkillHoveredOver(false);
             m_CurrentSkillMenuButtonsMenu[i].m_ButtonSkill = null;
 
         }

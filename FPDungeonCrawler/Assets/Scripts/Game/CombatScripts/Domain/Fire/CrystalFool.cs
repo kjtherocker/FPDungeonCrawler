@@ -19,7 +19,7 @@ public class CrystalFool : Domain
         Domaintype = DomainType.OneTime;
 
 
-        Addressables.LoadAssetAsync<Material>("CrystalFool").Completed += OnLoadDomainMaterial;
+//        Addressables.LoadAssetAsync<Material>("CrystalFool").Completed += OnLoadDomainMaterial;
         
     }
 

@@ -12,6 +12,9 @@ public class InputManager : Singleton<InputManager>
     // Use this for initialization
     public void Initialize()
     {
+        m_BaseMovementControls = new BaseInput();
+        m_BaseMovementControls.Enable();
+        
         m_MovementControls = new PlayerInput();
         m_MovementControls.Enable();
     }

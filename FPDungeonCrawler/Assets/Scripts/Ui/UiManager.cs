@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UiManager : Singleton<UiManager>
@@ -58,6 +59,7 @@ public class UiManager : Singleton<UiManager>
             if (m_UiScreens[i] != null)
             {
                 m_UiScreens[i].Initialize();
+                m_UiScreens[i].SetGameObjectState(false);
             }
 
         }
@@ -67,6 +69,12 @@ public class UiManager : Singleton<UiManager>
     {
         return m_UiTabs[(int)aUiTab];
     }
+
+    public void PushTab(UiTab aUiTab)
+    {
+         m_UiTabs[(int)aUiTab].gameObject.SetActive(true);
+    }
+
 
     public Screen GetTopScreenType()
     {

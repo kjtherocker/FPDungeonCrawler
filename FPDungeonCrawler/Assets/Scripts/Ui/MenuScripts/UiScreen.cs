@@ -72,12 +72,12 @@ public class UiScreen : MonoBehaviour
     {
         if (Axis < 0)
         {
-            aCurrent--;
+            aCurrent++;
         }
         
         if (Axis > 0)
         {
-            aCurrent++;
+            aCurrent--;
         }
 
         if (aCurrent < aMin)
@@ -115,7 +115,10 @@ public class UiScreen : MonoBehaviour
 
         return aCurrent;
     }
-    
+
+
+
+
     public virtual int MenuDirectionCalculationEndInvertAxis(float Axis, int aCurrent,int aMax, int aMin)
     {
         if (Axis > 0)
@@ -150,4 +153,9 @@ public class UiScreen : MonoBehaviour
     {
         UiManager.Instance.ReturnToLastScreen();
     }
+    public void SetGameObjectState(bool aState)
+    {
+        gameObject.SetActive(aState);
+    }
+    
 }

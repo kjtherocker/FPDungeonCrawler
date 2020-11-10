@@ -82,24 +82,27 @@ public class LevelNode : Cell
 
     // Use this for initialization
 
-    public void Start()
-    {
-        SetLevelNode();
-    }
 
-    public void Initialize()
+
+    public void Initialize(short aWalkableDirections)
     {
         m_MovementCost = 1;
 
         m_Grid = Grid.Instance;
         
         m_DomainCombatNode = LevelNode.DomainCombatNode.None;
-
-        SetLevelNode();
+        SetWalkableDirections(aWalkableDirections);
     }
 
-    public void SetLevelNode()
+    public void SetLevelNode(List<NodeDirections> aWalkableDirections)
     {
+        for(int i = NodeWalls.Count; i < 0;i++)
+        {
+            NodeWalls[i].SetActive(true);
+        }
+
+        m_WalkableDirections = aWalkableDirections;
+        
         foreach(NodeDirections node in m_WalkableDirections)
         {
             NodeWalls[(int)node].SetActive(false);
@@ -118,8 +121,6 @@ public class LevelNode : Cell
         DestroyImmediate(m_CreatureOnGridPoint.gameObject);
         m_CreatureOnGridPoint = null;
         m_IsCovered = false;
-        NodesGridFormation.RemoveEnemyFromList();
-
     }
     
     public void SpawnEnemy()
@@ -156,9 +157,9 @@ public class LevelNode : Cell
         Creatures m_EnemysCreature = Enemy.GetComponent<Creatures>();
        
         m_CreatureOnGridPoint = m_EnemysCreature;
-        NodesGridFormation.m_EnemysInGrid.Add(m_EnemysCreature);
-        
-        Enemy.transform.parent = NodesGridFormation.Enemy.transform;
+     //  NodesGridFormation.m_EnemysInGrid.Add(m_EnemysCreature);
+     //  
+     //  Enemy.transform.parent = NodesGridFormation.Enemy.transform;
         Enemy.transform.position = gameObject.transform.position + CreatureOffset;
         Enemy.transform.rotation = Quaternion.Euler(0.0f, 180, 0.0f);
 
@@ -214,8 +215,39 @@ public class LevelNode : Cell
                
        }
    }
-   
-    protected static readonly Vector2[] _directions =
+
+   public void SetWalkableDirections(short aWalkabledirections)
+   {
+       foreach (var direction in m_WalkableDirections)
+       {
+           m_WalkableDirections.Remove(direction);
+       }
+       
+       if (aWalkabledirections == (short) Level.LevelnodeType.Up)
+       {
+           m_WalkableDirections.Add(LevelNode.NodeDirections.Up);
+       }
+                
+       if (aWalkabledirections == (short) Level.LevelnodeType.Left)
+       {
+           m_WalkableDirections.Add(LevelNode.NodeDirections.Left);
+       }
+                
+       if (aWalkabledirections ==  (short)Level.LevelnodeType.Down)
+       {
+           m_WalkableDirections.Add(LevelNode.NodeDirections.Down);
+       }
+                
+       if (aWalkabledirections ==  (short)Level.LevelnodeType.Right)
+       {
+           m_WalkableDirections.Add(LevelNode.NodeDirections.Right);
+       }
+
+       SetLevelNode(m_WalkableDirections);
+   }
+
+
+   protected static readonly Vector2[] _directions =
     {
         new Vector2(1, 0), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(0, -1)
     };

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Level : MonoBehaviour
 {
     public enum LevelnodeType
@@ -19,46 +21,35 @@ public class Level : MonoBehaviour
     }
 
 
-    private short GridDimensionX = 10;
-    private short GridDimensionY = 10;
-    private short[] LevelBlueprint;
+    public short GridDimensionX = 10;
+    public short GridDimensionY = 10;
+    public short[] LevelBlueprint;
 
-    
+
+
     // Start is called before the first frame update
-    void Start()
+    public void Intialize()
     {
         LevelBlueprint = new short[]
         {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            1,1, 1, 0, 0, 0, 0, 0, 0, 0,
+            0, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+            0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         };
-
-        SetLevelNodes(LevelBlueprint);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public void SetLevelNodes(short[] aLevelBlueprint)
-    {
-        for (int i = 0; i < aLevelBlueprint.Length; i++)
-        {
-            if (aLevelBlueprint[i] == (short)LevelnodeType.Empty)
-            {
-               
-            }
-        }
-    }
+
+
+
+
+
 
 }

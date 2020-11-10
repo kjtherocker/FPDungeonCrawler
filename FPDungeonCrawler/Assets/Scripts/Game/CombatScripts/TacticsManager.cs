@@ -59,6 +59,7 @@ public class TacticsManager : Singleton<TacticsManager>
         CreatureOffset = new Vector3(0, Constants.Constants.m_HeightOffTheGrid, 0);
         
         PartyManager = PartyManager.Instance;
+        CombatStart();
     }
 
     public void CombatStart()
@@ -75,14 +76,21 @@ public class TacticsManager : Singleton<TacticsManager>
          AddCreatureToCombat(PartyManager.m_CurrentParty[2], TurnOrderAlly);
                                                                             
          AddCreatureToCombat(PartyManager.m_CurrentParty[3], TurnOrderAlly);
-        
-        CombatHasStarted = true;
 
-        m_BattleStates = CombatStates.AllyTurn;
          
-         WhichSidesTurnIsIt = false;
-
-         m_CreaturesWhosDomainHaveClashed = new Dictionary<Creatures, Creatures>();
+         UiManager.instance.PushScreen(UiManager.Screen.CommandBoard);
+         
+         UiScreen temp = UiManager.instance.GetScreen(UiManager.Screen.CommandBoard);
+         ((UiScreenCommandBoard) temp).m_CommandboardCreature = PartyManager.m_CurrentParty[0];
+         
+         
+       // CombatHasStarted = true;
+//
+       // m_BattleStates = CombatStates.AllyTurn;
+       //  
+       //  WhichSidesTurnIsIt = false;
+//
+       //  m_CreaturesWhosDomainHaveClashed = new Dictionary<Creatures, Creatures>();
 
     }
 
@@ -112,9 +120,9 @@ public class TacticsManager : Singleton<TacticsManager>
         int TopElement = aList.Count - 1;
 
         //Model
-        aList[TopElement].ModelInGame = Instantiate<GameObject>(aList[TopElement].Model);
+//        aList[TopElement].ModelInGame = Instantiate<GameObject>(aList[TopElement].Model);
         //aList[TopElement].ModelInGame.transform.position = // m_Grid.GetNode(aPosition.x, aPosition.y).gameObject.transform.position + CreatureOffset;
-        aList[TopElement].ModelInGame.transform.rotation = Quaternion.Euler(0.0f, 180, 0.0f);
+     //   aList[TopElement].ModelInGame.transform.rotation = Quaternion.Euler(0.0f, 180, 0.0f);
         
         
         //Healthbar
@@ -173,14 +181,6 @@ public class TacticsManager : Singleton<TacticsManager>
                break;
        }
 
-
-       if (Input.GetKeyDown("l"))
-       {
-
-       //   StartCoroutine(
-       //       DomainHasClashed(PartyManager.m_CurrentParty[0], PartyManager.m_CurrentParty[1]));
-
-       }
     }
     
     

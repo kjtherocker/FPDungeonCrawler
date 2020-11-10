@@ -26,16 +26,14 @@ public class ButtonSkillWrapper : MonoBehaviour
 
 
 
-    Color m_Color_TransparentWhite;
-    Color m_Color_HalfTransparentWhite;
-    Color m_Color_White;
+    public Color m_Color_TransparentWhite;
+    public Color m_Color_HalfTransparentWhite;
+    public Color m_Color_White;
 
     // Use this for initialization
     void Start()
     {
-         m_Color_TransparentWhite = new Color(1, 1, 1, 0.0f);
-         m_Color_HalfTransparentWhite = new Color(1,1,1,0.5f);
-         m_Color_White = new Color(1, 1, 1, 1);
+
     }
     
     public void SetElementalIcon(Skills.ElementalType aSkills, string sourceName = "Global")
@@ -44,30 +42,33 @@ public class ButtonSkillWrapper : MonoBehaviour
     }
 
 
-    public void SetupButton(Creatures a_TurnHolder, Skills a_Skill)
+    public void SetupButton(Creatures aTurnHolder, Skills aSkill)
     {
-        m_ButtonTurnHolder = a_TurnHolder;
-        m_ButtonSkill = a_Skill;
-        m_SkillType = a_Skill.GetSkillType();
+        m_ButtonTurnHolder = aTurnHolder;
+        m_ButtonSkill = aSkill;
+        m_SkillType = aSkill.GetSkillType();
 
-        SetElementalIcon(a_Skill.GetElementalType());
-        m_Text_NameOfSkill.text = a_Skill.m_SkillName;
+        SetElementalIcon(aSkill.GetElementalType());
+        m_Text_NameOfSkill.text = aSkill.m_SkillName;
 
-        if (a_Skill.m_SkillName == "")
+        if (aSkill.m_SkillName == "")
         {
             m_Text_NameOfSkill.text = "Name Is Empty";
         }
 
 
         
-       if (m_ButtonTurnHolder.CurrentMana <= m_ButtonSkill.m_Cost)
-       {
-           m_Text_NameOfSkill.color = m_Color_HalfTransparentWhite;
-       }
-       else if (m_ButtonTurnHolder.CurrentMana >= m_ButtonSkill.m_Cost)
-       {
-           m_Text_NameOfSkill.color = m_Color_White;
-       }
+        if (m_ButtonTurnHolder.CurrentMana <= m_ButtonSkill.m_Cost)
+        {
+            m_Text_NameOfSkill.color = m_Color_HalfTransparentWhite;
+        }
+        else if (m_ButtonTurnHolder.CurrentMana >= m_ButtonSkill.m_Cost)
+        {
+            m_Text_NameOfSkill.color = m_Color_White;
+        }
+
+     m_CostToUseText.text = aSkill.m_Cost.ToString();
+
     }
 
     public void SkillHoveredOver(bool isHoverovered)

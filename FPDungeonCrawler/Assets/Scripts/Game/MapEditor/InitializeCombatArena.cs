@@ -6,17 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class InitializeCombatArena : MonoBehaviour
 {
-    public GridFormations m_CurrentLevel;
-    public TextAsset TextAsset;
+    public Camera m_Camera;
     public bool PreloadScene = false;
     public void Start()
     {
 #if UNITY_EDITOR
 
-        if (PreloadScene == true)
-        {
-            SceneManager.LoadScene("PreloadScene", LoadSceneMode.Additive);
-        }
+     //  if (PreloadScene == true)
+     //  {
+     //      SceneManager.LoadScene("PreloadScene", LoadSceneMode.Additive);
+     //  }
 #endif
         
         StartCoroutine(Initialize());

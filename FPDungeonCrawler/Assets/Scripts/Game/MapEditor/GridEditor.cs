@@ -16,13 +16,8 @@ public class GridEditor : Editor
         GridFormations myScript = (GridFormations)target;
         if (GUILayout.Button("Build Grid"))
         {
-            myScript.CreateGrid(new Vector2Int(myScript.m_GridDimensions.x, myScript.m_GridDimensions.y));
+            myScript.CreateGrid();
         }
-        if (GUILayout.Button("Destroy Grid"))
-        {
-            myScript.DeleteGrid();
-        }
-
     }
 }
 #endif
