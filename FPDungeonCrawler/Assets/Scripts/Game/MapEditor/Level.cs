@@ -14,10 +14,19 @@ public class Level : MonoBehaviour
         Down = 2,
         Left = 3,
         Right = 4,
-        UpDown = 5,
-        UpLeft = 6,
-        Upright = 7,
-        
+        AllSidesOpen = 5,
+        UpDown = 6,
+        UpLeft = 7,
+        Upright = 8,
+        DownLeft = 9,
+        DownRight = 10,
+        LeftRight = 11,
+        UpLeftRight = 12,
+        UpLeftDown = 13,
+        UpRightDown = 14,
+        RightLeftDown = 15,
+       // UpRightDown = 16,
+       
     }
 
 
@@ -32,10 +41,10 @@ public class Level : MonoBehaviour
     {
         LevelBlueprint = new short[]
         {
-            1,1, 1, 0, 0, 0, 0, 0, 0, 0,
-            0, 1, 1, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+            4, 15, 9, 0, 0, 0, 0, 0, 0, 0,
+            0, 8, 13, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 6, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 6, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
             0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -46,8 +55,20 @@ public class Level : MonoBehaviour
     }
 
 
+    public int GetIndex(int aRow, int aColumn)
+    {
+        return aColumn * GridDimensionX + aRow;
+    }
 
-
+    public void SpawnCamera()
+    {
+        
+    }
+    
+    public void SpawnGimmicks()
+    {
+        
+    }
 
 
 

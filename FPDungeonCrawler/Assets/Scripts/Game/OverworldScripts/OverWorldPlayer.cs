@@ -32,25 +32,13 @@ public class OverWorldPlayer : MonoBehaviour {
 
         m_PlayerAnimatior = GetComponentInChildren<Animator>();
         
-       InputManager.Instance.m_BaseMovementControls.Player.Movement.performed += movement => PlayerMovement(movement.ReadValue<Vector2>());
+     //  InputManager.Instance.m_BaseMovementControls.Player.Movement.performed += movement => PlayerMovement(movement.ReadValue<Vector2>());
        //    InputManager.Instance.m_MovementControls.Player.Movement.performed += movement => PlayerMovement(movement.ReadValue<Vector2>());
 
     }
 
     public void PlayerMovement(Vector2 aDirection)
     {
-       
-
-        if (aDirection == Vector2.zero)
-        {
-            m_PlayerAnimatior.SetBool("b_IsWalking", false);
-            MoveDirection = aDirection;
-            return;
-        }
-        else
-        {
-            m_PlayerAnimatior.SetBool("b_IsWalking", true); 
-        }
         
         MoveDirection = aDirection;
         Vector3 NextRotation = new Vector3(MoveDirection.x, 0, MoveDirection.y);

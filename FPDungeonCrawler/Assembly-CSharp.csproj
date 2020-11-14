@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\FireBall.cs" />
      <Compile Include="Assets\Scripts\Services\Preloader.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Debug\DebugMenu.cs" />
+     <Compile Include="Assets\Scripts\Ui\UiTab\UiTabPartyStatus.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\WaterController.cs" />
      <Compile Include="Assets\Scripts\Ui\UiManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\Attack.cs" />
@@ -168,7 +169,6 @@
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
-     <Compile Include="Assets\Scripts\Ui\UiTab\UiTabPartyStatus.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

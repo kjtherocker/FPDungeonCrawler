@@ -26,41 +26,45 @@ public class GridFormations : MonoBehaviour
         {
             for (int y = 0; y < m_LevelCore.GridDimensionY; y++)
             {
-                int LevelIndex = GetIndex(y, x);
+                int LevelIndex = m_LevelCore.GetIndex(x, y);
                 //If there is no node then continue
                 if (aLevelBlueprint[LevelIndex] == (short) Level.LevelnodeType.Empty)
                 {
                     continue;
                 }
 
-                SpawnNode(y , x);
+                SpawnNode(y , x,LevelIndex );
                 
-             //   _levelNodes[LevelIndex].Initialize(aLevelBlueprint[LevelIndex]);
+                _levelNodes[LevelIndex].Initialize(aLevelBlueprint[LevelIndex]);
             }
         }
     
     }
 
-    
-    public void SpawnNode(int aRow, int aColumn)
+    public void SpawnCamera()
     {
+        
+    }
 
-        int index = GetIndex(aRow, aColumn);
+    public void SpawnGimmicks()
+    {
+        
+    }
+
+    public void SpawnNode(int aRow, int aColumn,int aIndex)
+    {
+        
          
-        _levelNodes[index] =  PrefabUtility.InstantiatePrefab(m_LevelNodePrefab) as LevelNode;
+        _levelNodes[aIndex] =  PrefabUtility.InstantiatePrefab(m_LevelNodePrefab) as LevelNode;
 
-        _levelNodes[index].gameObject.transform.parent = transform;
-        _levelNodes[index].gameObject.name  = aRow + " " + aColumn;
-        _levelNodes[index].transform.position = new Vector3(4 * aRow, 0.5f, 4 * aColumn);
+        _levelNodes[aIndex].gameObject.transform.parent = transform;
+        _levelNodes[aIndex].gameObject.name  = aRow + " " + aColumn;
+        _levelNodes[aIndex].transform.position = new Vector3(4 * aRow, 0.5f, 4 * aColumn);
          
 
         //  m_GridPathArray[x, y].m_Grid = m_Grid;
     }
-
-   public int GetIndex(int aRow, int aColumn)
-   {
-       return aColumn * m_LevelCore.GridDimensionX + aRow;
-   }
+    
 
 
 }
