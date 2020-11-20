@@ -7,7 +7,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Level : MonoBehaviour
 {
-    public enum LevelnodeType
+    public enum Directions
     {
         Empty = 0,
         Up = 1,
@@ -34,7 +34,7 @@ public class Level : MonoBehaviour
     public short GridDimensionY = 10;
     public short[] LevelBlueprint;
 
-
+    public Vector2Int m_DefaultSpawnPosition;
 
     // Start is called before the first frame update
     public void Intialize()
@@ -42,16 +42,20 @@ public class Level : MonoBehaviour
         LevelBlueprint = new short[]
         {
             4, 15, 9, 0, 0, 0, 0, 0, 0, 0,
-            0, 8, 13, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 6, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 6, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+            2, 8, 13, 0, 0, 0, 0, 0, 0, 0,
+            8, 9, 6, 0, 0, 0, 0, 0, 0, 0,
+            0, 6, 6, 0, 0, 0, 0, 0, 0, 0,
+            0, 8, 5, 1, 1, 1, 0, 0, 0, 0,
             0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         };
+
+        SpawnCamera();
+
+        SpawnGimmicks();
     }
 
 
@@ -62,7 +66,7 @@ public class Level : MonoBehaviour
 
     public void SpawnCamera()
     {
-        
+        m_DefaultSpawnPosition = new Vector2Int(1,1);
     }
     
     public void SpawnGimmicks()

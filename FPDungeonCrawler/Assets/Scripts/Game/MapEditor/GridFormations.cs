@@ -8,10 +8,17 @@ using System;
 [System.Serializable]
 public class GridFormations : MonoBehaviour
 {
+
+    public OverWorldPlayer m_OverworldPlayer;
     public Level m_LevelCore;
     public LevelNode[] _levelNodes;
     public LevelNode m_LevelNodePrefab;
-    
+
+    public void Start()
+    {
+        SpawnCamera();
+    }
+
     public void CreateGrid()
     {
         m_LevelCore.Intialize();
@@ -28,7 +35,7 @@ public class GridFormations : MonoBehaviour
             {
                 int LevelIndex = m_LevelCore.GetIndex(x, y);
                 //If there is no node then continue
-                if (aLevelBlueprint[LevelIndex] == (short) Level.LevelnodeType.Empty)
+                if (aLevelBlueprint[LevelIndex] == (short) Level.Directions.Empty)
                 {
                     continue;
                 }
@@ -43,12 +50,22 @@ public class GridFormations : MonoBehaviour
 
     public void SpawnCamera()
     {
+        //Default Node
+        LevelNode SpawnNode = GetNode(m_LevelCore.m_DefaultSpawnPosition.x, m_LevelCore.m_DefaultSpawnPosition.y);
         
+        Vector3 StartNodePosition = SpawnNode.transform.position;
+        m_OverworldPlayer.transform.position =
+            new Vector3(StartNodePosition.x, StartNodePosition.y + Constants.Constants.m_HeightOffTheGrid, StartNodePosition.z);
     }
 
     public void SpawnGimmicks()
     {
         
+    }
+
+    public LevelNode GetNode(int aRow, int aColumn)
+    {
+        return _levelNodes[aColumn * m_LevelCore.GridDimensionX + aRow] ;
     }
 
     public void SpawnNode(int aRow, int aColumn,int aIndex)

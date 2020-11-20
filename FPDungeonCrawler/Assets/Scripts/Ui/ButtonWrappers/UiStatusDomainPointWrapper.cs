@@ -66,7 +66,6 @@ public class UiStatusDomainPointWrapper : MonoBehaviour
     
     public IEnumerator DPHighlighting()
     {
-    Debug.Log("yall is shit happeninbg");
         float TempHighlightSpeed = HighlightSpeed * Time.deltaTime;
         
         float TempOpacityAddition = HightlightingDirection ?  TempHighlightSpeed * -1 :  TempHighlightSpeed ;

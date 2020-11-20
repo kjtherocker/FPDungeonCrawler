@@ -226,27 +226,27 @@ public class LevelNode : Cell
            }
        }
 
-       if (aWalkabledirections == (short) Level.LevelnodeType.Up)
+       if (aWalkabledirections == (short) Level.Directions.Up)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Up);
        }
                 
-       if (aWalkabledirections == (short) Level.LevelnodeType.Left)
+       if (aWalkabledirections == (short) Level.Directions.Left)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Left);
        }
                 
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.Down)
+       if (aWalkabledirections ==  (short)Level.Directions.Down)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Down);
        }
                 
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.Right)
+       if (aWalkabledirections ==  (short)Level.Directions.Right)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Right);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.AllSidesOpen)
+       if (aWalkabledirections ==  (short)Level.Directions.AllSidesOpen)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Up);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Down);
@@ -254,65 +254,65 @@ public class LevelNode : Cell
            m_WalkableDirections.Add(LevelNode.NodeDirections.Left);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.UpDown)
+       if (aWalkabledirections ==  (short)Level.Directions.UpDown)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Up);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Down);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.UpLeft)
+       if (aWalkabledirections ==  (short)Level.Directions.UpLeft)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Up);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Left);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.Upright)
+       if (aWalkabledirections ==  (short)Level.Directions.Upright)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Up);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Right);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.DownLeft)
+       if (aWalkabledirections ==  (short)Level.Directions.DownLeft)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Down);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Left);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.DownRight)
+       if (aWalkabledirections ==  (short)Level.Directions.DownRight)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Down);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Right);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.LeftRight)
+       if (aWalkabledirections ==  (short)Level.Directions.LeftRight)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Right);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Left);
        }
        
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.UpLeftRight)
+       if (aWalkabledirections ==  (short)Level.Directions.UpLeftRight)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Up);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Right);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Left);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.UpLeftDown)
+       if (aWalkabledirections ==  (short)Level.Directions.UpLeftDown)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Up);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Down);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Left);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.UpRightDown)
+       if (aWalkabledirections ==  (short)Level.Directions.UpRightDown)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Up);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Down);
            m_WalkableDirections.Add(LevelNode.NodeDirections.Right);
        }
        
-       if (aWalkabledirections ==  (short)Level.LevelnodeType.RightLeftDown)
+       if (aWalkabledirections ==  (short)Level.Directions.RightLeftDown)
        {
            m_WalkableDirections.Add(LevelNode.NodeDirections.Left); 
            m_WalkableDirections.Add(LevelNode.NodeDirections.Down);

@@ -59,7 +59,7 @@ public class TacticsManager : Singleton<TacticsManager>
         CreatureOffset = new Vector3(0, Constants.Constants.m_HeightOffTheGrid, 0);
         
         PartyManager = PartyManager.Instance;
-        CombatStart();
+        //CombatStart();
     }
 
     public void CombatStart()

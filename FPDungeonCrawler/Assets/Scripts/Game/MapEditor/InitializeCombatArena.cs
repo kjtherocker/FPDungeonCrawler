@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class InitializeCombatArena : MonoBehaviour
 {
-    public Camera m_Camera;
+
+    public Camera m_PlayerCamera;
+    public GridFormations m_LevelGrid;
+    public OverWorldPlayer m_OverworldPlayer;
     public bool PreloadScene = false;
     public void Start()
     {
@@ -19,6 +22,8 @@ public class InitializeCombatArena : MonoBehaviour
 #endif
         
         StartCoroutine(Initialize());
+
+        m_LevelGrid = GetComponent<GridFormations>();
     }
 
     
@@ -31,8 +36,8 @@ public class InitializeCombatArena : MonoBehaviour
 
         
         Debug.Log("Preload Is Initialized");
-    
-        TacticsManager.Instance.CombatStart();
+        m_OverworldPlayer.Initialize();
+        // TacticsManager.Instance.CombatStart();
     }
 
 }
