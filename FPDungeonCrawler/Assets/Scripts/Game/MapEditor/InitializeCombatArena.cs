@@ -23,7 +23,7 @@ public class InitializeCombatArena : MonoBehaviour
         
         StartCoroutine(Initialize());
 
-        m_LevelGrid = GetComponent<GridFormations>();
+      //  m_LevelGrid = GetComponent<GridFormations>();
     }
 
     
@@ -36,6 +36,7 @@ public class InitializeCombatArena : MonoBehaviour
 
         
         Debug.Log("Preload Is Initialized");
+        
         m_OverworldPlayer.Initialize();
         // TacticsManager.Instance.CombatStart();
     }

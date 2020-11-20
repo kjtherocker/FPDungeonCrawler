@@ -28,13 +28,11 @@ public class OverWorldPlayer : MonoBehaviour {
     public Vector2 MoveDirection;
     public Level.Directions[] CardinalDirections;
 
-    private Vector3[] CardinalRotations;
-
     public Level.Directions CurrentDirection;
     public int CurrentDirectionValue;
 
     private GridFormations m_GridFormation;
-    
+    private Dictionary<Level.Directions, Vector3> m_Directions;
     
     public void Initialize ()
     {
@@ -44,18 +42,15 @@ public class OverWorldPlayer : MonoBehaviour {
         {
             Level.Directions.Up, Level.Directions.Right, Level.Directions.Down, Level.Directions.Left
         };
-
-        CardinalRotations = new[]
-        {
-             new Vector3(0, 90, 0), 
-             new Vector3(0, 180, 0), 
-             new Vector3(0, 270, 0),
-             new Vector3(0, 0, 0)
-        };
-
-
-        transform.eulerAngles = CardinalRotations[0];
         
+        m_Directions = new Dictionary<Level.Directions, Vector3>();
+        
+        m_Directions.Add( Level.Directions.Up, new Vector3(0, 90, 0));
+        m_Directions.Add( Level.Directions.Right, new Vector3(0, 180, 0));
+        m_Directions.Add( Level.Directions.Down, new Vector3(0, 270, 0));
+        m_Directions.Add( Level.Directions.Left,  new Vector3(0, 0, 0));
+
+
         CurrentDirection = CardinalDirections[0];
 
         CurrentDirectionValue = 0;
@@ -76,6 +71,10 @@ public class OverWorldPlayer : MonoBehaviour {
         CurrentDirection = CardinalDirections[CurrentDirectionValue];
 
 
+        StartCoroutine(MovetoRotation());
+        
+       // transform.eulerAngles = m_Directions[CurrentDirection];
+
         if (aDirection.y > 0)
         {
             
@@ -89,6 +88,23 @@ public class OverWorldPlayer : MonoBehaviour {
       //  transform.rotation =  Quaternion.LookRotation( NextRotation,Vector3.up );
 
         
+    }
+
+    IEnumerator MovetoRotation()
+    {
+
+        Vector3 NewRotation = m_Directions[CurrentDirection];
+
+        if (Vector3.Distance(transform.eulerAngles, NewRotation) < 0.5f)
+        {
+            yield break;
+        }
+
+
+        transform.eulerAngles = Vector3.RotateTowards(transform.eulerAngles, NewRotation, 1, 1);
+
+        yield return new WaitForEndOfFrame();
+
     }
 
 
