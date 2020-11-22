@@ -68,7 +68,7 @@ public class DialogueTrigger : MonoBehaviour
                 else if (m_TriggerType == TriggerType.Menu)
                 {
                   //  UiManager.Instance.PushScreen(m_UiScreen);
-                    m_BasePlayer.m_IsInMenu = true;
+          
                 }
                 else if (m_TriggerType == TriggerType.WaitForObjectToCome)
                 {

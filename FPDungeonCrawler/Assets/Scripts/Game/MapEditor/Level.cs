@@ -66,7 +66,7 @@ public class Level : MonoBehaviour
 
     public void SpawnCamera()
     {
-        m_DefaultSpawnPosition = new Vector2Int(1,1);
+        m_DefaultSpawnPosition = new Vector2Int(0,1);
     }
     
     public void SpawnGimmicks()
