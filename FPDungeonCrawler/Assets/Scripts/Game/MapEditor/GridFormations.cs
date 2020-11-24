@@ -47,7 +47,7 @@ public class GridFormations : MonoBehaviour
                     continue;
                 }
 
-                SpawnNode(y , x,LevelIndex );
+                SpawnNode(x , y,LevelIndex );
                 
                 _levelNodes[LevelIndex].Initialize(aLevelBlueprint[LevelIndex]);
             }
@@ -78,7 +78,7 @@ public class GridFormations : MonoBehaviour
         Vector2Int FinalPosition = new Vector2Int(CurrentPosition.x + m_CardinalPositions[TargetDirection].x,
             CurrentPosition.y + m_CardinalPositions[TargetDirection].y );
         
-        int FinalIndex = FinalPosition.x * m_LevelCore.GridDimensionX + FinalPosition.y;
+        int FinalIndex = m_LevelCore.GetIndex( FinalPosition.x,FinalPosition.y) ;
         
         Debug.Log("Current position " + CurrentPosition + " TargetDirection " + m_CardinalPositions[TargetDirection] + " Final index: " + FinalIndex
          + " Final Position: " + FinalPosition);
@@ -88,7 +88,7 @@ public class GridFormations : MonoBehaviour
     
     public LevelNode GetNode(int aRow, int aColumn)
     {
-        return _levelNodes[aColumn * m_LevelCore.GridDimensionX + aRow] ;
+        return _levelNodes[m_LevelCore.GetIndex( aRow,aColumn)] ;
     }
 
     public void SpawnNode(int aRow, int aColumn,int aIndex)

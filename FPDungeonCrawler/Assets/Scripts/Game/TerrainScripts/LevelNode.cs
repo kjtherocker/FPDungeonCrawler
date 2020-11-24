@@ -216,6 +216,19 @@ public class LevelNode : Cell
        }
    }
 
+   public bool IsDirectionWalkable(Level.Directions aDirection)
+   {
+    // for (int i = 0; i < m_WalkableDirections.Count; i++)
+    // {
+    //     if (m_WalkableDirections[i] == aDirection)
+    //     {
+    //         return true;
+    //     }
+    // }
+
+       return false;
+   }
+
    public void SetWalkableDirections(short aWalkabledirections)
    {
        if (m_WalkableDirections.Count != 0)

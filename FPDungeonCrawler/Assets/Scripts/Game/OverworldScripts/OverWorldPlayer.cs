@@ -117,6 +117,12 @@ public class OverWorldPlayer : MonoBehaviour {
 
         if (aDirection.y > 0)
         {
+            if (CurrentLevelNode.IsDirectionWalkable(CurrentDirection))
+            {
+                
+            }
+
+
             LevelNode TargetNode = m_GridFormation.GetNode(CurrentLevelNode.m_PositionInGrid, CurrentDirection);
 
             if (TargetNode == null)

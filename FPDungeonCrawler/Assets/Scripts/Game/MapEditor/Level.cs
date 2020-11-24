@@ -61,7 +61,7 @@ public class Level : MonoBehaviour
 
     public int GetIndex(int aRow, int aColumn)
     {
-        return aColumn * GridDimensionX + aRow;
+        return aRow * GridDimensionX + aColumn;
     }
 
     public void SpawnCamera()
