@@ -19,10 +19,10 @@ public class GridFormations : MonoBehaviour
         SpawnCamera();
         
         m_CardinalPositions = new Dictionary<Level.Directions, Vector2Int>();
-        m_CardinalPositions.Add(Level.Directions.Up, new Vector2Int(0,1));
-        m_CardinalPositions.Add(Level.Directions.Down, new Vector2Int(0,-1));
-        m_CardinalPositions.Add(Level.Directions.Left, new Vector2Int(-1,0));
-        m_CardinalPositions.Add(Level.Directions.Right, new Vector2Int(1,0));
+        m_CardinalPositions.Add(Level.Directions.Up, new Vector2Int(-1,0));
+        m_CardinalPositions.Add(Level.Directions.Down, new Vector2Int(1,0));
+        m_CardinalPositions.Add(Level.Directions.Left, new Vector2Int(0,1));
+        m_CardinalPositions.Add(Level.Directions.Right, new Vector2Int(0,-1));
         
     }
 
@@ -75,10 +75,13 @@ public class GridFormations : MonoBehaviour
     
     public LevelNode GetNode(Vector2Int CurrentPosition,Level.Directions TargetDirection)
     {
-        Vector2Int FinalPosition = CurrentPosition + m_CardinalPositions[TargetDirection];
-
-
-        int FinalIndex = FinalPosition.y * m_LevelCore.GridDimensionX + FinalPosition.x;
+        Vector2Int FinalPosition = new Vector2Int(CurrentPosition.x + m_CardinalPositions[TargetDirection].x,
+            CurrentPosition.y + m_CardinalPositions[TargetDirection].y );
+        
+        int FinalIndex = FinalPosition.x * m_LevelCore.GridDimensionX + FinalPosition.y;
+        
+        Debug.Log("Current position " + CurrentPosition + " TargetDirection " + m_CardinalPositions[TargetDirection] + " Final index: " + FinalIndex
+         + " Final Position: " + FinalPosition);
         
         return _levelNodes[FinalIndex] ;
     }

@@ -91,6 +91,8 @@ public class OverWorldPlayer : MonoBehaviour {
       //     yield return null;
       // }
  
+      
+      
         aObject.position =  FinalTargetPosition;
         yield return null;
     }
@@ -109,20 +111,22 @@ public class OverWorldPlayer : MonoBehaviour {
         
         Vector3 NewRotation = m_DirectionRotations[CurrentDirection];
 
-        StartCoroutine(InterpolateRotationSmooth(transform, NewRotation,0.5f));
+        StartCoroutine(InterpolateRotationSmooth(transform, NewRotation,0.7f));
         
        // transform.eulerAngles = m_Directions[CurrentDirection];
 
         if (aDirection.y > 0)
         {
             LevelNode TargetNode = m_GridFormation.GetNode(CurrentLevelNode.m_PositionInGrid, CurrentDirection);
-            Debug.Log(TargetNode.m_PositionInGrid);
-            
+
             if (TargetNode == null)
             {
+                Debug.Log("Cant Find Node");
                 return;
             }
 
+
+            CurrentLevelNode = TargetNode;
             StartCoroutine(InterpolateMovementSmooth(transform, TargetNode.transform, 0.5f));
         }
 
