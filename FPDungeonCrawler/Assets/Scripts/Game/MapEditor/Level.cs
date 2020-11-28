@@ -7,7 +7,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Level : MonoBehaviour
 {
-    public enum Directions
+    public enum LevelCreationDirections
     {
         Empty = 0,
         Up = 1,
@@ -45,7 +45,7 @@ public class Level : MonoBehaviour
             2, 8, 13, 0, 0, 0, 0, 0, 0, 0,
             8, 9, 6, 0, 0, 0, 0, 0, 0, 0,
             0, 6, 6, 0, 0, 0, 0, 0, 0, 0,
-            0, 8, 5, 1, 1, 1, 0, 0, 0, 0,
+            0, 8, 7, 1, 1, 1, 0, 0, 0, 0,
             0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

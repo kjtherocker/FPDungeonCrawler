@@ -21,26 +21,26 @@ public class OverWorldPlayer : MonoBehaviour {
 
     public LevelNode CurrentLevelNode;
     
-    public Level.Directions[] CardinalDirections;
-    public Level.Directions CurrentDirection;
+    public LevelNode.CardinalNodeDirections[] CardinalDirections;
+    public LevelNode.CardinalNodeDirections CurrentDirection;
     public int CurrentDirectionValue;
 
     public GridFormations m_GridFormation;
-    private Dictionary<Level.Directions, Vector3> m_DirectionRotations;
+    private Dictionary<LevelNode.CardinalNodeDirections, Vector3> m_DirectionRotations;
     
     public void Initialize ()
     {
         CardinalDirections = new []
         {
-            Level.Directions.Up, Level.Directions.Right, Level.Directions.Down, Level.Directions.Left
+            LevelNode.CardinalNodeDirections.Up, LevelNode.CardinalNodeDirections.Right, LevelNode.CardinalNodeDirections.Down,LevelNode.CardinalNodeDirections.Left
         };
         
-        m_DirectionRotations = new Dictionary<Level.Directions, Vector3>();
+        m_DirectionRotations = new Dictionary<LevelNode.CardinalNodeDirections, Vector3>();
         
-        m_DirectionRotations.Add( Level.Directions.Down, new Vector3(0, 90, 0));
-        m_DirectionRotations.Add( Level.Directions.Left,  new Vector3(0, 360, 0));
-        m_DirectionRotations.Add( Level.Directions.Up, new Vector3(0, 270, 0));
-        m_DirectionRotations.Add( Level.Directions.Right, new Vector3(0, 180, 0));
+        m_DirectionRotations.Add( LevelNode.CardinalNodeDirections.Down, new Vector3(0, 90, 0));
+        m_DirectionRotations.Add( LevelNode.CardinalNodeDirections.Left,  new Vector3(0, 360, 0));
+        m_DirectionRotations.Add( LevelNode.CardinalNodeDirections.Up, new Vector3(0, 270, 0));
+        m_DirectionRotations.Add( LevelNode.CardinalNodeDirections.Right, new Vector3(0, 180, 0));
         
         
 
@@ -74,28 +74,25 @@ public class OverWorldPlayer : MonoBehaviour {
         aObject.localEulerAngles = aTargetRotation;
     }
     
-    public  IEnumerator InterpolateMovementSmooth(Transform aObject, Transform aTargetNode, float aTimeUntilDone)
-    {
-        Vector3 CurrentPostion = aObject.position;
-        
-        Vector3 FinalTargetPosition = new Vector3(aTargetNode.position.x, 
-            aTargetNode.position.y + Constants.Constants.m_HeightOffTheGrid, aTargetNode.position.z);
- 
-        float Frametime = Time.time;
-      // while(Time.time < Frametime + aTimeUntilDone && CurrentPostion != null)
-      // {
-      //     float timePercentage = (Time.time - Frametime) / aTimeUntilDone;
-      //     
-      //     //aObject.localEulerAngles = new Vector3 (0, Mathf.SmoothStep (CurrentPostion.y, aTargetRotation.y, timePercentage), 0);
-      //     aObject.position = Vector3.Lerp(CurrentPostion,aTargetNode.position,(Time.time - Frametime)/timePercentage);
-      //     yield return null;
-      // }
- 
-      
-      
-        aObject.position =  FinalTargetPosition;
-        yield return null;
-    }
+   // public  IEnumerator InterpolateMovementSmooth(Transform aObject, Transform aTargetNode, float aTimeUntilDone)
+   // {
+   //     Vector3 CurrentPostion = aObject.position;
+   //     
+   //     Vector3 FinalTargetPosition = new Vector3(aTargetNode.position.x, aTargetNode.position.y + Constants.Constants.m_HeightOffTheGrid, aTargetNode.position.z);
+ //
+   //     float Frametime = Time.time;
+   //    while(Time.time < Frametime + aTimeUntilDone && CurrentPostion != null)
+   //    {
+   //        float timePercentage = (Time.time - Frametime) / aTimeUntilDone;
+   //        aObject.position = Vector3.Lerp(CurrentPostion,aTargetNode.position,(Time.time - Frametime)/timePercentage);
+   //        yield return null;
+   //    }
+ //
+   //   
+   //   
+   //     aObject.position =  FinalTargetPosition;
+   //     yield return null;
+   // }
 
     
     public void PlayerMovement(Vector2 aDirection)
@@ -111,29 +108,29 @@ public class OverWorldPlayer : MonoBehaviour {
         
         Vector3 NewRotation = m_DirectionRotations[CurrentDirection];
 
-        StartCoroutine(InterpolateRotationSmooth(transform, NewRotation,0.7f));
+        StartCoroutine(InterpolateRotationSmooth(transform, NewRotation,0.4f));
         
        // transform.eulerAngles = m_Directions[CurrentDirection];
 
         if (aDirection.y > 0)
         {
-            if (CurrentLevelNode.IsDirectionWalkable(CurrentDirection))
-            {
+           // if (CurrentLevelNode.IsDirectionWalkable(CurrentDirection))
+           // {
+                LevelNode TargetNode = m_GridFormation.GetNode(CurrentLevelNode.m_PositionInGrid, CurrentDirection);
+
+                if (TargetNode == null)
+                {
+                    Debug.Log("Cant Find Node");
+                    return;
+                }
+
                 
-            }
-
-
-            LevelNode TargetNode = m_GridFormation.GetNode(CurrentLevelNode.m_PositionInGrid, CurrentDirection);
-
-            if (TargetNode == null)
-            {
-                Debug.Log("Cant Find Node");
-                return;
-            }
-
-
-            CurrentLevelNode = TargetNode;
-            StartCoroutine(InterpolateMovementSmooth(transform, TargetNode.transform, 0.5f));
+                Vector3 NewNodePosition = new Vector3(TargetNode.transform.position.x,TargetNode.transform.position.y + Constants.Constants.m_HeightOffTheGrid,
+                    TargetNode.transform.position.z);
+                
+                CurrentLevelNode = TargetNode;
+                StartCoroutine(Testo(transform, NewNodePosition, 0.5f));
+         //   }
         }
 
 
@@ -141,6 +138,25 @@ public class OverWorldPlayer : MonoBehaviour {
         
     }
     
+    public  IEnumerator Testo(Transform MainObject, Vector3 targetPosition, float TimeUntilDone)
+    {
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < TimeUntilDone) 
+        {
+            elapsedTime += Time.deltaTime;
+            float step = TimeUntilDone * Time.deltaTime;
+                
+            MainObject.position = Vector3.Lerp(MainObject.position, targetPosition, elapsedTime /2  );
+            yield return new WaitForEndOfFrame ();
+        }
+
+        MainObject.position = targetPosition;
+
+
+
+        yield return 0;
+    }
     
     public void CheckMinAndMax()
     {

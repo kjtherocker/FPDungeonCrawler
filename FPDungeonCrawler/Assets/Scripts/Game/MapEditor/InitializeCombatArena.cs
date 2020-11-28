@@ -11,6 +11,7 @@ public class InitializeCombatArena : MonoBehaviour
     public GridFormations m_LevelGrid;
     public OverWorldPlayer m_OverworldPlayer;
     public bool PreloadScene = false;
+    public UiMap m_UiMap;
     public void Start()
     {
 #if UNITY_EDITOR
@@ -36,6 +37,8 @@ public class InitializeCombatArena : MonoBehaviour
 
         
         Debug.Log("Preload Is Initialized");
+
+        m_UiMap.SetMap(m_LevelGrid.m_LevelCore);
         
         m_OverworldPlayer.Initialize();
         // TacticsManager.Instance.CombatStart();

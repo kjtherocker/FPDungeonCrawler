@@ -13,16 +13,16 @@ public class GridFormations : MonoBehaviour
     public Level m_LevelCore;
     public LevelNode[] _levelNodes;
     public LevelNode m_LevelNodePrefab;
-    private Dictionary<Level.Directions, Vector2Int> m_CardinalPositions;
+    private Dictionary<LevelNode.CardinalNodeDirections, Vector2Int> m_CardinalPositions;
     public void Start()
     {
         SpawnCamera();
         
-        m_CardinalPositions = new Dictionary<Level.Directions, Vector2Int>();
-        m_CardinalPositions.Add(Level.Directions.Up, new Vector2Int(-1,0));
-        m_CardinalPositions.Add(Level.Directions.Down, new Vector2Int(1,0));
-        m_CardinalPositions.Add(Level.Directions.Left, new Vector2Int(0,1));
-        m_CardinalPositions.Add(Level.Directions.Right, new Vector2Int(0,-1));
+        m_CardinalPositions = new Dictionary<LevelNode.CardinalNodeDirections, Vector2Int>();
+        m_CardinalPositions.Add(LevelNode.CardinalNodeDirections.Up, new Vector2Int(-1,0));
+        m_CardinalPositions.Add(LevelNode.CardinalNodeDirections.Down, new Vector2Int(1,0));
+        m_CardinalPositions.Add(LevelNode.CardinalNodeDirections.Left, new Vector2Int(0,1));
+        m_CardinalPositions.Add(LevelNode.CardinalNodeDirections.Right, new Vector2Int(0,-1));
         
     }
 
@@ -42,7 +42,7 @@ public class GridFormations : MonoBehaviour
             {
                 int LevelIndex = m_LevelCore.GetIndex(x, y);
                 //If there is no node then continue
-                if (aLevelBlueprint[LevelIndex] == (short) Level.Directions.Empty)
+                if (aLevelBlueprint[LevelIndex] == (short) Level.LevelCreationDirections.Empty)
                 {
                     continue;
                 }
@@ -73,7 +73,7 @@ public class GridFormations : MonoBehaviour
     }
 
     
-    public LevelNode GetNode(Vector2Int CurrentPosition,Level.Directions TargetDirection)
+    public LevelNode GetNode(Vector2Int CurrentPosition,LevelNode.CardinalNodeDirections TargetDirection)
     {
         Vector2Int FinalPosition = new Vector2Int(CurrentPosition.x + m_CardinalPositions[TargetDirection].x,
             CurrentPosition.y + m_CardinalPositions[TargetDirection].y );
