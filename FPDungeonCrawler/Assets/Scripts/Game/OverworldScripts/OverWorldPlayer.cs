@@ -27,6 +27,8 @@ public class OverWorldPlayer : MonoBehaviour {
 
     public GridFormations m_GridFormation;
     private Dictionary<LevelNode.CardinalNodeDirections, Vector3> m_DirectionRotations;
+
+    public float timefucker;
     
     public void Initialize ()
     {
@@ -43,7 +45,6 @@ public class OverWorldPlayer : MonoBehaviour {
         m_DirectionRotations.Add( LevelNode.CardinalNodeDirections.Right, new Vector3(0, 180, 0));
         
         
-
         
         CurrentDirectionValue = 0;
 
@@ -53,46 +54,43 @@ public class OverWorldPlayer : MonoBehaviour {
         
        InputManager.Instance.m_MovementControls.Player.Movement.performed += movement => PlayerMovement(movement.ReadValue<Vector2>());
 
-    }
+    } 
     
     public  IEnumerator InterpolateRotationSmooth(Transform aObject, Vector3 aTargetRotation, float aTimeUntilDone)
     {
         Vector3 CurrentPostion = new Vector3(aObject.localRotation.eulerAngles.x,aObject.localRotation.eulerAngles.y,aObject.localRotation.eulerAngles.z);
- 
-        float Frametime = Time.time;
-        while(Time.time < Frametime + aTimeUntilDone && aObject != null)
+        float elapsedTime = 0.0f;
+        
+        Quaternion targetQuaternion = Quaternion.Euler(0, aTargetRotation.y, 0);
+        for(var t = 0f; t < 1; t += Time.deltaTime/aTimeUntilDone)
         {
-            float timePercentage = (Time.time - Frametime) / aTimeUntilDone;
-
-            Quaternion targetQuaternion = Quaternion.Euler(0, aTargetRotation.y, 0);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetQuaternion, timePercentage);
-           //aObject.localEulerAngles = new Vector3 (0, Mathf.SmoothStep (CurrentPostion.y, aTargetRotation.y, timePercentage), 0);
-            //obj.localEulerAngles = Vector3.Lerp(source,destinationRotation,(Time.time - startTime)/overTime);
-            yield return null;
+            Debug.Log("Elapsed time test rotation " + t );
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetQuaternion, t * 15);
+            
+            yield return new WaitForFixedUpdate();
         }
- 
+
         aObject.localEulerAngles = aTargetRotation;
+        yield return 0;
     }
-    
-   // public  IEnumerator InterpolateMovementSmooth(Transform aObject, Transform aTargetNode, float aTimeUntilDone)
-   // {
-   //     Vector3 CurrentPostion = aObject.position;
-   //     
-   //     Vector3 FinalTargetPosition = new Vector3(aTargetNode.position.x, aTargetNode.position.y + Constants.Constants.m_HeightOffTheGrid, aTargetNode.position.z);
- //
-   //     float Frametime = Time.time;
-   //    while(Time.time < Frametime + aTimeUntilDone && CurrentPostion != null)
-   //    {
-   //        float timePercentage = (Time.time - Frametime) / aTimeUntilDone;
-   //        aObject.position = Vector3.Lerp(CurrentPostion,aTargetNode.position,(Time.time - Frametime)/timePercentage);
-   //        yield return null;
-   //    }
- //
-   //   
-   //   
-   //     aObject.position =  FinalTargetPosition;
-   //     yield return null;
-   // }
+    public  IEnumerator Testo(Transform MainObject, Vector3 targetPosition, float TimeUntilDone)
+    {
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < TimeUntilDone) 
+        {
+            
+            yield return new WaitForFixedUpdate();
+            Debug.Log("Elapsed time test movement " + elapsedTime );
+            elapsedTime += Time.deltaTime;
+            MainObject.position = Vector3.Lerp(MainObject.position, targetPosition, elapsedTime /TimeUntilDone );
+        }
+        
+        
+        MainObject.position = targetPosition;
+
+        yield return 0;
+    }
 
     
     public void PlayerMovement(Vector2 aDirection)
@@ -108,7 +106,7 @@ public class OverWorldPlayer : MonoBehaviour {
         
         Vector3 NewRotation = m_DirectionRotations[CurrentDirection];
 
-        StartCoroutine(InterpolateRotationSmooth(transform, NewRotation,0.4f));
+        StartCoroutine(InterpolateRotationSmooth(transform, NewRotation,0.3f));
         
        // transform.eulerAngles = m_Directions[CurrentDirection];
 
@@ -129,7 +127,7 @@ public class OverWorldPlayer : MonoBehaviour {
                     TargetNode.transform.position.z);
                 
                 CurrentLevelNode = TargetNode;
-                StartCoroutine(Testo(transform, NewNodePosition, 0.5f));
+                StartCoroutine(Testo(transform, NewNodePosition, 0.2f));
          //   }
         }
 
@@ -138,25 +136,7 @@ public class OverWorldPlayer : MonoBehaviour {
         
     }
     
-    public  IEnumerator Testo(Transform MainObject, Vector3 targetPosition, float TimeUntilDone)
-    {
-        float elapsedTime = 0.0f;
 
-        while (elapsedTime < TimeUntilDone) 
-        {
-            elapsedTime += Time.deltaTime;
-            float step = TimeUntilDone * Time.deltaTime;
-                
-            MainObject.position = Vector3.Lerp(MainObject.position, targetPosition, elapsedTime /2  );
-            yield return new WaitForEndOfFrame ();
-        }
-
-        MainObject.position = targetPosition;
-
-
-
-        yield return 0;
-    }
     
     public void CheckMinAndMax()
     {
@@ -170,25 +150,8 @@ public class OverWorldPlayer : MonoBehaviour {
             CurrentDirectionValue = CardinalDirections.Length - 1;
         }
     }
+    
 
-    IEnumerator MoveToDirection()
-    {
-     // float SpeedUpdate = Player_Speed * Time.deltaTime;
-     // 
-     // m_Velocity = (new Vector3(MoveDirection.x ,0  ,MoveDirection.y )* SpeedUpdate );
-     // 
-     // transform.position =  gameObject.transform.position + m_Velocity;
-        yield return  new WaitForEndOfFrame();
-    }
-
-
-    // Update is called once per frame
-	void FixedUpdate ()
-    {
-
-
-
-    }
     
 }
 
