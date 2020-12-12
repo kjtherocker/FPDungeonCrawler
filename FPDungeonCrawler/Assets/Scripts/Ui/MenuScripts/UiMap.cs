@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UiMap : UiScreen
 {
-    private Level m_LevelCore;
+    private Floor m_FloorCore;
 
     public GameObject m_MapTextureNode;
     
@@ -17,9 +17,11 @@ public class UiMap : UiScreen
     public GameObject m_StartingPoint;
 
     public GameObject SpawnPoint;
-    public void SetMap(Level aLevelCore)
+
+    public GameObject PlayerNode;
+    public void SetMap(Floor aFloorCore)
     {
-        m_LevelCore = aLevelCore;
+        m_FloorCore = aFloorCore;
         GenerateMap();
         
         
@@ -27,16 +29,16 @@ public class UiMap : UiScreen
 
     public void GenerateMap()
     {
-        _MapNodes = new GameObject[m_LevelCore.GridDimensionX * m_LevelCore.GridDimensionY];
+        _MapNodes = new GameObject[m_FloorCore.GridDimensionX * m_FloorCore.GridDimensionY];
         
-        for (int x = 0; x < m_LevelCore.GridDimensionX; x++)
+        for (int x = 0; x < m_FloorCore.GridDimensionX; x++)
         {
-            for (int y = 0; y < m_LevelCore.GridDimensionY; y++)
+            for (int y = 0; y < m_FloorCore.GridDimensionY; y++)
             {
                 
-                int nodeindex = m_LevelCore.GetIndex(x, y);
+                int nodeindex = m_FloorCore.GetIndex(x, y);
                 
-                if (m_LevelCore.LevelBlueprint[nodeindex] == (short) Level.LevelCreationDirections.Empty)
+                if (m_FloorCore.FloorBlueprint[nodeindex] == (short) Floor.LevelCreationDirections.Empty)
                 {
                     continue;
                 }
@@ -46,12 +48,46 @@ public class UiMap : UiScreen
                 
                 _MapNodes[nodeindex] = Instantiate(m_MapTextureNode,SpawnPoint.transform);
                 _MapNodes[nodeindex].GetComponent<RawImage>().texture =
-                    MapNodeTexture[m_LevelCore.LevelBlueprint[nodeindex]];
+                    MapNodeTexture[m_FloorCore.FloorBlueprint[nodeindex]];
                 _MapNodes[nodeindex].transform.position = Spawnposition;
+
+                IsNodeRevealed(nodeindex);
+
 
             }
         }
 
     }
-    
+
+
+    public void IsNodeRevealed(int aIndex)
+    {
+        if (!m_FloorCore.FloorRevealed[aIndex])
+        {
+            _MapNodes[aIndex].SetActive(false);
+        }
+        else
+        {
+            _MapNodes[aIndex].SetActive(true); 
+        }
+    }
+
+    public void SetMapRevealed(int aIndex, bool aSetRevealStatus)
+    {
+        if (m_FloorCore.FloorRevealed[aIndex] == aSetRevealStatus)
+        {
+            return;
+        }
+
+        m_FloorCore.FloorRevealed[aIndex] = aSetRevealStatus;
+        
+        IsNodeRevealed(aIndex);
+    }
+
+    public void SetPlayerNode(int index)
+    {
+        PlayerNode.transform.position = _MapNodes[index].transform.position; 
+        SetMapRevealed(index, true);
+    }
+
 }

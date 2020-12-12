@@ -36,8 +36,8 @@ public class RedEyes : Enemy
 
         
         charactertype = Charactertype.Enemy;
-        elementalStrength = ElementalStrength.Fire;
-        elementalWeakness = ElementalWeakness.Water;
+        elementalStrength = Skills.ElementalType.Fire;
+        elementalWeakness = Skills.ElementalType.Ice;
     }
 
 

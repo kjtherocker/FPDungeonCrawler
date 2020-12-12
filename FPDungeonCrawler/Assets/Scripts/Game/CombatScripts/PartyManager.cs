@@ -13,8 +13,8 @@ public class PartyManager : Singleton<PartyManager>
     {
         m_CurrentParty.Add(gameObject.AddComponent<Sigma>());
         m_CurrentParty.Add(gameObject.AddComponent<Fide>());
-        m_CurrentParty.Add(gameObject.AddComponent<Cavia>());
         m_CurrentParty.Add(gameObject.AddComponent<Vella>());
+        m_CurrentParty.Add(gameObject.AddComponent<Cavia>());
 
 
         foreach (Creatures ACreatures in m_CurrentParty)

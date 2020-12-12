@@ -44,8 +44,8 @@ public class RedKnightPhase1 : Enemy
         m_Texture = (Material)Resources.Load("Materials/Portrait/Material_GreenSlime", typeof(Material));
 
         charactertype = Charactertype.Enemy;
-        elementalStrength = ElementalStrength.Water;
-        elementalWeakness = ElementalWeakness.Fire;
+        elementalStrength = Skills.ElementalType.Ice;
+        elementalWeakness = Skills.ElementalType .Fire;
     }
 
 

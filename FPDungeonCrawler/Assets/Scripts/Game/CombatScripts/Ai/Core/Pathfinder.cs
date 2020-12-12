@@ -6,20 +6,20 @@ using System;
 
 public class Pathfinder : IPathfinding
 {
-    public Dictionary<LevelNode, List<LevelNode>> findAllPaths(Dictionary<LevelNode, Dictionary<LevelNode, int>> edges, LevelNode originNode,int m_Range)
+    public Dictionary<FloorNode, List<FloorNode>> findAllPaths(Dictionary<FloorNode, Dictionary<FloorNode, int>> edges, FloorNode originNode,int m_Range)
     {
-        IPriorityQueue<LevelNode> frontier = new HeapPriorityQueue<LevelNode>();
+        IPriorityQueue<FloorNode> frontier = new HeapPriorityQueue<FloorNode>();
         frontier.Enqueue(originNode, 0);
 
-        Dictionary<LevelNode, LevelNode> cameFrom = new Dictionary<LevelNode, LevelNode>();
-        cameFrom.Add(originNode, default(LevelNode));
-        Dictionary<LevelNode, int> costSoFar = new Dictionary<LevelNode, int>();
+        Dictionary<FloorNode, FloorNode> cameFrom = new Dictionary<FloorNode, FloorNode>();
+        cameFrom.Add(originNode, default(FloorNode));
+        Dictionary<FloorNode, int> costSoFar = new Dictionary<FloorNode, int>();
         costSoFar.Add(originNode, 0);
         while (frontier.Count != 0)
         {
             var current = frontier.Dequeue();
-            List<LevelNode>neighbours = GetNeigbours(edges, current);
-            foreach (LevelNode neighbour in neighbours)
+            List<FloorNode>neighbours = GetNeigbours(edges, current);
+            foreach (FloorNode neighbour in neighbours)
             {
                 int newCost = costSoFar[current] + edges[current][neighbour];
                 if (!costSoFar.ContainsKey(neighbour) || newCost < costSoFar[neighbour])
@@ -36,10 +36,10 @@ public class Pathfinder : IPathfinding
                 }
             }
         }
-        Dictionary<LevelNode, List<LevelNode>> paths = new Dictionary<LevelNode, List<LevelNode>>();
-        foreach (LevelNode destination in cameFrom.Keys)
+        Dictionary<FloorNode, List<FloorNode>> paths = new Dictionary<FloorNode, List<FloorNode>>();
+        foreach (FloorNode destination in cameFrom.Keys)
         {
-            List<LevelNode> path = new List<LevelNode>();
+            List<FloorNode> path = new List<FloorNode>();
             var current = destination;
             while (!current.Equals(originNode))
             {

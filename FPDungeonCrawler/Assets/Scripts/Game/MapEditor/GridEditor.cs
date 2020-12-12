@@ -4,7 +4,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 
-[CustomEditor(typeof(GridFormations))]
+[CustomEditor(typeof(FloorManager))]
 public class GridEditor : Editor
 {
 
@@ -13,7 +13,7 @@ public class GridEditor : Editor
     {
         DrawDefaultInspector();
 
-        GridFormations myScript = (GridFormations)target;
+        FloorManager myScript = (FloorManager)target;
         if (GUILayout.Button("Build Grid"))
         {
             myScript.CreateGrid();

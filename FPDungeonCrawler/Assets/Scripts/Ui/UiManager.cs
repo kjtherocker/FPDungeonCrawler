@@ -63,6 +63,16 @@ public class UiManager : Singleton<UiManager>
             }
 
         }
+        
+        for (int i = 0; i <= m_UiTabs.Count - 1; i++)
+        {
+            if (m_UiTabs[i] != null)
+            {
+                m_UiTabs[i].Initialize();
+                // m_UiScreens[i].SetGameObjectState(false);
+            }
+
+        }
     }
 
     public UiTabScreen GetUiTab(UiTab aUiTab)

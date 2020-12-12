@@ -11,6 +11,9 @@ public class Vella : Ally
     {
         CurrentHealth = 50;
         MaxHealth = 50;
+        MaxMana = 180;
+        CurrentMana = MaxMana;
+        
         BaseStrength = 75;
         BaseMagic = 40;
         BaseHit = 20;
@@ -43,8 +46,8 @@ public class Vella : Ally
         m_Texture = (Material)Resources.Load("Materials/Portrait/Material_Knight", typeof(Material));
 
         charactertype = Charactertype.Ally;
-        elementalStrength = ElementalStrength.Wind;
-        elementalWeakness = ElementalWeakness.Fire;
+        elementalStrength = Skills.ElementalType .Shadow;
+        elementalWeakness = Skills.ElementalType .Light;
     }
 
 }

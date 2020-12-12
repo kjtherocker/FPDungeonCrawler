@@ -55,8 +55,8 @@ public class Sigma : Ally {
 
 
         charactertype = Charactertype.Ally;
-        elementalStrength = ElementalStrength.Fire;
-        elementalWeakness = ElementalWeakness.Null;
+        elementalStrength = Skills.ElementalType .Fire;
+        elementalWeakness = Skills.ElementalType .Null;
 
     }
 	

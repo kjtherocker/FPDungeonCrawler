@@ -8,7 +8,7 @@ public class UiTabPartyStatus : UiTabScreen
     
     
     // Start is called before the first frame update
-    void Initialize()
+    public override void Initialize()
     {
         for (int i = 0; i < m_Playerstatus.Count; i++)
         {

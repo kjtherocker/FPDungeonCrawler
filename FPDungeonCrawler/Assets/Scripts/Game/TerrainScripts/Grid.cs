@@ -7,11 +7,11 @@ public class Grid : Singleton<Grid>
 
     public Vector2Int m_GridDimensions;
 
-    public List<LevelNode> m_GridPathToGoal;
+    public List<FloorNode> m_GridPathToGoal;
 
     public GameObject m_PrefabNode;
-    public LevelNode[,] m_GridPathArray;
-    public List<LevelNode> m_GridPathList;
+    public FloorNode[,] m_GridPathArray;
+    public List<FloorNode> m_GridPathList;
     
     public Material m_WalkableTile;    
     public Material m_DomainTile;
@@ -20,11 +20,11 @@ public class Grid : Singleton<Grid>
     // Use this for initialization
 
 
-    public void Convert1DArrayto2D(List<LevelNode> aNodeGroup, Vector2Int grid)
+    public void Convert1DArrayto2D(List<FloorNode> aNodeGroup, Vector2Int grid)
     {
 
         m_GridDimensions = grid;
-        m_GridPathArray = new LevelNode[m_GridDimensions.x, m_GridDimensions.y];
+        m_GridPathArray = new FloorNode[m_GridDimensions.x, m_GridDimensions.y];
         
         for (int i = 0; i < m_GridDimensions.x * m_GridDimensions.y; i++)
         {
@@ -37,7 +37,7 @@ public class Grid : Singleton<Grid>
         m_GridPathList = aNodeGroup;
     }
 
-    public LevelNode GetNode(Vector2Int grid)
+    public FloorNode GetNode(Vector2Int grid)
     {
         if (m_GridPathArray != null)
         {
@@ -50,7 +50,7 @@ public class Grid : Singleton<Grid>
         
     }
     
-    public LevelNode GetNode(int gridX, int gridY)
+    public FloorNode GetNode(int gridX, int gridY)
     {
         if (m_GridPathArray != null)
         {
@@ -82,10 +82,10 @@ public class Grid : Singleton<Grid>
         new Vector2Int(1, 0), new Vector2Int(-1, 0), new Vector2Int(0, 1), new Vector2Int(0, -1)
     };
 
-    public LevelNode CheckNeighborsForLowestNumber(Vector2Int grid)
+    public FloorNode CheckNeighborsForLowestNumber(Vector2Int grid)
     {
         float TempHeuristic = 100;
-        LevelNode TempNode = null;
+        FloorNode TempNode = null;
 
 
         foreach (Vector2Int direction in _directions)
@@ -93,7 +93,7 @@ public class Grid : Singleton<Grid>
             if ((grid.x + direction.x) < m_GridDimensions.x &&  (grid.y + direction.y)  < m_GridDimensions.y 
                 && grid.x + direction.x > -1 && (grid.y + direction.y) > -1)
             {
-                LevelNode neighbour = m_GridPathArray[grid.x + direction.x, grid.y + direction.y];
+                FloorNode neighbour = m_GridPathArray[grid.x + direction.x, grid.y + direction.y];
                 if (neighbour == null)
                 {
                     Debug.Log("neighbour literally doesnt exist");
@@ -151,7 +151,7 @@ public class Grid : Singleton<Grid>
 
     
 
-    public List<LevelNode> GetTheLowestH(Vector2Int grid, int aMovement)
+    public List<FloorNode> GetTheLowestH(Vector2Int grid, int aMovement)
     {
 
 

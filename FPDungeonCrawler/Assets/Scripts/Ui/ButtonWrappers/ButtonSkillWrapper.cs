@@ -73,13 +73,6 @@ public class ButtonSkillWrapper : MonoBehaviour
 
     public void SkillHoveredOver(bool isHoverovered)
     {
-        if (isHoverovered)
-        {
-            Highlight.color = m_Color_TransparentWhite;
-        }
-        else
-        {
-            Highlight.color = m_Color_White;
-        }
+        Highlight.color = isHoverovered ? m_Color_TransparentWhite : m_Color_White;
     }
 }

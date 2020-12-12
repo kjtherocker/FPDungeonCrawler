@@ -86,7 +86,6 @@ public class UiSkillBoard : UiScreen
         for (int i = 0; i < m_CurrentSkillMenuButtonsMenu.Count; i++)
         {
             m_CurrentSkillMenuButtonsMenu[i].gameObject.SetActive(false);
-            m_CurrentSkillMenuButtonsMenu[i].SkillHoveredOver(false);
             m_CurrentSkillMenuButtonsMenu[i].m_ButtonSkill = null;
 
         }
@@ -94,9 +93,11 @@ public class UiSkillBoard : UiScreen
         for (int i = 0; i < m_SkillBoardCreature.m_Skills.Count; i++)
         {
             m_CurrentSkillMenuButtonsMenu[i].gameObject.SetActive(true);
+            m_CurrentSkillMenuButtonsMenu[i].SkillHoveredOver(true);
             m_CurrentSkillMenuButtonsMenu[i].SetupButton(m_SkillBoardCreature, m_SkillBoardCreature.m_Skills[i]);
         }
 
+        
         m_CreatureSkillCount = m_SkillBoardCreature.m_Skills.Count - 1;
         
        ResetCursorPosition();

@@ -45,8 +45,8 @@ public class Alpha : Ally
 
 
         charactertype = Charactertype.Ally;
-        elementalStrength = ElementalStrength.Water;
-        elementalWeakness = ElementalWeakness.Fire;
+        elementalStrength = Skills.ElementalType.Ice;
+        elementalWeakness = Skills.ElementalType.Fire;
 
     }
 	

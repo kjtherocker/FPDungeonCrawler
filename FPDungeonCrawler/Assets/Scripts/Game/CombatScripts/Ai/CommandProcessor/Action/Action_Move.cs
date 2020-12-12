@@ -5,13 +5,13 @@ using UnityEngine;
 public class Action_Move : Action
 {
     private Creatures m_ActionCreature;
-    private LevelNode m_ActionCommandNode;
+    private FloorNode m_ActionCommandNode;
     
-    private LevelNode m_PreviousActionCommandNode;
+    private FloorNode m_PreviousActionCommandNode;
     public Vector3 CreatureOffset;
     
     
-    public void SetupAction(Creatures aActionCreature , LevelNode aActionCommandNode)
+    public void SetupAction(Creatures aActionCreature , FloorNode aActionCommandNode)
     {
         m_ActionCreature = aActionCreature;
         m_ActionCommandNode = aActionCommandNode;

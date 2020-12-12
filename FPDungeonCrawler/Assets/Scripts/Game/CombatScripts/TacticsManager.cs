@@ -13,16 +13,11 @@ public class TacticsManager : Singleton<TacticsManager>
 {
 
     public PartyManager PartyManager;
-    public Grid m_Grid;
-
-
+    
     bool WhichSidesTurnIsIt;
     bool CombatHasStarted;
 
     private int m_EnemyAiCurrentlyInList;
-    
-
-    public Vector3 CreatureOffset;
 
     public HealthBar m_Healthbar;
     
@@ -56,41 +51,27 @@ public class TacticsManager : Singleton<TacticsManager>
 
     void Start()
     {
-        CreatureOffset = new Vector3(0, Constants.Constants.m_HeightOffTheGrid, 0);
+     //   CreatureOffset = new Vector3(0, Constants.Constants.m_HeightOffTheGrid, 0);
         
         PartyManager = PartyManager.Instance;
         //CombatStart();
     }
 
-    public void CombatStart()
+    public void StartCombat(CombatArena aArena)
     {
-
-         m_Grid = Grid.Instance;
-
-         PartyManager = PartyManager.Instance;
+        PartyManager = PartyManager.Instance;
          
-         AddCreatureToCombat(PartyManager.m_CurrentParty[0],TurnOrderAlly);
-        
-         AddCreatureToCombat(PartyManager.m_CurrentParty[1], TurnOrderAlly);
-        
-         AddCreatureToCombat(PartyManager.m_CurrentParty[2], TurnOrderAlly);
-                                                                            
-         AddCreatureToCombat(PartyManager.m_CurrentParty[3], TurnOrderAlly);
-
+       //  AddCreatureToCombat(PartyManager.m_CurrentParty[0],TurnOrderAlly);
+       //  AddCreatureToCombat(PartyManager.m_CurrentParty[1], TurnOrderAlly);
+       //  AddCreatureToCombat(PartyManager.m_CurrentParty[2], TurnOrderAlly);
+       //  AddCreatureToCombat(PartyManager.m_CurrentParty[3], TurnOrderAlly);
          
          UiManager.instance.PushScreen(UiManager.Screen.CommandBoard);
          
          UiScreen temp = UiManager.instance.GetScreen(UiManager.Screen.CommandBoard);
          ((UiScreenCommandBoard) temp).m_CommandboardCreature = PartyManager.m_CurrentParty[0];
-         
-         
-       // CombatHasStarted = true;
-//
-       // m_BattleStates = CombatStates.AllyTurn;
-       //  
-       //  WhichSidesTurnIsIt = false;
-//
-       //  m_CreaturesWhosDomainHaveClashed = new Dictionary<Creatures, Creatures>();
+
+         aArena.gameObject.SetActive(true);
 
     }
 

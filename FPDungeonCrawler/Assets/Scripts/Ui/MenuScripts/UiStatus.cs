@@ -12,6 +12,11 @@ public class UiStatus : UiTabScreen
     public Creatures Creature;
 
 
+    public List<Material> m_ElementIconsList;
+
+    public Image m_ElementalStrength;
+    public Image m_ElementalWeakness;
+    
     private int m_CurrentHealth = 150;
     private int m_MaxHealth = 150;
 
@@ -19,7 +24,9 @@ public class UiStatus : UiTabScreen
     private int m_MaxMana = 150;
     public bool m_IsSelected;
 
-
+    public TextMeshProUGUI m_HealthText;
+    public TextMeshProUGUI m_ManaText;
+    
     public Slider m_HealthbarSlider;
     public Slider m_ManaSlider;
     public List<UiStatusDomainPointWrapper> m_DomainPointWrappers;
@@ -45,12 +52,24 @@ public class UiStatus : UiTabScreen
         
         m_CurrentHealth = Creature.CurrentHealth;
         m_MaxHealth = Creature.MaxHealth;
+        m_HealthText.text = m_CurrentHealth.ToString();
         
         m_CurrentMana = Creature.CurrentMana;
         m_MaxMana = Creature.MaxMana;
+        m_ManaText.text = m_CurrentMana.ToString();
 
+
+        m_ElementalStrength.material = m_ElementIconsList[(short)Creature.elementalStrength];
+        
+        m_ElementalWeakness.material = m_ElementIconsList[(short)Creature.elementalWeakness];
+        
         m_HealthbarSlider.value = m_CurrentHealth / m_MaxHealth;
-        m_ManaSlider.value = m_CurrentMana / m_MaxMana;
+        if (m_CurrentMana != 0 || m_MaxMana != 0)
+        {
+            m_ManaSlider.value = m_CurrentMana / m_MaxMana;     
+        }
+
+       
         
         
         UpdateSliders();

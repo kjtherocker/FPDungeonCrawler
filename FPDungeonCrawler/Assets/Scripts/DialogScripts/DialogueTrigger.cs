@@ -39,7 +39,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public bool DialogueIsDone;
     
-    public OverWorldPlayer m_BasePlayer;
+    public PlayerMovementController mBasePlayerMovementController;
 
     public DialogueTimelineHandler m_DialogueTimeLineHandler;
     

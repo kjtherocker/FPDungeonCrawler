@@ -1,48 +1,44 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
 
-public class OverWorldPlayer : MonoBehaviour {
+public class PlayerMovementController : MonoBehaviour {
 
     // Use this for initialization
 
     [SerializeField]
     
-    public float m_RotationSpeed = 0.5f;
-
-    Vector3 m_Velocity = Vector3.zero;
-
-    public Vector2 MoveDirection;
-
-    public LevelNode CurrentLevelNode;
+    public FloorNode currentFloorNode;
     
-    public LevelNode.CardinalNodeDirections[] CardinalDirections;
-    public LevelNode.CardinalNodeDirections CurrentDirection;
+    public FloorNode.CardinalNodeDirections[] CardinalDirections;
+    public FloorNode.CardinalNodeDirections CurrentDirection;
     public int CurrentDirectionValue;
 
-    public GridFormations m_GridFormation;
-    private Dictionary<LevelNode.CardinalNodeDirections, Vector3> m_DirectionRotations;
+    public Vector2Int CurrentPosition;
 
-    public float timefucker;
-    
+    public FloorManager m_CurrentFloorManager;
+    private Dictionary<FloorNode.CardinalNodeDirections, Vector3> m_DirectionRotations;
+
+    public UiMap m_Map;  
     public void Initialize ()
     {
         CardinalDirections = new []
         {
-            LevelNode.CardinalNodeDirections.Up, LevelNode.CardinalNodeDirections.Right, LevelNode.CardinalNodeDirections.Down,LevelNode.CardinalNodeDirections.Left
+            FloorNode.CardinalNodeDirections.Up, FloorNode.CardinalNodeDirections.Right, FloorNode.CardinalNodeDirections.Down,FloorNode.CardinalNodeDirections.Left
         };
         
-        m_DirectionRotations = new Dictionary<LevelNode.CardinalNodeDirections, Vector3>();
+        m_DirectionRotations = new Dictionary<FloorNode.CardinalNodeDirections, Vector3>();
         
-        m_DirectionRotations.Add( LevelNode.CardinalNodeDirections.Down, new Vector3(0, 90, 0));
-        m_DirectionRotations.Add( LevelNode.CardinalNodeDirections.Left,  new Vector3(0, 360, 0));
-        m_DirectionRotations.Add( LevelNode.CardinalNodeDirections.Up, new Vector3(0, 270, 0));
-        m_DirectionRotations.Add( LevelNode.CardinalNodeDirections.Right, new Vector3(0, 180, 0));
+        m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Down, new Vector3(0, 90, 0));
+        m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Left,  new Vector3(0, 360, 0));
+        m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Up, new Vector3(0, 270, 0));
+        m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Right, new Vector3(0, 180, 0));
         
         
         
@@ -64,7 +60,7 @@ public class OverWorldPlayer : MonoBehaviour {
         Quaternion targetQuaternion = Quaternion.Euler(0, aTargetRotation.y, 0);
         for(var t = 0f; t < 1; t += Time.deltaTime/aTimeUntilDone)
         {
-            Debug.Log("Elapsed time test rotation " + t );
+      
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetQuaternion, t * 15);
             
             yield return new WaitForFixedUpdate();
@@ -81,22 +77,31 @@ public class OverWorldPlayer : MonoBehaviour {
         {
             
             yield return new WaitForFixedUpdate();
-            Debug.Log("Elapsed time test movement " + elapsedTime );
             elapsedTime += Time.deltaTime;
             MainObject.position = Vector3.Lerp(MainObject.position, targetPosition, elapsedTime /TimeUntilDone );
         }
         
-        
+        FloorNode TargetNode = m_CurrentFloorManager.GetNode(currentFloorNode.m_PositionInGrid, CurrentDirection);
         MainObject.position = targetPosition;
-
+        currentFloorNode = TargetNode;
+        TargetNode.ActivateWalkOnTopTrigger();
         yield return 0;
     }
 
     
     public void PlayerMovement(Vector2 aDirection)
     {
-        
-        int direction = (int)aDirection.x * -1;
+        RotatePlayer((int)aDirection.x);
+        if (aDirection.y > 0)
+        {
+            MoveForward();
+        }
+    }
+
+    public void RotatePlayer(int aRotateDirection)
+    {
+        //Inverting Direction
+        int direction = aRotateDirection * -1;
         
         CurrentDirectionValue += direction;
 
@@ -107,37 +112,41 @@ public class OverWorldPlayer : MonoBehaviour {
         Vector3 NewRotation = m_DirectionRotations[CurrentDirection];
 
         StartCoroutine(InterpolateRotationSmooth(transform, NewRotation,0.3f));
-        
-       // transform.eulerAngles = m_Directions[CurrentDirection];
+    }
 
-        if (aDirection.y > 0)
+    public void MoveForward()
+    {
+        FloorNode TargetNode = m_CurrentFloorManager.GetNode(currentFloorNode.m_PositionInGrid, CurrentDirection);
+        if (TargetNode == null)
         {
-           // if (CurrentLevelNode.IsDirectionWalkable(CurrentDirection))
-           // {
-                LevelNode TargetNode = m_GridFormation.GetNode(CurrentLevelNode.m_PositionInGrid, CurrentDirection);
-
-                if (TargetNode == null)
-                {
-                    Debug.Log("Cant Find Node");
-                    return;
-                }
-
-                
-                Vector3 NewNodePosition = new Vector3(TargetNode.transform.position.x,TargetNode.transform.position.y + Constants.Constants.m_HeightOffTheGrid,
-                    TargetNode.transform.position.z);
-                
-                CurrentLevelNode = TargetNode;
-                StartCoroutine(Testo(transform, NewNodePosition, 0.2f));
-         //   }
+            Debug.Log("Cant Find Node " + currentFloorNode.m_PositionInGrid);
+            return;
         }
 
+                
+        Vector3 NewNodePosition = new Vector3(TargetNode.transform.position.x,TargetNode.transform.position.y + Constants.Constants.m_HeightOffTheGrid,
+            TargetNode.transform.position.z);
+                
+                
+        StartCoroutine(Testo(transform, NewNodePosition, 0.2f));
 
+        int index = m_CurrentFloorManager.m_FloorCore.GetIndex(TargetNode.m_PositionInGrid.x,
+            TargetNode.m_PositionInGrid.y);
+        m_Map.SetPlayerNode(index);
+        CurrentPosition = TargetNode.m_PositionInGrid;
 
-        
     }
-    
 
-    
+
+    public void SetPlayerMapPosition(FloorNode aFloorNode)
+    {
+        int index = m_CurrentFloorManager.m_FloorCore.GetIndex(aFloorNode.m_PositionInGrid.x,
+            aFloorNode.m_PositionInGrid.y);
+        m_Map.SetPlayerNode(index);
+    }
+
+
+
     public void CheckMinAndMax()
     {
         if (CurrentDirectionValue > CardinalDirections.Length -1)

@@ -23,7 +23,7 @@ public class Memoria : MonoBehaviour
     public void DestroyMemoria()
     {
 
-        Grid.Instance.GetNode(m_NodePosition).m_WalkOnTopTriggerTypes = LevelNode.WalkOntopTriggerTypes.None;
+        Grid.Instance.GetNode(m_NodePosition).m_WalkOnTopTriggerTypes = FloorNode.WalkOntopTriggerTypes.None;
         gameObject.SetActive(false);
     }
 

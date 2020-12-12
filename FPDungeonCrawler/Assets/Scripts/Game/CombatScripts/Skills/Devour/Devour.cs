@@ -13,7 +13,7 @@ public class Devour : Domain
         m_SkillDescription = "Consume Domain tiles";
     }
 
-    public override bool CheckIfNodeIsClearAndReturnNodeIndex(LevelNode aNode, Vector2Int m_Position)
+    public override bool CheckIfNodeIsClearAndReturnNodeIndex(FloorNode aNode, Vector2Int m_Position)
     {
         // if the node is out of bounds, return -1 (an invalid tile index)
 
@@ -22,7 +22,7 @@ public class Devour : Domain
             Debug.Log("YOU BROKE " + aNode.m_PositionInGrid.ToString());
         }
 
-        LevelNode nodeIndex = aNode;
+        FloorNode nodeIndex = aNode;
 
         // if the node is already closed, return -1 (an invalid tile index)
         if (nodeIndex.m_HeuristicCalculated == true)
@@ -31,7 +31,7 @@ public class Devour : Domain
         }
 
         // if the node can't be walked on, return -1 (an invalid tile index)
-        if (nodeIndex.m_CombatsNodeType == LevelNode.CombatNodeTypes.Empty)
+        if (nodeIndex.m_CombatsNodeType == FloorNode.CombatNodeTypes.Empty)
         {
             return false;
         }

@@ -17,27 +17,6 @@ public class Creatures : MonoBehaviour
 
 
 
-    public enum ElementalStrength
-    {
-        Null,
-        Fire,
-        Water,
-        Wind,
-        Lighting,
-        Shadow,
-        Light
-    }
-    public enum ElementalWeakness
-    {
-        Null,
-        Fire,
-        Water,
-        Wind,
-        Lighting,
-        Shadow,
-        Light
-
-    }
 
     public enum CreaturesAilment
     {
@@ -64,8 +43,8 @@ public class Creatures : MonoBehaviour
 
     public CreaturesAilment m_creaturesAilment;
     public Charactertype charactertype;
-    public ElementalStrength elementalStrength;
-    public ElementalWeakness elementalWeakness;
+    public Skills.ElementalType elementalStrength;
+    public Skills.ElementalType  elementalWeakness;
     public MovementType m_CreaturesMovementType;
 
     public MovementList m_MovementList;

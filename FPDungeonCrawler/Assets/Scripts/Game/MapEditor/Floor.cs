@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class Level : MonoBehaviour
+public class Floor : MonoBehaviour
 {
     public enum LevelCreationDirections
     {
@@ -32,32 +32,43 @@ public class Level : MonoBehaviour
 
     public short GridDimensionX = 10;
     public short GridDimensionY = 10;
-    public short[] LevelBlueprint;
+    public short[] FloorBlueprint;
+    public bool[] FloorRevealed;
 
     public Vector2Int m_DefaultSpawnPosition;
 
     // Start is called before the first frame update
     public void Intialize()
     {
-        LevelBlueprint = new short[]
+        FloorRevealed = new bool[GridDimensionX * GridDimensionY];
+
+        for (int i = FloorRevealed.Length - 1; i >= 0; i--)
+        {
+            FloorRevealed[i] = false;
+        }
+
+
+        FloorBlueprint = new short[]
         {
             4, 15, 9, 0, 0, 0, 0, 0, 0, 0,
             2, 8, 13, 0, 0, 0, 0, 0, 0, 0,
             8, 9, 6, 0, 0, 0, 0, 0, 0, 0,
             0, 6, 6, 0, 0, 0, 0, 0, 0, 0,
-            0, 8, 7, 1, 1, 1, 0, 0, 0, 0,
-            0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+            0, 8, 5, 15, 15, 9, 0, 0, 0, 0,
+            0, 0, 8, 12, 12, 7, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         };
+        
+        
 
         SpawnCamera();
 
         SpawnGimmicks();
     }
-
+    
 
     public int GetIndex(int aRow, int aColumn)
     {

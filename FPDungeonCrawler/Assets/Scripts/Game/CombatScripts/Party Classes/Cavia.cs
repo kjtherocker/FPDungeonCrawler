@@ -11,6 +11,11 @@ public class Cavia : Ally
     {
         CurrentHealth = 50;
         MaxHealth = 50;
+        
+        
+        MaxMana = 80;
+        CurrentMana = MaxMana;
+        
         BaseStrength = 75;
         BaseMagic = 40;
         BaseHit = 20;
@@ -43,8 +48,8 @@ public class Cavia : Ally
         m_Texture = (Material)Resources.Load("Materials/Portrait/Material_Knight", typeof(Material));
 
         charactertype = Charactertype.Ally;
-        elementalStrength = ElementalStrength.Light;
-        elementalWeakness = ElementalWeakness.Shadow;
+        elementalStrength = Skills.ElementalType .Wind;
+        elementalWeakness = Skills.ElementalType .Lightning;
     }
 
 }

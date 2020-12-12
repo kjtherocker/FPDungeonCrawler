@@ -8,8 +8,8 @@ public class InitializeCombatArena : MonoBehaviour
 {
 
     public Camera m_PlayerCamera;
-    public GridFormations m_LevelGrid;
-    public OverWorldPlayer m_OverworldPlayer;
+    public FloorManager m_FloorManager;
+    public PlayerMovementController mOverworldPlayerMovementController;
     public bool PreloadScene = false;
     public UiMap m_UiMap;
     public void Start()
@@ -38,10 +38,10 @@ public class InitializeCombatArena : MonoBehaviour
         
         Debug.Log("Preload Is Initialized");
 
-        m_UiMap.SetMap(m_LevelGrid.m_LevelCore);
-        
-        m_OverworldPlayer.Initialize();
-        // TacticsManager.Instance.CombatStart();
+        m_UiMap.SetMap(m_FloorManager.m_FloorCore);
+        m_FloorManager.Initialize();
+        mOverworldPlayerMovementController.Initialize();
+        // TacticsManager.Instance.CombatStsart();
     }
 
 }

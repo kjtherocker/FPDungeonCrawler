@@ -9,6 +9,9 @@ public class Fide : Ally
     {
         CurrentHealth = 50;
         MaxHealth = 50;
+        MaxMana = 20;
+        CurrentMana = MaxMana;
+        
         BaseStrength = 75;
         BaseMagic = 40;
         BaseHit = 20;
@@ -49,8 +52,8 @@ public class Fide : Ally
 
 
         charactertype = Charactertype.Ally;
-        elementalStrength = ElementalStrength.Fire;
-        elementalWeakness = ElementalWeakness.Null;
+        elementalStrength = Skills.ElementalType .Earth;
+        elementalWeakness = Skills.ElementalType .Shadow;
 
     }
 }

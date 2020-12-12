@@ -35,6 +35,12 @@ public class Preloader : Singleton<Preloader>
         m_InitializationSteps = InitializationSteps.GameManager;
         GameManager.Instance.Initialize();
 
+        
+        m_InitializationSteps = InitializationSteps.PartyManager;
+        PartyManager.instance.Initialize();
+
+        
+        
         m_InitializationSteps = InitializationSteps.Ui;
         UiManager.Instance.Initialize();
 
@@ -42,6 +48,7 @@ public class Preloader : Singleton<Preloader>
         UiManager.Instance.PushTab(UiManager.UiTab.PlayerStatus);
         
         
+
                 
         m_InitializationSteps = InitializationSteps.Input;
         if (InputManager.Instance == null)
@@ -52,10 +59,7 @@ public class Preloader : Singleton<Preloader>
         {
             InputManager.instance.Initialize();
         }
-
         
-        m_InitializationSteps = InitializationSteps.PartyManager;
-        PartyManager.instance.Initialize();
         
         m_InitializationSteps = InitializationSteps.Finished;
 

@@ -100,7 +100,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\SkillList.cs" />
      <Compile Include="Assets\Scripts\Game\Props\NodeReplacement.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Enemys\Forest Enemys\RedKnight\RedKnightPhase4.cs" />
-     <Compile Include="Assets\Scripts\Game\TerrainScripts\LevelNode.cs" />
+     <Compile Include="Assets\Scripts\Game\TerrainScripts\FloorNode.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\GridEditor.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueTrack.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Domain\DomainList.cs" />
@@ -127,7 +127,7 @@
      <Compile Include="Assets\Scripts\Services\Singleton.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Light\LightBehaviour.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\DialogueTimelineHandler.cs" />
-     <Compile Include="Assets\Scripts\Game\MapEditor\Level.cs" />
+     <Compile Include="Assets\Scripts\Game\MapEditor\Floor.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Dialogue.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\CameraEditor.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Light\LightClip.cs" />
@@ -142,7 +142,7 @@
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiSkillBoard.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AilmentSkills\Poison.cs" />
      <Compile Include="Assets\Scripts\Game\Props\Prop.cs" />
-     <Compile Include="Assets\Scripts\Game\OverworldScripts\OverWorldPlayer.cs" />
+     <Compile Include="Assets\Scripts\Game\OverworldScripts\PlayerMovementController.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\Options.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\LightRay.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\ResurrectSkills\PhoenixSpirit.cs" />
@@ -152,7 +152,7 @@
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiStatus.cs" />
      <Compile Include="Assets\Scripts\Input\PlayerInput.cs" />
      <Compile Include="Assets\Scripts\Game\Initializer\MainMenuInitialize.cs" />
-     <Compile Include="Assets\Scripts\Game\MapEditor\GridFormations.cs" />
+     <Compile Include="Assets\Scripts\Game\MapEditor\FloorManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\Behaviours\Behaviour_WalkClose.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Enemys\EnemyList.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\Memoria.cs" />
@@ -170,6 +170,8 @@
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\CombatArena.cs" />
+     <Compile Include="Assets\Scripts\Game\AutoSave.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
