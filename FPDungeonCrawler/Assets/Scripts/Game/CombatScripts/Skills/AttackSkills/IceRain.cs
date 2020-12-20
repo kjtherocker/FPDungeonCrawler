@@ -13,7 +13,7 @@ public class IceRain : Skills
 
         m_ElementalType = ElementalType.Ice;
         m_SkillType = SkillType.Attack;
-        m_SkillFormation = SkillFormation.SingleNode;
+        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
         m_Damage = 5;
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/IceWave/ParticleEffect_IceWave", typeof(ParticleSystem));

@@ -13,19 +13,14 @@ public class BloodRelief : Skills
 
         m_ElementalType = ElementalType.Shadow;
         m_SkillType = SkillType.Defence;
-        m_SkillFormation = SkillFormation.SingleNode;
+        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/DarkWave/ParticleEffect_DarkWave", typeof(ParticleSystem));
         m_Damage = 4;
         m_SkillName = "Blood Relief";
         m_SkillDescription = "Sacrifice 25% of your current health for 25% mana gain";
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     public override IEnumerator UseSkill(Creatures aVictum, Creatures aAttacker )
     {

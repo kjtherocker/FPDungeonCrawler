@@ -27,7 +27,7 @@ public class DialogueBehaviour : PlayableBehaviour
 		if(!clipPlayed
 			&& info.weight > 0f)
 		{
-			DialogueManager.Instance.DisplayNextSentence(ClearDialogue);
+			DialogueManager.Instance.DisplayNextSentence(characterName,dialogueLine,ClearDialogue);
 
 			if(Application.isPlaying)
 			{

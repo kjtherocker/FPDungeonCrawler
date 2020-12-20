@@ -12,7 +12,7 @@ public class HolyWater : Skills
 
         m_ElementalType = ElementalType.Ice;
         m_SkillType = SkillType.Heal;
-        m_SkillFormation = SkillFormation.SingleNode;
+        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
         m_Damage = 300;
         m_SkillName = "Holy Water";

@@ -30,7 +30,7 @@ public class UiSkillBoard : UiScreen
     {
         m_CursorYMax = m_CreatureSkillCount;
         m_CursorYCurrent = 0;
-        m_CurrentSkillMenuButtonsMenu[m_CursorYCurrent].SkillHoveredOver(true);
+        m_CurrentSkillMenuButtonsMenu[m_CursorYCurrent].SkillHoveredOver(false);
         
     }
     public  override void MoveMenuCursorPosition(Vector2 aMovement)
@@ -59,7 +59,7 @@ public class UiSkillBoard : UiScreen
 
     public void SetSkill()
     {
-
+        UiManager.instance.PushScreen(UiManager.Screen.EnemyTab);
         OnPop();
     }
 

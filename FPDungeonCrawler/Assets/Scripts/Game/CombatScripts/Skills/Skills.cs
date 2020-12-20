@@ -40,9 +40,10 @@ public class Skills
 
     public enum SkillFormation
     {
-        SingleNode,
-        FourInAStraightLine,
-        BrickOf4,
+        Single,
+        Party,
+        Enemy,
+        All,
     }
 
     public enum SkillAilment
@@ -88,7 +89,7 @@ public class Skills
 
     public virtual void Start()
     {
-        m_SkillRange = 2;
+    
     }
     public virtual void Update()
     {

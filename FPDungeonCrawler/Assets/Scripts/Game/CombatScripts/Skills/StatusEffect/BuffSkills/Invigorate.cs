@@ -13,7 +13,7 @@ public class Invigorate : StatusEffects
 
         m_ElementalType = ElementalType.Ice;
         m_SkillType = SkillType.Defence;
-        m_SkillFormation = SkillFormation.SingleNode;
+        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
         m_SkillName = "Invigorate";
         m_SkillDescription = "A buff that greatly increases damage";

@@ -95,7 +95,7 @@ public class DialogueTrigger : MonoBehaviour
 
         
         DialogueManager.Instance.m_DialogueTrigger = this;
-        DialogueManager.Instance.StartDialogue(m_JsonFile,m_DialogueType);
+        DialogueManager.Instance.StartDialogue();
         DialogueHasHappend = true;
         DialogueIsDone = false;
     }

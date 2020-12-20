@@ -10,7 +10,7 @@ public class DevourPhase1 : Skills
         m_ElementalType = ElementalType.Fire;
         m_SkillAilment = SkillAilment.Poison;
         m_SkillType = SkillType.Attack;
-        m_SkillFormation = SkillFormation.SingleNode;
+        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/FireWave/ParticleEffect_FireWave", typeof(ParticleSystem));
         m_Damage = 10;

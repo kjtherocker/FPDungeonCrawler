@@ -30,28 +30,33 @@ public class PlayerMovementController : MonoBehaviour {
     {
         CardinalDirections = new []
         {
-            FloorNode.CardinalNodeDirections.Up, FloorNode.CardinalNodeDirections.Right, FloorNode.CardinalNodeDirections.Down,FloorNode.CardinalNodeDirections.Left
+            FloorNode.CardinalNodeDirections.Up, FloorNode.CardinalNodeDirections.Left, 
+            FloorNode.CardinalNodeDirections.Down,FloorNode.CardinalNodeDirections.Right
         };
         
         m_DirectionRotations = new Dictionary<FloorNode.CardinalNodeDirections, Vector3>();
         
         m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Down, new Vector3(0, 90, 0));
-        m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Left,  new Vector3(0, 360, 0));
+        m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Left, new Vector3(0, 180, 0));
         m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Up, new Vector3(0, 270, 0));
-        m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Right, new Vector3(0, 180, 0));
-        
-        
-        
+        m_DirectionRotations.Add( FloorNode.CardinalNodeDirections.Right,  new Vector3(0, 360, 0));        
         CurrentDirectionValue = 0;
 
         CurrentDirection = CardinalDirections[CurrentDirectionValue];
         StartCoroutine(InterpolateRotationSmooth(transform, m_DirectionRotations[CurrentDirection],0.0f));
-       
         
-       InputManager.Instance.m_MovementControls.Player.Movement.performed += movement => PlayerMovement(movement.ReadValue<Vector2>());
+        InputManager.Instance.m_MovementControls.Player.Movement.performed += movement => PlayerMovement(movement.ReadValue<Vector2>());
 
-    } 
-    
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown("q"))
+        {
+            m_CurrentFloorManager.SwitchToCombat();
+        }
+    }
+
     public  IEnumerator InterpolateRotationSmooth(Transform aObject, Vector3 aTargetRotation, float aTimeUntilDone)
     {
         Vector3 CurrentPostion = new Vector3(aObject.localRotation.eulerAngles.x,aObject.localRotation.eulerAngles.y,aObject.localRotation.eulerAngles.z);
@@ -69,7 +74,7 @@ public class PlayerMovementController : MonoBehaviour {
         aObject.localEulerAngles = aTargetRotation;
         yield return 0;
     }
-    public  IEnumerator Testo(Transform MainObject, Vector3 targetPosition, float TimeUntilDone)
+    public  IEnumerator DirectMovement(Transform MainObject, Vector3 targetPosition, float TimeUntilDone)
     {
         float elapsedTime = 0.0f;
 
@@ -94,7 +99,10 @@ public class PlayerMovementController : MonoBehaviour {
         RotatePlayer((int)aDirection.x);
         if (aDirection.y > 0)
         {
-            MoveForward();
+            if (currentFloorNode.IsDirectionWalkable(CurrentDirection))
+            {
+                MoveForward();
+            }
         }
     }
 
@@ -128,7 +136,7 @@ public class PlayerMovementController : MonoBehaviour {
             TargetNode.transform.position.z);
                 
                 
-        StartCoroutine(Testo(transform, NewNodePosition, 0.2f));
+        StartCoroutine(DirectMovement(transform, NewNodePosition, 0.2f));
 
         int index = m_CurrentFloorManager.m_FloorCore.GetIndex(TargetNode.m_PositionInGrid.x,
             TargetNode.m_PositionInGrid.y);

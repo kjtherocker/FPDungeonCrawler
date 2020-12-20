@@ -23,8 +23,8 @@ public class FloorManager : MonoBehaviour
         m_CardinalPositions = new Dictionary<FloorNode.CardinalNodeDirections, Vector2Int>();
         m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Up, new Vector2Int(-1,0));
         m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Down, new Vector2Int(1,0));
-        m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Left, new Vector2Int(0,1));
-        m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Right, new Vector2Int(0,-1));
+        m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Left, new Vector2Int(0,-1));
+        m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Right, new Vector2Int(0,1));
         
     }
 
@@ -57,6 +57,7 @@ public class FloorManager : MonoBehaviour
 
         m_FloorNodes = new FloorNode[m_FloorCore.GridDimensionX * m_FloorCore.GridDimensionY];
         SetLevelNodes(m_FloorCore.FloorBlueprint);
+        SpawnGimmicks();
     }
 
     public void SetLevelNodes(short[] aLevelBlueprint)
@@ -96,7 +97,7 @@ public class FloorManager : MonoBehaviour
 
     public void SpawnGimmicks()
     {
-        
+//        m_FloorNodes[0].gameObject.AddComponent<Gimmick>();
     }
 
     

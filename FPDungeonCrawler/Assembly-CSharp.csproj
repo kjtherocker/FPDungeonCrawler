@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\Game\MapEditor\LevelCreator.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\Cell.cs" />
      <Compile Include="Assets\Scripts\Game\Sound\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\Game\OverworldScripts\Gimmick.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\StatusEffect\DebuffSkills\Restrict.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\CommandProcessor\Action\Action_Move.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Domain\Null\PatchWorkChimera.cs" />
@@ -119,15 +120,17 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\Devour\DevourPhase1.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Enemys\Forest Enemys\RedKnight\RedKnightPhase3.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\CommandProcessor\Action\Action.cs" />
+     <Compile Include="Assets\Scripts\Game\AutoSave.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Enemys\Forest Enemys\RedKnight\RedKnightPhase2.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\SkillStatus.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\CombatArena.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Light\LightMixerBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\OverworldScripts\OverworldCamera.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\DomainSphere.cs" />
      <Compile Include="Assets\Scripts\Services\Singleton.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Light\LightBehaviour.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\DialogueTimelineHandler.cs" />
-     <Compile Include="Assets\Scripts\Game\MapEditor\Floor.cs" />
+     <Compile Include="Assets\Scripts\Game\MapEditor\Floors\Floor.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Dialogue.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\CameraEditor.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Light\LightClip.cs" />
@@ -170,8 +173,7 @@
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\CombatArena.cs" />
-     <Compile Include="Assets\Scripts\Game\AutoSave.cs" />
+     <Compile Include="Assets\Scripts\Game\MapEditor\Floors\Floor_Rubedo1.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

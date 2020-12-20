@@ -13,7 +13,7 @@ public class Restrict : Skills
 
         m_ElementalType = ElementalType.Shadow;
         m_SkillType = SkillType.Defence;
-        m_SkillFormation = SkillFormation.SingleNode;
+        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
         m_Damage = 3;
         m_SkillName = "Restrict";

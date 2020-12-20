@@ -10,6 +10,7 @@ public class UiManager : Singleton<UiManager>
         CommandBoard,
         SkillBoard,
         DomainBoard,
+        EnemyTab,
         DomainClash,
         Memoria,
         MainMenu,
@@ -190,5 +191,15 @@ public class UiManager : Singleton<UiManager>
         }
 
         m_ScreenStack.Clear();
+    }
+    
+    
+    public void PopAllTabs()
+    {
+        foreach (var screenPair in m_UiTabs)
+        {
+            screenPair.gameObject.SetActive(false);
+        }
+        
     }
 }

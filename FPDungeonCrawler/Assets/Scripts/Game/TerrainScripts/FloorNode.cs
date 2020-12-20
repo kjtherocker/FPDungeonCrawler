@@ -196,7 +196,7 @@ public class FloorNode : Cell
 
                break;
            case WalkOntopTriggerTypes.Enemy:
-               m_NodeFloorManager.SwitchToCombat();
+               
                
                break;
            case WalkOntopTriggerTypes.RelicTower:
@@ -205,7 +205,7 @@ public class FloorNode : Cell
                
                break ;
            case WalkOntopTriggerTypes.DialoguePrompt:
-               
+               DialogueManager.instance.StartDialogue();
                break ;
            case  WalkOntopTriggerTypes.Memoria:
                
@@ -290,13 +290,13 @@ public class FloorNode : Cell
            m_WalkableDirections.Add(FloorNode.CardinalNodeDirections.Right);
        }
        
-       if (aWalkabledirections ==  (short)Floor.LevelCreationDirections.DownLeft)
+       if (aWalkabledirections ==  (short)Floor.LevelCreationDirections.LeftDown)
        {
            m_WalkableDirections.Add(FloorNode.CardinalNodeDirections.Down);
            m_WalkableDirections.Add(FloorNode.CardinalNodeDirections.Left);
        }
        
-       if (aWalkabledirections ==  (short)Floor.LevelCreationDirections.DownRight)
+       if (aWalkabledirections ==  (short)Floor.LevelCreationDirections.RightDown)
        {
            m_WalkableDirections.Add(FloorNode.CardinalNodeDirections.Down);
            m_WalkableDirections.Add(FloorNode.CardinalNodeDirections.Right);
@@ -330,7 +330,7 @@ public class FloorNode : Cell
            m_WalkableDirections.Add(FloorNode.CardinalNodeDirections.Right);
        }
        
-       if (aWalkabledirections ==  (short)Floor.LevelCreationDirections.RightLeftDown)
+       if (aWalkabledirections ==  (short)Floor.LevelCreationDirections.DownLeftRight)
        {
            m_WalkableDirections.Add(FloorNode.CardinalNodeDirections.Left); 
            m_WalkableDirections.Add(FloorNode.CardinalNodeDirections.Down);
