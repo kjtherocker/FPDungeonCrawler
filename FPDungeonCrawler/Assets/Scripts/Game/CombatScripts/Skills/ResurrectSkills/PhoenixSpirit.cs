@@ -20,5 +20,11 @@ public class PhoenixSpirit : Skills
         m_SkillDescription = "Resurrect one dead party member";
     }
 
+    public override IEnumerator UseSkill(Creatures aVictum, Creatures aAttacker )
+    {
+        return aVictum.DecrementHealth(m_Damage + aAttacker.GetAllStrength(), GetElementalType(),
+            0.1f, 0.1f, 1);
+    }
+    
 }
 

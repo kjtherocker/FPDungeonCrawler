@@ -53,13 +53,13 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Domain\Domain.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\NameGenerator.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Party Classes\Vella.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\Wrappers\UiTab.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Wrappers\UiTabs.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\MovementTypes\Movement_Flying.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\EnemyAi\EnemyAiController.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\FireBall.cs" />
      <Compile Include="Assets\Scripts\Services\Preloader.cs" />
      <Compile Include="Assets\Scripts\Game\Debug\DebugMenu.cs" />
-     <Compile Include="Assets\Scripts\Ui\UiTab\UiTabPartyStatusManager.cs" />
+     <Compile Include="Assets\Scripts\Ui\UiTab\UiTabsPartyStatusManager.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\WaterController.cs" />
      <Compile Include="Assets\Scripts\Ui\UiManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\Attack.cs" />
@@ -178,8 +178,9 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\items\Potion.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\items\ItemManager.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiEnemyScreen.cs" />
-     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\EnemyTab.cs" />
+     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\EnemyTabs.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\EnemyManager.cs" />
+     <Compile Include="Assets\Scripts\Ui\UiTab\UiTabTurnKeeper.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

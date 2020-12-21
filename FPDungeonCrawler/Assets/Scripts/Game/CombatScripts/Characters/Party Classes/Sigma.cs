@@ -43,7 +43,7 @@ public class Sigma : Ally {
 
         m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Invigorate));
         m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.FireBall));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.PheonixSpirit));
+        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.HolyWater));
         m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.icerain));
 
         Model = (GameObject)Resources.Load("Objects/Battle/PartyModels/Sigma/Prefab/Pref_Sigma", typeof(GameObject));

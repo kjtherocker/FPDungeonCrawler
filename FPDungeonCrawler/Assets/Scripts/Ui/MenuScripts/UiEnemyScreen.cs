@@ -5,7 +5,7 @@ using UnityEngine;
 public class UiEnemyScreen : UiScreen
 {
     public Creatures m_Creature;
-    public List<EnemyTab> m_EnemyTabs;
+    public List<EnemyTabs> m_EnemyTabs;
 
     private Skills m_CurrentSkillInUse;
 

@@ -214,7 +214,7 @@ public class Creatures : MonoBehaviour
 
     public virtual void DecrementHealth(int Decremenby)
     {
-        FloatingUiElementsController.CreateFloatingText(Decremenby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Text);
+        FloatingUiElementsController.CreateFloatingText(Decremenby.ToString(),  gameObject.transform, FloatingUiElementsController.UiElementType.Text);
         m_CurrentHealth -= Decremenby;
     }
     public virtual IEnumerator DecrementHealth(int Decrementby, Skills.ElementalType elementalType,float TimeTillInitalDamage, float TimeTillHoveringUiElement, float TimeTillDamage)
@@ -229,25 +229,22 @@ public class Creatures : MonoBehaviour
         int ConvertToInt = Mathf.CeilToInt(ConvertToFloat);
         Decrementby = ConvertToInt;
 
-     //  if (AttackingElement.Equals(ElementalWeakness))
-     //  {
-     //      yield return new WaitForSeconds(TimeTillHoveringUiElement);
-     //      FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Weak);
-     //  }
-     //  if (AttackingElement.Equals(ElementalStrength))
-     //  {
-     //      yield return new WaitForSeconds(TimeTillHoveringUiElement);
-     //      FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Strong);
-     //  }
-     
-     
-        m_CurrentHealth -= Decrementby;
-     
-     
+       if (AttackingElement.Equals(ElementalWeakness))
+       {
+           yield return new WaitForSeconds(TimeTillHoveringUiElement);
+           FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), gameObject.transform, FloatingUiElementsController.UiElementType.Weak);
+       }
+       if (AttackingElement.Equals(ElementalStrength))
+       {
+           yield return new WaitForSeconds(TimeTillHoveringUiElement);
+           FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), gameObject.transform, FloatingUiElementsController.UiElementType.Strong);
+       }
+       
+       
         yield return new WaitForSeconds(TimeTillDamage);
-   //     FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Text);
-
         
+        FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(),  gameObject.transform, FloatingUiElementsController.UiElementType.Text);
+        m_CurrentHealth -= Decrementby;
 
         DeathCheck();
     }
@@ -258,7 +255,7 @@ public class Creatures : MonoBehaviour
         m_CurrentHealth += Increment;
         yield return new WaitForSeconds(0.5f);
         FloatingUiElementsController.Initalize();
-        FloatingUiElementsController.CreateFloatingText(Increment.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Text);
+        FloatingUiElementsController.CreateFloatingText(Increment.ToString(), gameObject.transform, FloatingUiElementsController.UiElementType.Text);
     }
 
     public virtual Charactertype GetCharactertype()
@@ -286,10 +283,10 @@ public class Creatures : MonoBehaviour
 
     public virtual void Death()
     {
-       // m_CurrentHealth = 0;
+        m_CurrentHealth = 0;
     
 
-      //  TacticsManager.Instance.RemoveDeadFromList(charactertype);
+       TacticsManager.Instance.RemoveDeadFromList(charactertype);
     }
 
 

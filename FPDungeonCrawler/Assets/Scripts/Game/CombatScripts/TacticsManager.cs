@@ -21,8 +21,8 @@ public class TacticsManager : Singleton<TacticsManager>
     private int m_EnemyAiCurrentlyInList;
 
     public HealthBar m_Healthbar;
-    
 
+    public UiTabTurnKeeper m_UiTabTurnKeeper;
     public TextMeshProUGUI m_TurnSwitchText;
     
     public List<Creatures> DeadAllys;
@@ -33,8 +33,9 @@ public class TacticsManager : Singleton<TacticsManager>
     
     private GameObject m_MemoriaPrefab;
     public Dictionary<Creatures, Creatures> m_CreaturesWhosDomainHaveClashed;
-    
 
+    public Camera m_CombatCamera;
+    
     public enum CombatStates
     {
         NoTurn,
@@ -60,7 +61,7 @@ public class TacticsManager : Singleton<TacticsManager>
 
     public void StartCombat(CombatArena aArena,Floor aCurrentFloor)
     {
-        EnemyManager.instance.AddEnemysToManager(aCurrentFloor.EnemySet1());
+        EnemyManager.instance.AddEnemysToManager(aCurrentFloor.EnemySet1(),aArena);
         
          for (int i = 0; i < m_EnemyManager.m_EnemyList.Count; i++)
          {
@@ -74,6 +75,8 @@ public class TacticsManager : Singleton<TacticsManager>
          AddCreatureToCombat(m_PartyManager.m_CurrentParty[3], TurnOrderAlly);
 
          m_Turns = m_PartyManager.m_CurrentParty.Count;
+         m_UiTabTurnKeeper.gameObject.SetActive(true);
+         m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
          
          UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
          
@@ -88,7 +91,7 @@ public class TacticsManager : Singleton<TacticsManager>
     {
         StartCoroutine(aCoroutine);
         m_Turns--;
-
+        m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
         if (m_Turns > 0)
         {
             NextTurn();

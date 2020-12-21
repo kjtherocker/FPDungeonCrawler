@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiTab : MonoBehaviour
+public class UiTabs : MonoBehaviour
 {
     // Start is called before the first frame update
     public Image Highlight;

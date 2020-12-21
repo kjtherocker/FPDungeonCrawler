@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DebugMenu : UiTab
+public class DebugMenu : UiTabs
 {
     
     public GameObject m_DebugItems;

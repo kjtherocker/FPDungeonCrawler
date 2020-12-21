@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEditor.AnimatedValues;
 
-public class UiStatus : UiTab
+public class UiStatus : UiTabs
 {
     
     public RawImage Image_Portrait;

@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8321605535965750829}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -132.66635, y: 107.316635, z: -536.73096}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3141997218847687097}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &2705639115553349154
 Animator:
   serializedVersion: 3
@@ -105,8 +105,9 @@ MonoBehaviour:
     m_SkillFormation: 0
     m_Damagetype: 0
     m_SkillAilment: 0
-    SkillName: 
-    SkillDescription: 
+    m_Cost: 0
+    m_SkillName: 
+    m_SkillDescription: 
     m_SkillParticleEffect: {fileID: 0}
     m_Damage: 0
     m_AnimationName: 
@@ -116,31 +117,38 @@ MonoBehaviour:
   charactertype: 0
   elementalStrength: 0
   elementalWeakness: 0
-  m_DomainStages: 0
-  CurrentHealth: 0
-  MaxHealth: 0
+  m_CurrentHealth: 0
+  m_MaxHealth: 0
   CurrentMana: 0
   MaxMana: 0
-  Strength: 0
-  Magic: 0
-  Hit: 0
-  Evasion: 0
-  Defence: 0
-  Resistance: 0
+  BaseStrength: 0
+  BuffStrength: 0
+  DebuffStrength: 0
+  DomainStrength: 0
+  BaseMagic: 0
+  BuffMagic: 0
+  DebuffMagic: 0
+  DomainMagic: 0
+  BaseHit: 0
+  BuffHit: 0
+  DebuffHit: 0
+  DomainHit: 0
+  BaseEvasion: 0
+  BuffEvasion: 0
+  DebuffEvasion: 0
+  DomainEvasion: 0
+  BaseDefence: 0
+  BuffDefence: 0
+  DebuffDefence: 0
+  DomainDefence: 0
+  BaseResistance: 0
+  BuffResistance: 0
+  DebuffResistance: 0
+  DomainResistance: 0
   CurrentDomainpoints: 0
   MaxDomainPoints: 3
-  BeforeDomain_MaxHealth: 0
-  BeforeDomain_MaxMana: 0
-  BeforeDomain_Strength: 0
   m_CreatureMovement: 4
   AmountOfTurns: 0
-  BuffandDebuff: 0
-  BuffDamageStrength: 0
-  BuffDamageMagic: 0
-  DebuffDamageStrength: 0
-  DebuffDamageMagic: 0
-  IsSelected: 0
-  IsCurrentTurnHolder: 0
   DomainAffectingCreature: 
   Name: No Name
   m_Texture: {fileID: 0}
@@ -153,8 +161,9 @@ MonoBehaviour:
     m_SkillFormation: 0
     m_Damagetype: 0
     m_SkillAilment: 0
-    SkillName: 
-    SkillDescription: 
+    m_Cost: 0
+    m_SkillName: 
+    m_SkillDescription: 
     m_SkillParticleEffect: {fileID: 0}
     m_Damage: 0
     m_AnimationName: 
@@ -166,7 +175,6 @@ MonoBehaviour:
     m_DomainTexture: {fileID: 0}
     m_Creature: {fileID: 0}
     m_CostToUse: 0
-  ObjectToRotateAround: {fileID: 0}
   m_SkillLootTable: []
 --- !u!1001 &8267910262676935654
 PrefabInstance:
@@ -175,63 +183,51 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4113812175554877345}
     m_Modifications:
-    - target: {fileID: 1390595251291120595, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 1390595251291120595, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_Name
       value: 3D_KnightPhase3
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-        type: 3}
+    - target: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -239,7 +235,6 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
 --- !u!4 &3141997218847687097 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 6424131185982886495, guid: 82f3988b63b9d6946b486e23ec40a197, type: 3}
   m_PrefabInstance: {fileID: 8267910262676935654}
   m_PrefabAsset: {fileID: 0}

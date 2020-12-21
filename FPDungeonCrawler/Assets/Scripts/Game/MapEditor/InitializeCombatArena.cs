@@ -8,6 +8,7 @@ public class InitializeCombatArena : MonoBehaviour
 {
 
     public Camera m_PlayerCamera;
+    public Camera m_CombatCamera;
     public FloorManager m_FloorManager;
     public PlayerMovementController mOverworldPlayerMovementController;
     public bool PreloadScene = false;

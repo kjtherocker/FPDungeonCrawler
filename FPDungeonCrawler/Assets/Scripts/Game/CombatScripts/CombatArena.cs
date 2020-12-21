@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class CombatArena : MonoBehaviour
 {
-   
+    public List<GameObject> SpawnPositions;
+
 }

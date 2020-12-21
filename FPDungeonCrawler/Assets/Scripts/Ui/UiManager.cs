@@ -28,6 +28,7 @@ public class UiManager : Singleton<UiManager>
     public enum UiTab
     {
         PlayerStatus,
+        MapUi,
         EnemyStatus,
         DebugUi,
         DomainTab,
@@ -40,7 +41,7 @@ public class UiManager : Singleton<UiManager>
     public UiScreen[] m_UiScreens;
 
     
-    public List<global::UiTab> m_UiTabs;
+    public List<global::UiTabs> m_UiTabs;
 
     public List<KeyValuePair<UiScreens, UiScreen>> m_ScreenStack = new List<KeyValuePair<UiScreens, UiScreen>>();
     
@@ -83,7 +84,7 @@ public class UiManager : Singleton<UiManager>
         }
     }
 
-    public global::UiTab GetUiTab(UiTab aUiTab)
+    public global::UiTabs GetUiTab(UiTab aUiTab)
     {
         return m_UiTabs[(int)aUiTab];
     }

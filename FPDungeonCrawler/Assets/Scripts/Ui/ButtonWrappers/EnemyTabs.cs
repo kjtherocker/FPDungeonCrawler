@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyTab : UiTab
+public class EnemyTabs : UiTabs
 {
     // Start is called before the first frame update
 

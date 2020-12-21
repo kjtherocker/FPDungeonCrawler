@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class HealthBar : UiTab
+public class HealthBar : UiTabs
 {
     public Image Image_Healthbar;
     public TextMeshProUGUI Text_HealthRatio;

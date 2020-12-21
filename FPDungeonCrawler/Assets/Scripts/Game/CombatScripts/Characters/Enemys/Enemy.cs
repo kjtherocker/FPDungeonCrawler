@@ -13,6 +13,6 @@ public class Enemy : Creatures
 
       // Grid.Instance.GetNode(m_CreatureAi.m_Position.x, m_CreatureAi.m_Position.y).m_IsCovered = false;
 
-     //   Destroy(gameObject);
+       Destroy(gameObject);
     }
 }

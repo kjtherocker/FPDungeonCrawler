@@ -100,8 +100,8 @@ public class UiScreenCommandBoard : UiScreen
     public void SkillCommand()
     {
         m_MenuControls.Disable();
-
-        //UiManager.Instance.PopScreen();
+ 
+        UiManager.Instance.PopScreen();
         UiManager.Instance.PushScreen(UiManager.UiScreens.SkillBoard);
 
         UiScreen ScreenTemp =

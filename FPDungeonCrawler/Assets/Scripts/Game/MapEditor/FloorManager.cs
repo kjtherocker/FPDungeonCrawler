@@ -16,6 +16,9 @@ public class FloorManager : MonoBehaviour
     public FloorNode[] m_FloorNodes;
     public FloorNode m_FloorNodePrefab;
     private Dictionary<FloorNode.CardinalNodeDirections, Vector2Int> m_CardinalPositions;
+
+    public GameObject m_Map;
+    
     public void Initialize()
     {
         SpawnCamera();
@@ -35,6 +38,7 @@ public class FloorManager : MonoBehaviour
         TacticsManager.instance.StartCombat(m_CombatArena,m_FloorCore);
         InputManager.instance.m_MovementControls.Disable();
         gameObject.SetActive(false);
+        m_Map.gameObject.SetActive(false);
     }
 
     public void CreateGrid()

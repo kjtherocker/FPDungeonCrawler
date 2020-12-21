@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FloatingUiElements : MonoBehaviour {
 
     public Animator animator;
-    public Text DamageText;
+    public TextMeshProUGUI DamageText;
 	// Use this for initialization
 	void Start ()
     {
@@ -17,7 +18,7 @@ public class FloatingUiElements : MonoBehaviour {
 
     public void SetText(string a_text)
     {
-        DamageText = animator.GetComponent<Text>();
+        DamageText = animator.GetComponent<TextMeshProUGUI>();
         DamageText.text = a_text;
     }
     public void DestroyAll()

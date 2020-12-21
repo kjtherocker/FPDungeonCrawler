@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UiTabPartyStatusManager : UiTab
+public class UiTabsPartyStatusManager : UiTabs
 {
     public List<UiStatus> m_Playerstatus;
     
