@@ -77,6 +77,7 @@ public class TacticsManager : Singleton<TacticsManager>
          m_Turns = m_PartyManager.m_CurrentParty.Count;
          m_UiTabTurnKeeper.gameObject.SetActive(true);
          m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
+         m_UiTabTurnKeeper.SetIconType(true);
          
          UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
          
@@ -100,6 +101,7 @@ public class TacticsManager : Singleton<TacticsManager>
         if (m_Turns == 0)
         {
             //swap sides
+            StartCoroutine(EnemyTurn());
         }
     }
 
@@ -223,16 +225,12 @@ public class TacticsManager : Singleton<TacticsManager>
     public IEnumerator EnemyTurn()
     {
         m_BattleStates = CombatStates.EnemyTurn;
-
-        m_TurnSwitchText.gameObject.SetActive(true);
-        m_TurnSwitchText.text = "ENEMY TURN";
-        m_TurnSwitchText.color = Color.red;
-
-        yield return new WaitForSeconds(2f);
-        m_TurnSwitchText.gameObject.SetActive(false);
         
-        m_EnemyAiCurrentlyInList = 0;
-        EnemyMovement();
+        m_UiTabTurnKeeper.SetIconType(false);
+        m_Turns = TurnOrderEnemy.Count;
+      
+        yield return new WaitForSeconds(2f);
+        m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
 
     }
 
@@ -263,14 +261,14 @@ public class TacticsManager : Singleton<TacticsManager>
         m_TurnSwitchText.text = "PLAYER TURN";
         m_TurnSwitchText.color = Color.blue;
 
-
+        m_UiTabTurnKeeper.SetIconType(true);
         foreach (Creatures creature in TurnOrderAlly)
         {
-            creature.m_CreatureAi.m_HasMovedForThisTurn = false;
-            creature.m_CreatureAi.m_HasAttackedForThisTurn = false;
             creature.EndTurn();
         }
 
+        m_Turns = TurnOrderAlly.Count;
+        
         yield return new WaitForSeconds(2f);
         m_TurnSwitchText.gameObject.SetActive(false);
     }
