@@ -131,6 +131,45 @@ public class Floor : MonoBehaviour
         
     }
 
+    public void EnemysThatCanSpawn()
+    {
+    }
+
+    public List<EnemyList.EnemyTypes> EnemySet1()
+    {
+        List<EnemyList.EnemyTypes> EnemysToCombat = new List<EnemyList.EnemyTypes>();
+        
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight1);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight1);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight1);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight1);
+
+        return EnemysToCombat;
+    }
+
+    public List<EnemyList.EnemyTypes> EnemySet2()
+    {
+        List<EnemyList.EnemyTypes> EnemysToCombat = new List<EnemyList.EnemyTypes>();
+        
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight2);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight3);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight4);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight1);
+
+        return EnemysToCombat;
+    }
+
+    public List<EnemyList.EnemyTypes> EnemySet3()
+    {
+        List<EnemyList.EnemyTypes> EnemysToCombat = new List<EnemyList.EnemyTypes>();
+        
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight3);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight2);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight2);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight3);
+
+        return EnemysToCombat;
+    }
 
 
 

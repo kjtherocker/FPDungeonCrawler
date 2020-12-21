@@ -45,12 +45,9 @@ public class Creatures : MonoBehaviour
     public Charactertype charactertype;
     public Skills.ElementalType elementalStrength;
     public Skills.ElementalType  elementalWeakness;
-    public MovementType m_CreaturesMovementType;
 
-    public MovementList m_MovementList;
-    
-    public int CurrentHealth;
-    public int MaxHealth;
+    public int m_CurrentHealth;
+    public int m_MaxHealth;
 
     public int CurrentMana;
     public int MaxMana;
@@ -126,9 +123,8 @@ public class Creatures : MonoBehaviour
         m_StatusEffectsOnCreature = new List<StatusEffects>();
         
         m_Devour = new Devour();
-
-        m_MovementList = GameManager.Instance.m_MovementList;
-        m_CreatureSkillList = GameManager.Instance.m_SkillList;
+        
+        m_CreatureSkillList = SkillList.instance;
 
         //m_Attack = gameObject.AddComponent<Attack>();
 
@@ -219,7 +215,7 @@ public class Creatures : MonoBehaviour
     public virtual void DecrementHealth(int Decremenby)
     {
         FloatingUiElementsController.CreateFloatingText(Decremenby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Text);
-        CurrentHealth -= Decremenby;
+        m_CurrentHealth -= Decremenby;
     }
     public virtual IEnumerator DecrementHealth(int Decrementby, Skills.ElementalType elementalType,float TimeTillInitalDamage, float TimeTillHoveringUiElement, float TimeTillDamage)
     {
@@ -233,21 +229,25 @@ public class Creatures : MonoBehaviour
         int ConvertToInt = Mathf.CeilToInt(ConvertToFloat);
         Decrementby = ConvertToInt;
 
-        if (AttackingElement.Equals(ElementalWeakness))
-        {
-            yield return new WaitForSeconds(TimeTillHoveringUiElement);
-            FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Weak);
-        }
-        if (AttackingElement.Equals(ElementalStrength))
-        {
-            yield return new WaitForSeconds(TimeTillHoveringUiElement);
-            FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Strong);
-        }
-
+     //  if (AttackingElement.Equals(ElementalWeakness))
+     //  {
+     //      yield return new WaitForSeconds(TimeTillHoveringUiElement);
+     //      FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Weak);
+     //  }
+     //  if (AttackingElement.Equals(ElementalStrength))
+     //  {
+     //      yield return new WaitForSeconds(TimeTillHoveringUiElement);
+     //      FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Strong);
+     //  }
+     
+     
+        m_CurrentHealth -= Decrementby;
+     
+     
         yield return new WaitForSeconds(TimeTillDamage);
-        FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Text);
+   //     FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Text);
 
-        CurrentHealth -= Decrementby;
+        
 
         DeathCheck();
     }
@@ -255,7 +255,7 @@ public class Creatures : MonoBehaviour
 
     public virtual IEnumerator IncrementHealth(int Increment)
     {
-        CurrentHealth += Increment;
+        m_CurrentHealth += Increment;
         yield return new WaitForSeconds(0.5f);
         FloatingUiElementsController.Initalize();
         FloatingUiElementsController.CreateFloatingText(Increment.ToString(), ModelInGame.gameObject.transform, FloatingUiElementsController.UiElementType.Text);
@@ -274,22 +274,22 @@ public class Creatures : MonoBehaviour
 
     public void DeathCheck()
     {
-        if (CurrentHealth <= 0)
+        if (m_CurrentHealth <= 0)
         {
             m_IsAlive = false;
 
             Death();
         }
 
-        CurrentHealth = Mathf.Min(CurrentHealth, MaxHealth);
+        m_CurrentHealth = Mathf.Min(m_CurrentHealth, m_MaxHealth);
     }
 
     public virtual void Death()
     {
-        CurrentHealth = 0;
+       // m_CurrentHealth = 0;
     
 
-        TacticsManager.Instance.RemoveDeadFromList(charactertype);
+      //  TacticsManager.Instance.RemoveDeadFromList(charactertype);
     }
 
 

@@ -209,10 +209,10 @@ public class FloorNode : Cell
                break ;
            case  WalkOntopTriggerTypes.Memoria:
                
-               UiManager.Instance.PushScreen(UiManager.Screen.Memoria);
+               UiManager.Instance.PushScreen(UiManager.UiScreens.Memoria);
                
                UiMemoria ScreenTemp =
-                   UiManager.Instance.GetScreen(UiManager.Screen.Memoria) as UiMemoria;
+                   UiManager.Instance.GetScreen(UiManager.UiScreens.Memoria) as UiMemoria;
 
                ScreenTemp.SetMemoriaScreen(m_CreatureOnGridPoint,m_MemoriaOnTop);
                

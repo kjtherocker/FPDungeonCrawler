@@ -12,7 +12,8 @@ using UnityEngine.AddressableAssets;
 public class TacticsManager : Singleton<TacticsManager>
 {
 
-    public PartyManager PartyManager;
+    public PartyManager m_PartyManager;
+    public EnemyManager m_EnemyManager;
     
     bool WhichSidesTurnIsIt;
     bool CombatHasStarted;
@@ -28,9 +29,9 @@ public class TacticsManager : Singleton<TacticsManager>
     public List<Creatures> TurnOrderAlly;
     public List<Creatures> TurnOrderEnemy;
 
+    private int m_Turns;
+    
     private GameObject m_MemoriaPrefab;
-    
-    
     public Dictionary<Creatures, Creatures> m_CreaturesWhosDomainHaveClashed;
     
 
@@ -52,29 +53,63 @@ public class TacticsManager : Singleton<TacticsManager>
     void Start()
     {
      //   CreatureOffset = new Vector3(0, Constants.Constants.m_HeightOffTheGrid, 0);
-        
-        PartyManager = PartyManager.Instance;
+        m_EnemyManager = EnemyManager.instance;
+        m_PartyManager = PartyManager.Instance;
         //CombatStart();
     }
 
-    public void StartCombat(CombatArena aArena)
+    public void StartCombat(CombatArena aArena,Floor aCurrentFloor)
     {
-        PartyManager = PartyManager.Instance;
+        EnemyManager.instance.AddEnemysToManager(aCurrentFloor.EnemySet1());
+        
+         for (int i = 0; i < m_EnemyManager.m_EnemyList.Count; i++)
+         {
+             m_EnemyManager.m_EnemyList[i].Initialize();
+             AddCreatureToCombat(m_EnemyManager.m_EnemyList[i], TurnOrderEnemy);
+         }
+
+         AddCreatureToCombat(m_PartyManager.m_CurrentParty[0], TurnOrderAlly);
+         AddCreatureToCombat(m_PartyManager.m_CurrentParty[1], TurnOrderAlly);
+         AddCreatureToCombat(m_PartyManager.m_CurrentParty[2], TurnOrderAlly);
+         AddCreatureToCombat(m_PartyManager.m_CurrentParty[3], TurnOrderAlly);
+
+         m_Turns = m_PartyManager.m_CurrentParty.Count;
          
-       //  AddCreatureToCombat(PartyManager.m_CurrentParty[0],TurnOrderAlly);
-       //  AddCreatureToCombat(PartyManager.m_CurrentParty[1], TurnOrderAlly);
-       //  AddCreatureToCombat(PartyManager.m_CurrentParty[2], TurnOrderAlly);
-       //  AddCreatureToCombat(PartyManager.m_CurrentParty[3], TurnOrderAlly);
+         UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
          
-         UiManager.instance.PushScreen(UiManager.Screen.CommandBoard);
-         
-         UiScreen temp = UiManager.instance.GetScreen(UiManager.Screen.CommandBoard);
-         ((UiScreenCommandBoard) temp).m_CommandboardCreature = PartyManager.m_CurrentParty[0];
+         UiScreen temp = UiManager.instance.GetScreen(UiManager.UiScreens.CommandBoard);
+         ((UiScreenCommandBoard) temp).m_CommandboardCreature = m_PartyManager.m_CurrentParty[0];
 
          aArena.gameObject.SetActive(true);
 
     }
 
+    public void ProcessTurn(IEnumerator aCoroutine)
+    {
+        StartCoroutine(aCoroutine);
+        m_Turns--;
+
+        if (m_Turns > 0)
+        {
+            NextTurn();
+        }
+
+        if (m_Turns == 0)
+        {
+            //swap sides
+        }
+    }
+
+
+    public void NextTurn()
+    {
+        UiManager.instance.PopAllScreens();
+        UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
+         
+        UiScreen temp = UiManager.instance.GetScreen(UiManager.UiScreens.CommandBoard);
+        ((UiScreenCommandBoard) temp).m_CommandboardCreature = m_PartyManager.m_CurrentParty[m_Turns];
+        
+    }
 
     public void InvokeSkill(IEnumerator aSkill)
     {
@@ -98,7 +133,7 @@ public class TacticsManager : Singleton<TacticsManager>
 
         aList.Add(aCreature);
 
-        int TopElement = aList.Count - 1;
+        //int TopElement = aList.Count - 1;
 
         //Model
 //        aList[TopElement].ModelInGame = Instantiate<GameObject>(aList[TopElement].Model);

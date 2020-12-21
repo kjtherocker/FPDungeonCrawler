@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class HealthBar : UiTabScreen
+public class HealthBar : UiTab
 {
     public Image Image_Healthbar;
     public TextMeshProUGUI Text_HealthRatio;
@@ -35,8 +35,8 @@ public class HealthBar : UiTabScreen
 
         Partymember = Character;
 
-        m_CurrentHealth = Partymember.CurrentHealth;
-        m_MaxHealth = Partymember.MaxHealth;
+        m_CurrentHealth = Partymember.m_CurrentHealth;
+        m_MaxHealth = Partymember.m_MaxHealth;
 
 
     }
@@ -48,8 +48,8 @@ public class HealthBar : UiTabScreen
         if (Partymember != null)
         {
 
-            m_CurrentHealth = Partymember.CurrentHealth;
-            m_MaxHealth = Partymember.MaxHealth;
+            m_CurrentHealth = Partymember.m_CurrentHealth;
+            m_MaxHealth = Partymember.m_MaxHealth;
 
          
           // if(m_PortraitCamera != null)

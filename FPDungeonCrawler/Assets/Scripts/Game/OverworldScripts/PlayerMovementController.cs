@@ -25,7 +25,10 @@ public class PlayerMovementController : MonoBehaviour {
     public FloorManager m_CurrentFloorManager;
     private Dictionary<FloorNode.CardinalNodeDirections, Vector3> m_DirectionRotations;
 
-    public UiMap m_Map;  
+    public UiMap m_Map;
+
+    public float StepCounter;
+    
     public void Initialize ()
     {
         CardinalDirections = new []
@@ -102,7 +105,13 @@ public class PlayerMovementController : MonoBehaviour {
             if (currentFloorNode.IsDirectionWalkable(CurrentDirection))
             {
                 MoveForward();
+                StepCounter++;
             }
+        }
+
+        if (StepCounter >= 10)
+        {
+            m_CurrentFloorManager.SwitchToCombat();    
         }
     }
 

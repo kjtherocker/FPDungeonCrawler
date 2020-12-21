@@ -102,14 +102,14 @@ public class UiScreenCommandBoard : UiScreen
         m_MenuControls.Disable();
 
         //UiManager.Instance.PopScreen();
-        UiManager.Instance.PushScreen(UiManager.Screen.SkillBoard);
+        UiManager.Instance.PushScreen(UiManager.UiScreens.SkillBoard);
 
-        UiSkillBoard ScreenTemp =
-            UiManager.Instance.GetScreen(UiManager.Screen.SkillBoard) as UiSkillBoard;
+        UiScreen ScreenTemp =
+            UiManager.Instance.GetScreen(UiManager.UiScreens.SkillBoard) ;
 
-        ScreenTemp.SpawnSkills(m_CommandboardCreature);
-       
-        
+        ((UiSkillBoard)ScreenTemp).SpawnSkills(m_CommandboardCreature);
+
+
     }
 
     
@@ -125,7 +125,7 @@ public class UiScreenCommandBoard : UiScreen
         m_CommandboardCreature.m_CreatureAi.DeselectAllPaths();
         
         UiManager.Instance.PopScreen();
-        UiManager.Instance.PushScreen(UiManager.Screen.DomainBoard);
+        UiManager.Instance.PushScreen(UiManager.UiScreens.DomainBoard);
 
         //  UiDomainBoard ScreenTemp =
         //      UiManager.Instance.GetScreen(UiManager.Screen.DomainBoard) as UiDomainBoard;

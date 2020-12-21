@@ -32,7 +32,7 @@ public class FloorManager : MonoBehaviour
 
     public void SwitchToCombat()
     {
-        TacticsManager.instance.StartCombat(m_CombatArena);
+        TacticsManager.instance.StartCombat(m_CombatArena,m_FloorCore);
         InputManager.instance.m_MovementControls.Disable();
         gameObject.SetActive(false);
     }

@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class UiManager : Singleton<UiManager>
 {
-    public enum Screen
+    public enum UiScreens
     {
         CommandBoard,
         SkillBoard,
         DomainBoard,
-        EnemyTab,
+        EnemyScreen,
         DomainClash,
         Memoria,
         MainMenu,
@@ -40,21 +40,28 @@ public class UiManager : Singleton<UiManager>
     public UiScreen[] m_UiScreens;
 
     
-    public List<UiTabScreen> m_UiTabs;
+    public List<global::UiTab> m_UiTabs;
 
-    public List<KeyValuePair<Screen, UiScreen>> m_ScreenStack = new List<KeyValuePair<Screen, UiScreen>>();
+    public List<KeyValuePair<UiScreens, UiScreen>> m_ScreenStack = new List<KeyValuePair<UiScreens, UiScreen>>();
     
-    public List<Screen> m_LastScreen = new List<Screen>();
+    public List<UiScreens> m_LastScreen = new List<UiScreens>();
 
     void OnValidate()
     {
-        System.Array.Resize(ref m_UiScreens, (int)Screen._NumberOfScreens);
+        System.Array.Resize(ref m_UiScreens, (int)UiScreens._NumberOfScreens);
     }
 
     // Use this for initialization
     public void Initialize()
     {
 
+        m_UiScreens = new UiScreen[15];
+        m_UiScreens[(short) UiScreens.CommandBoard] = GetComponentInChildren<UiScreenCommandBoard>(true);
+        m_UiScreens[(short) UiScreens.SkillBoard] = GetComponentInChildren<UiSkillBoard>(true);
+      //  m_UiScreens[(short) Screen.CommandBoard] = GetComponentInChildren<UiScreenCommandBoard>();
+        m_UiScreens[(short) UiScreens.EnemyScreen] = GetComponentInChildren<UiEnemyScreen>(true);
+   
+        
         for (int i = 0; i < m_UiScreens.Length - 1; i++)
         {
             if (m_UiScreens[i] != null)
@@ -76,7 +83,7 @@ public class UiManager : Singleton<UiManager>
         }
     }
 
-    public UiTabScreen GetUiTab(UiTab aUiTab)
+    public global::UiTab GetUiTab(UiTab aUiTab)
     {
         return m_UiTabs[(int)aUiTab];
     }
@@ -87,7 +94,7 @@ public class UiManager : Singleton<UiManager>
     }
 
 
-    public Screen GetTopScreenType()
+    public UiScreens GetTopScreenType()
     {
         return m_ScreenStack[m_ScreenStack.Count - 1].Key;
     }
@@ -97,31 +104,30 @@ public class UiManager : Singleton<UiManager>
         return m_ScreenStack[m_ScreenStack.Count - 1].Value;
     }
 
-    public UiScreen GetScreen(Screen aScreen)
+    public UiScreen GetScreen(UiScreens aUiScreens)
     {
-        for (int i = 0; i < m_ScreenStack.Count; i++)
+
+        if (m_UiScreens[(short)aUiScreens] != null)
         {
-            if (m_ScreenStack[i].Key == aScreen)
-            {
-                return m_ScreenStack[i].Value;
-            }
+            return m_UiScreens[(short)aUiScreens];
         }
+        
 
         return null;
     }
 
-    public void PushScreen(Screen aScreen)
+    public void PushScreen(UiScreens aUiScreens)
     {
         if (m_ScreenStack.Count != 0)
         {
             m_ScreenStack[m_ScreenStack.Count - 1].Value.m_InputActive = true;
         }
 
-        UiScreen screenToAdd = m_UiScreens[(int)aScreen];
+        UiScreen screenToAdd = m_UiScreens[(int)aUiScreens];
         screenToAdd.OnPush();
 
         Debug.Log(screenToAdd.ToString());
-        m_ScreenStack.Add(new KeyValuePair<Screen, UiScreen>(aScreen, screenToAdd));
+        m_ScreenStack.Add(new KeyValuePair<UiScreens, UiScreen>(aUiScreens, screenToAdd));
         m_ScreenStack[m_ScreenStack.Count - 1].Value.m_InputActive = true;
     }
 

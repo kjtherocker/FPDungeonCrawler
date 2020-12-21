@@ -59,7 +59,11 @@ public class UiSkillBoard : UiScreen
 
     public void SetSkill()
     {
-        UiManager.instance.PushScreen(UiManager.Screen.EnemyTab);
+
+        ((UiEnemyScreen) UiManager.instance.GetScreen(UiManager.UiScreens.EnemyScreen)).
+            SetSkill(m_SkillBoardCreature.m_Skills[m_CursorYCurrent],m_SkillBoardCreature);
+        
+        UiManager.instance.PushScreen(UiManager.UiScreens.EnemyScreen);
         OnPop();
     }
 

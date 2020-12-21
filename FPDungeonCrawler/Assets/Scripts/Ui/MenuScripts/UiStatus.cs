@@ -5,14 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEditor.AnimatedValues;
 
-public class UiStatus : UiTabScreen
+public class UiStatus : UiTab
 {
     
     public RawImage Image_Portrait;
     public Creatures Creature;
-
-
-    public List<Material> m_ElementIconsList;
 
     public Image m_ElementalStrength;
     public Image m_ElementalWeakness;
@@ -50,8 +47,8 @@ public class UiStatus : UiTabScreen
 
         Creature = Character;
         
-        m_CurrentHealth = Creature.CurrentHealth;
-        m_MaxHealth = Creature.MaxHealth;
+        m_CurrentHealth = Creature.m_CurrentHealth;
+        m_MaxHealth = Creature.m_MaxHealth;
         m_HealthText.text = m_CurrentHealth.ToString();
         
         m_CurrentMana = Creature.CurrentMana;
@@ -59,9 +56,9 @@ public class UiStatus : UiTabScreen
         m_ManaText.text = m_CurrentMana.ToString();
 
 
-        m_ElementalStrength.material = m_ElementIconsList[(short)Creature.elementalStrength];
+        m_ElementalStrength.material = SkillList.instance.GetElementalIcon(Creature.elementalStrength);
         
-        m_ElementalWeakness.material = m_ElementIconsList[(short)Creature.elementalWeakness];
+        m_ElementalWeakness.material =  SkillList.instance.GetElementalIcon(Creature.elementalWeakness);
         
         m_HealthbarSlider.value = m_CurrentHealth / m_MaxHealth;
         if (m_CurrentMana != 0 || m_MaxMana != 0)
