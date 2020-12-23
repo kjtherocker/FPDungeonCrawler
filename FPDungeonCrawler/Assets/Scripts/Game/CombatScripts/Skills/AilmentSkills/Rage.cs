@@ -13,7 +13,6 @@ public class Rage : Skills
 
         //m_ElementalType = ElementalType.Water;
         m_SkillType = SkillType.Defence;
-        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
         m_SkillAilment = SkillAilment.Rage;
         m_Damage = 0;

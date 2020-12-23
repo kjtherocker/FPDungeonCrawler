@@ -19,12 +19,14 @@ public class UiMap : UiScreen
     public GameObject SpawnPoint;
 
     public GameObject PlayerNode;
+
+    private float MapNodeOffset;
     public void SetMap(Floor aFloorCore)
     {
         m_FloorCore = aFloorCore;
         GenerateMap();
-        
-        
+        MapNodeOffset = 25;
+
     }
 
     public void GenerateMap()
@@ -43,7 +45,8 @@ public class UiMap : UiScreen
                     continue;
                 }
 
-                Vector3 Spawnposition = new Vector3(m_StartingPoint.transform.position.x + 22 * x, m_StartingPoint.transform.position.y +22 * y,0);
+                //Every time I tried to use a variable it just wouldnt work correctly
+                Vector3 Spawnposition = new Vector3(m_StartingPoint.transform.position.x + 24 * x, m_StartingPoint.transform.position.y +24 * y,0);
                 
                 
                 _MapNodes[nodeindex] = Instantiate(m_MapTextureNode,SpawnPoint.transform);

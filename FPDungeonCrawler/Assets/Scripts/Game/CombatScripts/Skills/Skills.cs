@@ -35,15 +35,6 @@ public class Skills
     {
         Strength,
         Magic
-
-    }
-
-    public enum SkillFormation
-    {
-        Single,
-        Party,
-        Enemy,
-        All,
     }
 
     public enum SkillAilment
@@ -60,14 +51,14 @@ public class Skills
     public ElementalType m_ElementalType;
     [SerializeField]
     public SkillType m_SkillType;
-    [SerializeField]
-    public SkillFormation m_SkillFormation;
+
     [SerializeField]
     public DamageType m_Damagetype;
     [SerializeField]
     public SkillAilment m_SkillAilment;
 
-    public int m_Cost;
+    public int m_SingleTargetCost;
+    public int m_MultiTargetCost;
     
     [SerializeField]
     public string m_SkillName;
@@ -130,13 +121,19 @@ public class Skills
         return m_SkillType;
     }
 
-    public SkillFormation GetSkillRange()
+    public virtual List<IEnumerator> UseSkill(List<Creatures> aVictum, Creatures aAttacker )
     {
-        return m_SkillFormation;
+        
+        Debug.Log( m_SkillName + " Skill was not overwritten");
+        
+        return null;
     }
-
+    
     public virtual IEnumerator UseSkill(Creatures aVictum, Creatures aAttacker )
     {
+        
+        Debug.Log( m_SkillName + " Skill was not overwritten");
+        
         return null;
     }
 

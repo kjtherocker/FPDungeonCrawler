@@ -22,6 +22,9 @@ public class PlayerMovementController : MonoBehaviour {
 
     public Vector2Int CurrentPosition;
 
+    private bool Testo;
+    private bool Testo2;
+    
     public FloorManager m_CurrentFloorManager;
     private Dictionary<FloorNode.CardinalNodeDirections, Vector3> m_DirectionRotations;
 
@@ -66,21 +69,23 @@ public class PlayerMovementController : MonoBehaviour {
         float elapsedTime = 0.0f;
         
         Quaternion targetQuaternion = Quaternion.Euler(0, aTargetRotation.y, 0);
+        Testo = true;
         for(var t = 0f; t < 1; t += Time.deltaTime/aTimeUntilDone)
         {
       
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetQuaternion, t * 15);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetQuaternion, t * 10);
             
             yield return new WaitForFixedUpdate();
         }
 
+        Testo = false;
         aObject.localEulerAngles = aTargetRotation;
         yield return 0;
     }
     public  IEnumerator DirectMovement(Transform MainObject, Vector3 targetPosition, float TimeUntilDone)
     {
         float elapsedTime = 0.0f;
-
+        Testo2 = true;
         while (elapsedTime < TimeUntilDone) 
         {
             
@@ -93,25 +98,33 @@ public class PlayerMovementController : MonoBehaviour {
         MainObject.position = targetPosition;
         currentFloorNode = TargetNode;
         TargetNode.ActivateWalkOnTopTrigger();
+        Testo2 = false;
         yield return 0;
     }
 
     
     public void PlayerMovement(Vector2 aDirection)
     {
-        RotatePlayer((int)aDirection.x);
-        if (aDirection.y > 0)
+        if (Testo == false)
         {
-            if (currentFloorNode.IsDirectionWalkable(CurrentDirection))
-            {
-                MoveForward();
-                StepCounter++;
-            }
+            RotatePlayer((int) aDirection.x);
         }
+
+        if (aDirection.y > 0)
+            {
+                
+                    if (currentFloorNode.IsDirectionWalkable(CurrentDirection))
+                    {
+                        MoveForward();
+                        StepCounter++;
+                    }
+                
+            }
+        
 
         if (StepCounter >= 10)
         {
-            m_CurrentFloorManager.SwitchToCombat();    
+          //  m_CurrentFloorManager.SwitchToCombat();    
         }
     }
 

@@ -95,6 +95,7 @@
      <Compile Include="Assets\Scripts\Game\MapEditor\InitializeCombatArena.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Party Classes\Dolls\Alpha.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\HealSkills\HolyWater.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\items\ItemManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Party Classes\Ally.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\PartyManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\CommandProcessor\CommandProcessor.cs" />
@@ -104,6 +105,7 @@
      <Compile Include="Assets\Scripts\Game\TerrainScripts\FloorNode.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\GridEditor.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueTrack.cs" />
+     <Compile Include="Assets\Scripts\Game\MapEditor\Floors\Floor_Rubedo1.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Domain\DomainList.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Chant\ChantController.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Party Classes\Sigma.cs" />
@@ -119,6 +121,7 @@
      <Compile Include="Assets\Scripts\Game\OverworldScripts\Node.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\Devour\DevourPhase1.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\Forest Enemys\RedKnight\RedKnightPhase3.cs" />
+     <Compile Include="Assets\Scripts\Ui\UiTab\UiTabTurnKeeper.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\CommandProcessor\Action\Action.cs" />
      <Compile Include="Assets\Scripts\Game\AutoSave.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\Forest Enemys\RedKnight\RedKnightPhase2.cs" />
@@ -127,7 +130,9 @@
      <Compile Include="Assets\Scripts\DialogScripts\Light\LightMixerBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\OverworldScripts\OverworldCamera.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\DomainSphere.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\items\Potion.cs" />
      <Compile Include="Assets\Scripts\Services\Singleton.cs" />
+     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\EnemyTabs.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Light\LightBehaviour.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\DialogueTimelineHandler.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\Floors\Floor.cs" />
@@ -166,21 +171,16 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Creatures.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\BloodSkills\BloodRelief.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\PartyMenu.cs" />
+     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiEnemyScreen.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Text\FloatingUiElements.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\MovementTypes\Movement_Normal.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Party Classes\Fide.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\DialogueTrigger.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Tracks\DialogueBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\items\Items.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
-     <Compile Include="Assets\Scripts\Game\MapEditor\Floors\Floor_Rubedo1.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\items\Items.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\items\Potion.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\items\ItemManager.cs" />
-     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiEnemyScreen.cs" />
-     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\EnemyTabs.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\EnemyManager.cs" />
-     <Compile Include="Assets\Scripts\Ui\UiTab\UiTabTurnKeeper.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

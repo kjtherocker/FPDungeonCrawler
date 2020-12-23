@@ -12,7 +12,6 @@ public class Attack : Skills
 
         m_ElementalType = ElementalType.Null;
         m_SkillType = SkillType.Attack;
-        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Strength;
         m_Damage = 10;
         m_SkillName = "Attack";

@@ -42,7 +42,7 @@ public class ButtonSkillWrapper : MonoBehaviour
     }
 
 
-    public void SetupButton(Creatures aTurnHolder, Skills aSkill)
+    public void SetupButton(Creatures aTurnHolder, Skills aSkill, bool aSkillSize)
     {
         m_ButtonTurnHolder = aTurnHolder;
         m_ButtonSkill = aSkill;
@@ -57,17 +57,18 @@ public class ButtonSkillWrapper : MonoBehaviour
         }
 
 
+        int SkillSize = aSkillSize ?  m_ButtonSkill.m_MultiTargetCost : m_ButtonSkill.m_SingleTargetCost ;
         
-        if (m_ButtonTurnHolder.CurrentMana <= m_ButtonSkill.m_Cost)
+        if (m_ButtonTurnHolder.CurrentMana <= SkillSize)
         {
             m_Text_NameOfSkill.color = m_Color_HalfTransparentWhite;
         }
-        else if (m_ButtonTurnHolder.CurrentMana >= m_ButtonSkill.m_Cost)
+        else if (m_ButtonTurnHolder.CurrentMana >= SkillSize)
         {
             m_Text_NameOfSkill.color = m_Color_White;
         }
 
-     m_CostToUseText.text = aSkill.m_Cost.ToString();
+      m_CostToUseText.text = SkillSize.ToString();
 
     }
 

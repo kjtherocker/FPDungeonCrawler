@@ -6,7 +6,7 @@ public class UiEnemyScreen : UiScreen
 {
     public Creatures m_Creature;
     public List<EnemyTabs> m_EnemyTabs;
-
+    private bool m_SkillRange;
     private Skills m_CurrentSkillInUse;
 
     // Use this for initialization
@@ -30,6 +30,11 @@ public class UiEnemyScreen : UiScreen
     }
     public  override void MoveMenuCursorPosition(Vector2 aMovement)
     {
+        if (m_SkillRange)
+        {
+            return;
+        }
+
         m_CursorXPrevious = m_CursorXCurrent;
         m_CursorYPrevious = m_CursorYCurrent;
 
@@ -46,16 +51,58 @@ public class UiEnemyScreen : UiScreen
         m_EnemyTabs[m_CursorXCurrent].TabHoveredOver(true);
     }
 
-    public void SetSkill(Skills aSetSkill, Creatures aCreature)
+    public void SetSkill(Skills aSetSkill, Creatures aCreature,bool aSkillRange)
     {
         m_Creature = aCreature;
         m_CurrentSkillInUse = aSetSkill;
+        m_SkillRange = aSkillRange;
+        
     }
 
     public void ExecuteSkill()
     {
-        TacticsManager.instance.ProcessTurn(m_CurrentSkillInUse.UseSkill
-            (TacticsManager.instance.TurnOrderEnemy[m_CursorXCurrent], m_Creature));
+        
+        //Single Target Attack
+        if (m_CurrentSkillInUse.m_SkillType == Skills.SkillType.Attack && !m_SkillRange)
+        {
+            TacticsManager.instance.ProcessTurn(m_CurrentSkillInUse.UseSkill
+                (TacticsManager.instance.TurnOrderEnemy[m_CursorXCurrent], m_Creature));
+        }
+
+        
+        //Party Wide Attacks
+        if (m_CurrentSkillInUse.m_SkillType == Skills.SkillType.Attack && m_SkillRange)
+        {
+            if (m_Creature.charactertype == Creatures.Charactertype.Ally)
+            {
+                TacticsManager.instance.ProcessTurn(m_CurrentSkillInUse.UseSkill
+                    (TacticsManager.instance.TurnOrderEnemy, m_Creature));
+            }
+            else if (m_Creature.charactertype == Creatures.Charactertype.Enemy)
+            {
+                TacticsManager.instance.ProcessTurn(m_CurrentSkillInUse.UseSkill
+                    (TacticsManager.instance.TurnOrderAlly, m_Creature));
+            }
+        }
+        
+        // Party Wide Heals
+        if (m_CurrentSkillInUse.m_SkillType == Skills.SkillType.Attack && m_SkillRange)
+        {
+            if (m_Creature.charactertype == Creatures.Charactertype.Ally)
+            {
+                TacticsManager.instance.ProcessTurn(m_CurrentSkillInUse.UseSkill
+                    (TacticsManager.instance.TurnOrderAlly, m_Creature));
+            }
+            else if (m_Creature.charactertype == Creatures.Charactertype.Enemy)
+            {
+                TacticsManager.instance.ProcessTurn(m_CurrentSkillInUse.UseSkill
+                    (TacticsManager.instance.TurnOrderEnemy, m_Creature));
+            }
+        }
+
+        
+        
+
         OnPop();
     }
 
@@ -82,6 +129,10 @@ public class UiEnemyScreen : UiScreen
         for (int i = 0; i < CurrentEnemysInScene.Count; i++)
         {
             m_EnemyTabs[i].SetupTab(CurrentEnemysInScene[i]);
+            if (m_SkillRange)
+            {
+                m_EnemyTabs[i].TabHoveredOver(true);
+            }
         }
         
         m_EnemyTabs[m_CursorXCurrent].TabHoveredOver(true);

@@ -24,7 +24,6 @@ public class SkillStatus : MonoBehaviour
     {
         m_SkillName.text = m_Skill.GetSkillName();
         m_SkillElement.text = m_Skill.GetElementalType().ToString();
-        m_SkillRange.text = m_Skill.GetSkillRange().ToString();
 
 
     }

@@ -157,7 +157,7 @@ public class UiMemoria : UiScreen
         {
             m_MemoriaSkills[i].gameObject.SetActive(true);
 
-            m_MemoriaSkills[i].SetupButton(aCreature, aMemoria.m_Skills[i]);
+            //m_MemoriaSkills[i].SetupButton(aCreature, aMemoria.m_Skills[i]);
         }
         
         
@@ -170,7 +170,7 @@ public class UiMemoria : UiScreen
         for (int i = 0; i < m_MemoriaCreature.m_Skills.Count; i++)
         {
             m_CreatureSkills[i].gameObject.SetActive(true);
-            m_CreatureSkills[i].SetupButton(aCreature, aCreature.m_Skills[i]);
+           // m_CreatureSkills[i].SetupButton(aCreature, aCreature.m_Skills[i]);
         }
 
         

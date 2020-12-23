@@ -13,7 +13,6 @@ public class LightRay : Skills
 
         m_ElementalType = ElementalType.Light;
         m_SkillType = SkillType.Attack;
-        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/LightWave/ParticleEffect_LightWave", typeof(ParticleSystem));
         m_Damage = 10;

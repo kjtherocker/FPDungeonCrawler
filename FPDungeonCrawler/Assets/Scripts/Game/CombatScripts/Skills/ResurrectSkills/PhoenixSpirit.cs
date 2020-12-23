@@ -13,7 +13,6 @@ public class PhoenixSpirit : Skills
 
         m_ElementalType = ElementalType.Light;
         m_SkillType = SkillType.Heal;
-        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
         m_Damage = 0;
         m_SkillName = "Phoenix Spirit";

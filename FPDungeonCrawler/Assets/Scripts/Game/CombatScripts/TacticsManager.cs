@@ -48,6 +48,14 @@ public class TacticsManager : Singleton<TacticsManager>
 
 
     }
+    
+    public enum TurnStates
+    {
+        Add,
+        Set
+        
+    }
+    
 
     public CombatStates m_BattleStates;
 
@@ -88,10 +96,45 @@ public class TacticsManager : Singleton<TacticsManager>
 
     }
 
-    public void ProcessTurn(IEnumerator aCoroutine)
+    public void ProcessTurn(List<IEnumerator> aSkillActions)
     {
-        StartCoroutine(aCoroutine);
-        m_Turns--;
+        for (int i = 0; i < aSkillActions.Count; i++)
+        {
+            StartCoroutine(aSkillActions[i]);
+        }
+
+        ProgressToNextCharacter();
+    }
+    
+    public void ProcessTurn(IEnumerator aSkillActions)
+    {
+        StartCoroutine(aSkillActions);
+
+        ProgressToNextCharacter();
+    }
+
+
+    public void UpdateCurrentTurnAmount(int aTurn,TurnStates aTurnStates )
+    {
+
+        if (aTurnStates == TurnStates.Add)
+        {
+            m_Turns += aTurn;
+        }
+        
+        if (aTurnStates == TurnStates.Set)
+        {
+            m_Turns = aTurn;
+        }
+
+       
+    }
+
+    public void ProgressToNextCharacter()
+    {
+
+        UpdateCurrentTurnAmount(-1,TurnStates.Add);
+        
         m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
         if (m_Turns > 0)
         {
@@ -114,11 +157,6 @@ public class TacticsManager : Singleton<TacticsManager>
         UiScreen temp = UiManager.instance.GetScreen(UiManager.UiScreens.CommandBoard);
         ((UiScreenCommandBoard) temp).m_CommandboardCreature = m_PartyManager.m_CurrentParty[m_Turns];
         
-    }
-
-    public void InvokeSkill(IEnumerator aSkill)
-    {
-        StartCoroutine(aSkill);
     }
     
     public void EndTurn()
@@ -227,8 +265,8 @@ public class TacticsManager : Singleton<TacticsManager>
         m_BattleStates = CombatStates.EnemyTurn;
         
         m_UiTabTurnKeeper.SetIconType(false);
-        m_Turns = TurnOrderEnemy.Count;
-      
+        UpdateCurrentTurnAmount(TurnOrderEnemy.Count,TurnStates.Set);
+
         yield return new WaitForSeconds(2f);
         m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
 
@@ -237,37 +275,20 @@ public class TacticsManager : Singleton<TacticsManager>
     public void EnemyMovement()
     {
 
-        if (m_EnemyAiCurrentlyInList > TurnOrderEnemy.Count - 1)
-        {
-            StartCoroutine(AllyTurn());
-            return ;
-        }
-        else
-        {
-            EnemyAiController EnemyTemp = TurnOrderEnemy[m_EnemyAiCurrentlyInList].m_CreatureAi as EnemyAiController;
-            m_EnemyAiCurrentlyInList++;
-            if (EnemyTemp.DoNothing == false)
-            {
-                EnemyTemp.EnemyMovement();
-            }
-        }
     }
 
     public IEnumerator AllyTurn()
     {
         m_BattleStates = CombatStates.AllyTurn;
-
-        m_TurnSwitchText.gameObject.SetActive(true);
-        m_TurnSwitchText.text = "PLAYER TURN";
-        m_TurnSwitchText.color = Color.blue;
+        
 
         m_UiTabTurnKeeper.SetIconType(true);
         foreach (Creatures creature in TurnOrderAlly)
         {
             creature.EndTurn();
         }
-
-        m_Turns = TurnOrderAlly.Count;
+        
+        UpdateCurrentTurnAmount(TurnOrderAlly.Count,TurnStates.Set);
         
         yield return new WaitForSeconds(2f);
         m_TurnSwitchText.gameObject.SetActive(false);

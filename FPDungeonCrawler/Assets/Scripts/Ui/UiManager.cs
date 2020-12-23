@@ -78,7 +78,6 @@ public class UiManager : Singleton<UiManager>
             if (m_UiTabs[i] != null)
             {
                 m_UiTabs[i].Initialize();
-                // m_UiScreens[i].SetGameObjectState(false);
             }
 
         }

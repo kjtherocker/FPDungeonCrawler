@@ -9,7 +9,7 @@ public class Items : MonoBehaviour
 
     public Skills.ElementalType m_ItemElementalType;
     public Skills.SkillType m_ItemSkillType;
-    public Skills.SkillFormation m_SkillFormation;
+
 
     public string m_ItemName;
     public string m_ItemDescription;
@@ -19,7 +19,6 @@ public class Items : MonoBehaviour
 
         m_ItemElementalType = Skills.ElementalType.Null;
         m_ItemSkillType = Skills.SkillType.Defence;
-        m_SkillFormation = Skills.SkillFormation.Single;
         m_ItemName = "Item";
         m_ItemDescription = "If this is here something bad happened";
     }

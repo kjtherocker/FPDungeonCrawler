@@ -12,7 +12,6 @@ public class ShadowBlast : Skills
 
         m_ElementalType = ElementalType.Shadow;
         m_SkillType = SkillType.Attack;
-        m_SkillFormation = SkillFormation.Single;
         m_Damagetype = DamageType.Magic;
 
         m_Damage = 10;
