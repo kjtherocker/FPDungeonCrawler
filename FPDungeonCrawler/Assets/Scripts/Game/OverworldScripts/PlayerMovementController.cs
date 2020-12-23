@@ -82,8 +82,11 @@ public class PlayerMovementController : MonoBehaviour {
         aObject.localEulerAngles = aTargetRotation;
         yield return 0;
     }
-    public  IEnumerator DirectMovement(Transform MainObject, Vector3 targetPosition, float TimeUntilDone)
+    public  IEnumerator DirectMovement(Transform MainObject, FloorNode  aTargetNode, float TimeUntilDone)
     {
+        Vector3 NewNodePosition = new Vector3(aTargetNode.transform.position.x,aTargetNode.transform.position.y + Constants.Constants.m_HeightOffTheGrid,
+            aTargetNode.transform.position.z);
+
         float elapsedTime = 0.0f;
         Testo2 = true;
         while (elapsedTime < TimeUntilDone) 
@@ -91,13 +94,12 @@ public class PlayerMovementController : MonoBehaviour {
             
             yield return new WaitForFixedUpdate();
             elapsedTime += Time.deltaTime;
-            MainObject.position = Vector3.Lerp(MainObject.position, targetPosition, elapsedTime /TimeUntilDone );
+            MainObject.position = Vector3.Lerp(MainObject.position, NewNodePosition, elapsedTime /TimeUntilDone );
         }
         
-        FloorNode TargetNode = m_CurrentFloorManager.GetNode(currentFloorNode.m_PositionInGrid, CurrentDirection);
-        MainObject.position = targetPosition;
-        currentFloorNode = TargetNode;
-        TargetNode.ActivateWalkOnTopTrigger();
+        MainObject.position = NewNodePosition;
+        currentFloorNode = aTargetNode;
+        aTargetNode.ActivateWalkOnTopTrigger();
         Testo2 = false;
         yield return 0;
     }
@@ -110,17 +112,20 @@ public class PlayerMovementController : MonoBehaviour {
             RotatePlayer((int) aDirection.x);
         }
 
-        if (aDirection.y > 0)
+        if (Testo2 == false)
+        {
+            if (aDirection.y > 0)
             {
-                
-                    if (currentFloorNode.IsDirectionWalkable(CurrentDirection))
-                    {
-                        MoveForward();
-                        StepCounter++;
-                    }
-                
+
+                if (currentFloorNode.IsDirectionWalkable(CurrentDirection))
+                {
+                    MoveForward();
+                    StepCounter++;
+                }
+
             }
-        
+
+        }
 
         if (StepCounter >= 10)
         {
@@ -152,18 +157,13 @@ public class PlayerMovementController : MonoBehaviour {
             Debug.Log("Cant Find Node " + currentFloorNode.m_PositionInGrid);
             return;
         }
-
-                
-        Vector3 NewNodePosition = new Vector3(TargetNode.transform.position.x,TargetNode.transform.position.y + Constants.Constants.m_HeightOffTheGrid,
-            TargetNode.transform.position.z);
-                
-                
-        StartCoroutine(DirectMovement(transform, NewNodePosition, 0.2f));
+        
+        StartCoroutine(DirectMovement(transform, TargetNode, 0.3f));
 
         int index = m_CurrentFloorManager.m_FloorCore.GetIndex(TargetNode.m_PositionInGrid.x,
             TargetNode.m_PositionInGrid.y);
         m_Map.SetPlayerNode(index);
-        CurrentPosition = TargetNode.m_PositionInGrid;
+
 
     }
 

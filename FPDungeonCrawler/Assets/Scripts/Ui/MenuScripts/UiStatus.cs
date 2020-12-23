@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,10 @@ using UnityEditor.AnimatedValues;
 
 public class UiStatus : UiTabs
 {
+    
+    public delegate void OnUiStatusUpdate();
+    public event OnUiStatusUpdate onUiStatusUpdate;
+    
     
     public RawImage Image_Portrait;
     public Creatures Creature;
@@ -35,6 +40,8 @@ public class UiStatus : UiTabs
         m_IsSelected = false;
     }
 
+    
+    
     public void SetCharacter(Creatures Character)
     {
         
@@ -101,7 +108,12 @@ public class UiStatus : UiTabs
            m_DomainPointWrappers[i].SetDomainPointOpacity(true);
        }
     }
-    
+
+    public void Update()
+    {
+        UpdateSliders();
+    }
+
     // Update is called once per frame
     void UpdateSliders()
     {
@@ -115,12 +127,14 @@ public class UiStatus : UiTabs
             m_CurrentHealth = 0;
         }
         
-       // m_CurrentHealth = Mathf.Max(m_CurrentHealth, 0);
-       // m_CurrentHealth = Mathf.Min(m_CurrentHealth, m_MaxHealth);
-//
-       // float HealthRatio = (float)m_CurrentHealth / (float)m_MaxHealth;
-       // m_HealthbarSlider.value  = HealthRatio;
-//
+        m_CurrentHealth = Creature.m_CurrentHealth;
+        m_MaxHealth = Creature.m_MaxHealth;
+        m_HealthText.text = m_CurrentHealth.ToString();
+        
+        m_CurrentMana = Creature.CurrentMana;
+        m_MaxMana = Creature.MaxMana;
+        m_ManaText.text = m_CurrentMana.ToString();
+
         SetSliders(ref m_CurrentHealth, m_MaxHealth, m_HealthbarSlider);
         SetSliders(ref m_CurrentMana, m_MaxMana, m_ManaSlider);
 

@@ -171,7 +171,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Creatures.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\BloodSkills\BloodRelief.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\PartyMenu.cs" />
-     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiEnemyScreen.cs" />
+     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiSkillExecutionScreen.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Text\FloatingUiElements.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\MovementTypes\Movement_Normal.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Party Classes\Fide.cs" />

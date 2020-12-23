@@ -10,7 +10,7 @@ public class UiManager : Singleton<UiManager>
         CommandBoard,
         SkillBoard,
         DomainBoard,
-        EnemyScreen,
+        UiSkillExecutionScreen,
         DomainClash,
         Memoria,
         MainMenu,
@@ -41,7 +41,7 @@ public class UiManager : Singleton<UiManager>
     public UiScreen[] m_UiScreens;
 
     
-    public List<global::UiTabs> m_UiTabs;
+    public UiTabs [] m_UiTabs;
 
     public List<KeyValuePair<UiScreens, UiScreen>> m_ScreenStack = new List<KeyValuePair<UiScreens, UiScreen>>();
     
@@ -59,9 +59,12 @@ public class UiManager : Singleton<UiManager>
         m_UiScreens = new UiScreen[15];
         m_UiScreens[(short) UiScreens.CommandBoard] = GetComponentInChildren<UiScreenCommandBoard>(true);
         m_UiScreens[(short) UiScreens.SkillBoard] = GetComponentInChildren<UiSkillBoard>(true);
-      //  m_UiScreens[(short) Screen.CommandBoard] = GetComponentInChildren<UiScreenCommandBoard>();
-        m_UiScreens[(short) UiScreens.EnemyScreen] = GetComponentInChildren<UiEnemyScreen>(true);
-   
+        m_UiScreens[(short) UiScreens.UiSkillExecutionScreen] = GetComponentInChildren<UiSkillExecutionScreen>(true);
+
+        m_UiTabs= new UiTabs[15];
+        //UiTabs
+        m_UiTabs[(short) UiTab.PlayerStatus] = GetComponentInChildren<UiTabsPartyStatusManager>(true);
+        
         
         for (int i = 0; i < m_UiScreens.Length - 1; i++)
         {
@@ -73,7 +76,7 @@ public class UiManager : Singleton<UiManager>
 
         }
         
-        for (int i = 0; i <= m_UiTabs.Count - 1; i++)
+        for (int i = 0; i <= m_UiTabs.Length - 1; i++)
         {
             if (m_UiTabs[i] != null)
             {
@@ -83,7 +86,7 @@ public class UiManager : Singleton<UiManager>
         }
     }
 
-    public global::UiTabs GetUiTab(UiTab aUiTab)
+    public UiTabs GetUiTab(UiTab aUiTab)
     {
         return m_UiTabs[(int)aUiTab];
     }
@@ -137,7 +140,7 @@ public class UiManager : Singleton<UiManager>
         {
             m_LastScreen.RemoveAt(0);
         }
-        m_LastScreen.Add(m_ScreenStack[m_ScreenStack.Count - 1].Key);
+        m_LastScreen.Add(m_ScreenStack[m_ScreenStack.Count -1].Key);
         
         Debug.Log("Popped Screen " + m_ScreenStack[m_ScreenStack.Count - 1].Key);
         
@@ -159,7 +162,7 @@ public class UiManager : Singleton<UiManager>
 
     public void ReturnToLastScreen()
     {
-        PopScreenNoLastScreen();
+       PopScreenNoLastScreen();
         if (m_LastScreen.Count == 0)
         {
             return;

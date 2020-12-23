@@ -102,12 +102,16 @@ public class UiScreenCommandBoard : UiScreen
         m_MenuControls.Disable();
  
         UiManager.Instance.PopScreen();
-        UiManager.Instance.PushScreen(UiManager.UiScreens.SkillBoard);
-
+      
         UiScreen ScreenTemp =
             UiManager.Instance.GetScreen(UiManager.UiScreens.SkillBoard) ;
 
         ((UiSkillBoard)ScreenTemp).SpawnSkills(m_CommandboardCreature);
+        
+        
+        UiManager.Instance.PushScreen(UiManager.UiScreens.SkillBoard);
+
+      
 
 
     }
@@ -144,13 +148,5 @@ public class UiScreenCommandBoard : UiScreen
     public void EscapeCommand()
     {
         
-    }
-
-    public override void ReturnToLastScreen()
-    {
-        base.ReturnToLastScreen();
-
-      //  GameManager.Instance.m_CombatCameraController.SetCameraState(CombatCameraController.CameraState.Normal);
-        InputManager.Instance.m_MovementControls.Enable();
     }
 }

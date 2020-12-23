@@ -43,8 +43,10 @@ public class UiSkillBoard : UiScreen
         m_CursorYCurrent = 0;
         m_ToggleSkillRange = false;
         m_SkillRange.text = "SINGLE";
-        m_CurrentSkillMenuButtonsMenu[m_CursorYCurrent].SkillHoveredOver(false);
-        
+
+
+        SetUpButtons();
+
     }
     public  override void MoveMenuCursorPosition(Vector2 aMovement)
     {
@@ -73,17 +75,42 @@ public class UiSkillBoard : UiScreen
     public void SetSkill()
     {
 
-        ((UiEnemyScreen) UiManager.instance.GetScreen(UiManager.UiScreens.EnemyScreen)).
-            SetSkill(m_SkillBoardCreature.m_Skills[m_CursorYCurrent],m_SkillBoardCreature,m_ToggleSkillRange);
+        UiSkillExecutionScreen UiSkillExecution =
+            (UiSkillExecutionScreen) UiManager.instance.GetScreen(UiManager.UiScreens.UiSkillExecutionScreen);
         
-        UiManager.instance.PushScreen(UiManager.UiScreens.EnemyScreen);
-        OnPop();
+        UiSkillExecution.SetSkill(m_SkillBoardCreature.m_Skills[m_CursorYCurrent],m_SkillBoardCreature,m_ToggleSkillRange);
+
+        if (m_SkillBoardCreature.charactertype == Creatures.Charactertype.Ally &&
+            m_SkillBoardCreature.m_Skills[m_CursorYCurrent].m_SkillType == Skills.SkillType.Attack)
+        {
+            UiSkillExecution.SelectedCreatures(UiSkillExecutionScreen.SkillExecutionSelectedCreatures.Enemys);
+        }
+        
+        if (m_SkillBoardCreature.charactertype == Creatures.Charactertype.Ally &&
+            m_SkillBoardCreature.m_Skills[m_CursorYCurrent].m_SkillType == Skills.SkillType.Heal)
+        {
+            UiSkillExecution.SelectedCreatures(UiSkillExecutionScreen.SkillExecutionSelectedCreatures.Players);
+        }
+        
+        if (m_SkillBoardCreature.charactertype == Creatures.Charactertype.Ally &&
+            m_SkillBoardCreature.m_Skills[m_CursorYCurrent].m_SkillType == Skills.SkillType.Defence)
+        {
+            UiSkillExecution.SelectedCreatures(UiSkillExecutionScreen.SkillExecutionSelectedCreatures.Players);
+        }
+
+        
+        
+        UiManager.Instance.PopScreen();
+        UiManager.instance.PushScreen(UiManager.UiScreens.UiSkillExecutionScreen);
+        
     }
 
     public override void OnPop()
     {
+        
         gameObject.SetActive((false));
         m_MenuControls.Disable();
+       
     }
 
     public override void OnPush()
@@ -91,6 +118,7 @@ public class UiSkillBoard : UiScreen
         gameObject.SetActive((true));
      //   InputManager.Instance.m_MovementControls.Disable();
         m_MenuControls.Enable();
+        ResetCursorPosition();
     }
 
     public void SpawnSkills(Creatures aCreatures)
@@ -124,6 +152,7 @@ public class UiSkillBoard : UiScreen
             m_CurrentSkillMenuButtonsMenu[i].SkillHoveredOver(true);
             m_CurrentSkillMenuButtonsMenu[i].SetupButton(m_SkillBoardCreature, m_SkillBoardCreature.m_Skills[i],m_ToggleSkillRange);
         }
+        m_CurrentSkillMenuButtonsMenu[m_CursorYCurrent].SkillHoveredOver(false);
     }
 
 
