@@ -194,7 +194,7 @@ public class UiSkillExecutionScreen : UiScreen
         
         
 
-        UiManager.Instance.PopScreen();
+        
     }
 
     public override void OnPop()

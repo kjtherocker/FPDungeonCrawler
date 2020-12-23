@@ -138,7 +138,7 @@ public class TacticsManager : Singleton<TacticsManager>
         m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
         if (m_Turns > 0)
         {
-            NextTurn();
+            StartCoroutine(NextAlleyTurn());
         }
 
         if (m_Turns == 0)
@@ -149,9 +149,22 @@ public class TacticsManager : Singleton<TacticsManager>
     }
 
 
-    public void NextTurn()
+    public IEnumerator NextEnemyTurn()
     {
-        UiManager.instance.PopAllScreens();
+
+        ((Enemy) TurnOrderEnemy[m_Turns]).AiSetup();
+        
+        yield return new WaitForSeconds(2.5f);
+        
+    }
+    
+    public IEnumerator NextAlleyTurn()
+    {
+
+        yield return new WaitForSeconds(2.5f);
+        
+        UiManager.Instance.PopScreen();
+        yield return new WaitForSeconds(0.4f);
         UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
          
         UiScreen temp = UiManager.instance.GetScreen(UiManager.UiScreens.CommandBoard);

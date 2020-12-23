@@ -28,7 +28,7 @@ public class FireBall : Skills
 
         for (int i = 0; i < aVictum.Count; i++)
         {
-            AllSkillActions.Add(aVictum[i].DecrementHealth(m_Damage + aAttacker.GetAllStrength(), GetElementalType(),
+            AllSkillActions.Add(aVictum[i].DecrementHealth(m_Damage + aAttacker.GetAllStrength() / 3, GetElementalType(),
                 0.1f, 0.1f, 1));
         }
 
@@ -37,7 +37,7 @@ public class FireBall : Skills
     
     public override IEnumerator UseSkill(Creatures aVictum, Creatures aAttacker )
     {
-        return aVictum.DecrementHealth(m_Damage + aAttacker.GetAllStrength(), GetElementalType(),
+        return aVictum.DecrementHealth(m_Damage + aAttacker.GetAllStrength() /3, GetElementalType(),
             0.1f, 0.1f, 1);
     }
 }

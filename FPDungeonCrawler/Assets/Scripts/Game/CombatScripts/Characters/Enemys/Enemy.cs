@@ -15,4 +15,11 @@ public class Enemy : Creatures
 
        Destroy(gameObject);
     }
+
+    public virtual Skills AiSetup()
+    {
+
+        return null;
+    }
+
 }

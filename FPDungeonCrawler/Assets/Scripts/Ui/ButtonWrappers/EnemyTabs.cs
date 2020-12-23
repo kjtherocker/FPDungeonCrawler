@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,10 +16,12 @@ public class EnemyTabs : UiTabs
     public Image ElementalStrength;
     
     public Image m_ImageHightlight;
+
+    private Creatures m_CreatureInUse;
     
     public void SetupTab(Creatures aTurnHolder)
     {
-         
+        m_CreatureInUse = aTurnHolder;
          m_Healthbar.value = aTurnHolder.m_CurrentHealth / aTurnHolder.m_MaxHealth;
 
          ElementalStrength.material = SkillList.instance.GetElementalIcon(aTurnHolder.elementalStrength);
@@ -28,5 +31,12 @@ public class EnemyTabs : UiTabs
           m_EnemyName.text = aTurnHolder.Name;
         
      //   m_CostToUseText.text = aSkill.m_Cost.ToString();
+    }
+
+    public void Update()
+    {
+        
+        float SliderPercentage = (float) m_CreatureInUse.m_CurrentHealth / (float)m_CreatureInUse.m_MaxHealth;
+        m_Healthbar.value = SliderPercentage;
     }
 }
