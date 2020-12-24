@@ -18,19 +18,28 @@ public class IceRain : Skills
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/IceWave/ParticleEffect_IceWave", typeof(ParticleSystem));
         m_SkillName = "Ice Rain";
         m_SkillDescription = "IceRain that will hit the whole enemy team";
+        
+        m_SingleTargetCost = 5;
+        m_MultiTargetCost = m_SingleTargetCost * 2;
     }
+    
 
-    // Update is called once per frame
-    void Update()
+    public override List<IEnumerator> UseSkill(List<Creatures> aVictum, Creatures aAttacker )
     {
+        List<IEnumerator> AllSkillActions = new List<IEnumerator>();
 
+        for (int i = 0; i < aVictum.Count; i++)
+        {
+            AllSkillActions.Add(aVictum[i].DecrementHealth(m_Damage + aAttacker.GetAllStrength() / 3, GetElementalType(),
+                0.1f, 0.1f, 1));
+        }
+
+        return AllSkillActions;
     }
-
+    
     public override IEnumerator UseSkill(Creatures aVictum, Creatures aAttacker )
     {
-        
-        return aVictum.DecrementHealth(m_Damage + aAttacker.GetAllStrength(), GetElementalType(),
+        return aVictum.DecrementHealth(m_Damage + aAttacker.GetAllStrength() /3, GetElementalType(),
             0.1f, 0.1f, 1);
-        
     }
 }

@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class StatusEffects : Skills
 {
-    protected float Length;
+    protected int Length;
 
-    protected Creatures ActivatedCreature;
+    protected Dictionary<Creatures,int> ActivatedCreature;
     // Start is called before the first frame update
-    public virtual void RevertStatusEffect()
+    public virtual void RevertStatusEffect(Creatures aCreature)
     {
-        
+      //  ActivatedCreature[aCreature].;
+
     }
 
     public bool CheckIfStatusEffectIsActive()
@@ -29,7 +30,7 @@ public class StatusEffects : Skills
 
         if (Length == 0)
         {
-            RevertStatusEffect();
+         //   RevertStatusEffect();
         }
     }
     

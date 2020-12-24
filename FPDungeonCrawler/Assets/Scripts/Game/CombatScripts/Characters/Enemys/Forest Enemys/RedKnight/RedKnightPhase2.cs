@@ -8,8 +8,8 @@ public class RedKnightPhase2 : Enemy
     // Use this for initialization
     public override void Initialize ()
     {
-        m_CurrentHealth = 200;
-        m_MaxHealth = 200;
+        m_CurrentHealth = 30;
+        m_MaxHealth = 30;
         BaseStrength = 75;
         BaseMagic = 40;
         BaseHit = 20;
@@ -45,6 +45,7 @@ public class RedKnightPhase2 : Enemy
         charactertype = Charactertype.Enemy;
         elementalStrength = Skills.ElementalType.Shadow;
         elementalWeakness = Skills.ElementalType.Null;
+        
     }
 
 

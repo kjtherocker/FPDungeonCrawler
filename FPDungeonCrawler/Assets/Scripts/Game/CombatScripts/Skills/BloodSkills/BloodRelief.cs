@@ -12,7 +12,7 @@ public class BloodRelief : Skills
     {
 
         m_ElementalType = ElementalType.Shadow;
-        m_SkillType = SkillType.Defence;
+        m_SkillType = SkillType.Buff;
         m_Damagetype = DamageType.Magic;
         m_SkillParticleEffect = (ParticleSystem)Resources.Load("ParticleSystems/Waves/DarkWave/ParticleEffect_DarkWave", typeof(ParticleSystem));
         m_Damage = 4;

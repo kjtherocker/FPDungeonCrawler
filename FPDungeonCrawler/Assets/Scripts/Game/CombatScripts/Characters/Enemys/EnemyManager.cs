@@ -14,9 +14,22 @@ public class EnemyManager : Singleton<EnemyManager>
             
             GameObject m_Enemy = Instantiate(EnemyList.instance.ReturnEnemyData(aEnemys[i]));
             m_Enemy.transform.position = aArena.SpawnPositions[i].transform.position;
+
+            Creatures creatures = m_Enemy.GetComponent<Creatures>();
             
-            
-            m_EnemyList.Add(m_Enemy.GetComponent<Creatures>());
+            m_EnemyList.Add(creatures);
+            creatures.m_SpawnObject = m_Enemy;
+        }
+    }
+
+    public void ResetEnemyManager()
+    {
+        for (int i = m_EnemyList.Count - 1; i >= 0; i--)
+        {
+            if (m_EnemyList[i])
+            {    
+                m_EnemyList.RemoveAt(i);
+            }
         }
     }
 

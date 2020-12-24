@@ -11,7 +11,7 @@ public class Sleep : Skills
     {
 
         //m_ElementalType = ElementalType.Water;
-        m_SkillType = SkillType.Defence;
+        m_SkillType = SkillType.Buff;
         m_Damagetype = DamageType.Magic;
         m_SkillAilment = SkillAilment.Sleep;
         m_Damage = 0;

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1086060948377280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9707452, y: 0.8251128, z: 0.8251128}
+  m_LocalScale: {x: 1.7573582, y: 1.7573582, z: 1.7573582}
   m_Children:
   - {fileID: 224002384380051204}
   m_Father: {fileID: 0}
@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: e6943112f7ef5c645b97fc85e78aff56, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

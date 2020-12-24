@@ -35,10 +35,17 @@ public class FloorManager : MonoBehaviour
 
     public void SwitchToCombat()
     {
-        TacticsManager.instance.StartCombat(m_CombatArena,m_FloorCore);
+        TacticsManager.instance.StartCombat(m_CombatArena,m_FloorCore,this);
         InputManager.instance.m_MovementControls.Disable();
         gameObject.SetActive(false);
         m_Map.gameObject.SetActive(false);
+    }
+    
+    public void SwitchToExploration()
+    {
+        InputManager.instance.m_MovementControls.Enable();
+        gameObject.SetActive(true);
+        m_Map.gameObject.SetActive(true);
     }
 
     public void CreateGrid()

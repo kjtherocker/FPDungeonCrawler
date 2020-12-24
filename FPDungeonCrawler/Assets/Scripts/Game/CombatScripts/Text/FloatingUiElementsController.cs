@@ -69,53 +69,69 @@ public class FloatingUiElementsController : MonoBehaviour {
     }
 
 
-    public static void CreateFloatingText(string text, Transform location, UiElementType a_uiElementtype)
+    public static void CreateFloatingText(string text, Transform location, UiElementType a_uiElementtype,bool IsUi)
     {
         Camera Camera = TacticsManager.instance.m_CombatCamera;
+        Vector2 screenPosition = Vector2.zero;
+        if (IsUi)
+        {
+            screenPosition = location.position;
+             
+        }
+        else
+        {
+            screenPosition = Camera.WorldToScreenPoint(location.position + Vector3.up);
+        }
+        
+        
+        
         if (a_uiElementtype == UiElementType.Text)
         {
             FloatingUiElements instance = Instantiate(FloatingText);
-            Vector2 screenPosition = Camera.WorldToScreenPoint(location.position + Vector3.up);
             instance.transform.SetParent(canvas.transform, false);
             instance.transform.position = screenPosition;
+            
             instance.SetText(text);
         }
         if (a_uiElementtype == UiElementType.Strong)
         {
             FloatingUiElements instance = Instantiate(FloatingStrong);
-            Vector2 screenPosition = Camera.WorldToScreenPoint(location.position + Vector3.up);
             instance.transform.SetParent(canvas.transform, false);
+
             instance.transform.position = screenPosition;
+
 
         }
         if (a_uiElementtype == UiElementType.Weak)
         {
             FloatingUiElements instance = Instantiate(FloatingWeak);
-            Vector2 screenPosition = Camera.WorldToScreenPoint(location.position + Vector3.up);
             instance.transform.SetParent(canvas.transform, false);
+
             instance.transform.position = screenPosition;
+            
 
         }
         if (a_uiElementtype == UiElementType.Miss)
         {
             FloatingUiElements instance = Instantiate(FloatingMiss);
-            Vector2 screenPosition = Camera.WorldToScreenPoint(location.position + Vector3.up);
             instance.transform.SetParent(canvas.transform, false);
+
             instance.transform.position = screenPosition;
+            
 
         }
         if (a_uiElementtype == UiElementType.Attackup)
         {
             FloatingUiElements instance = Instantiate(FloatingAttackUp);
-            Vector2 screenPosition = Camera.WorldToScreenPoint(location.position + Vector3.up);
             instance.transform.SetParent(canvas.transform, false);
+
             instance.transform.position = screenPosition;
+            
 
         }
         if (a_uiElementtype == UiElementType.AttackDown)
         {
             FloatingUiElements instance = Instantiate(FloatingAttackDown);
-            Vector2 screenPosition = Camera.WorldToScreenPoint(location.position + Vector3.up);
             instance.transform.SetParent(canvas.transform, false);
             instance.transform.position = screenPosition;
 
@@ -123,7 +139,6 @@ public class FloatingUiElementsController : MonoBehaviour {
         if (a_uiElementtype == UiElementType.Defenseup)
         {
             FloatingUiElements instance = Instantiate(FloatingDefenseUp);
-            Vector2 screenPosition = Camera.WorldToScreenPoint(location.position + Vector3.up);
             instance.transform.SetParent(canvas.transform, false);
             instance.transform.position = screenPosition;
 
@@ -131,7 +146,6 @@ public class FloatingUiElementsController : MonoBehaviour {
         if (a_uiElementtype == UiElementType.SpeedUp)
         {
             FloatingUiElements instance = Instantiate(FloatingSpeedUp);
-            Vector2 screenPosition = Camera.WorldToScreenPoint(location.position + Vector3.up);
             instance.transform.SetParent(canvas.transform, false);
             instance.transform.position = screenPosition;
 

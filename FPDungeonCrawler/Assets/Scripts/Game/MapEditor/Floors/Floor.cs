@@ -140,8 +140,8 @@ public class Floor : MonoBehaviour
         List<EnemyList.EnemyTypes> EnemysToCombat = new List<EnemyList.EnemyTypes>();
         
         EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight1);
-        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight1);
-        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight1);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight2);
+        EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight2);
         EnemysToCombat.Add(EnemyList.EnemyTypes.RedKnight1);
 
         return EnemysToCombat;

@@ -6,6 +6,24 @@ public class Enemy : Creatures
 {
 
     public List<Skills> m_SkillLootTable;
+    
+    public override void SetCreature()
+    {
+        m_Skills = new List<Skills>();
+        m_BloodArts = new List<Skills>();
+        m_StatusEffectsOnCreature = new List<StatusEffects>();
+        
+        m_Devour = new Devour();
+        
+        m_CreatureSkillList = SkillList.instance;
+
+        FloatingUiElementsController.Initalize();
+        
+        //m_Attack = gameObject.AddComponent<Attack>();
+        
+        m_IsUi = false;
+        CurrentDomainpoints = MaxDomainPoints;
+    }
     public override void Death()
     {
         base.Death();

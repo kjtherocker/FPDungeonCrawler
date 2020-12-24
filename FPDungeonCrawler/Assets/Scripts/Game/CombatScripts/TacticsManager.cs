@@ -12,6 +12,10 @@ using UnityEngine.AddressableAssets;
 public class TacticsManager : Singleton<TacticsManager>
 {
 
+    delegate void TurnProcessor();
+
+    private TurnProcessor NextTurn;
+    
     public PartyManager m_PartyManager;
     public EnemyManager m_EnemyManager;
     
@@ -29,13 +33,17 @@ public class TacticsManager : Singleton<TacticsManager>
     public List<Creatures> TurnOrderAlly;
     public List<Creatures> TurnOrderEnemy;
 
+
+    private FloorManager m_CurrentFloorManager;
     private int m_Turns;
     
     private GameObject m_MemoriaPrefab;
     public Dictionary<Creatures, Creatures> m_CreaturesWhosDomainHaveClashed;
 
-    public Camera m_CombatCamera;
+    private CombatArena m_CombatArena;
     
+    public Camera m_CombatCamera;
+    public SkillExecutionManager m_SkillExecutionManager;
     public enum CombatStates
     {
         NoTurn,
@@ -65,11 +73,16 @@ public class TacticsManager : Singleton<TacticsManager>
         m_EnemyManager = EnemyManager.instance;
         m_PartyManager = PartyManager.Instance;
         //CombatStart();
+        m_SkillExecutionManager = new SkillExecutionManager(this);
     }
 
-    public void StartCombat(CombatArena aArena,Floor aCurrentFloor)
+    public void StartCombat(CombatArena aArena,Floor aCurrentFloor, FloorManager aFloorManager)
     {
+
+        m_CurrentFloorManager = aFloorManager;
         EnemyManager.instance.AddEnemysToManager(aCurrentFloor.EnemySet1(),aArena);
+
+        m_CombatArena = aArena;
         
          for (int i = 0; i < m_EnemyManager.m_EnemyList.Count; i++)
          {
@@ -103,14 +116,32 @@ public class TacticsManager : Singleton<TacticsManager>
             StartCoroutine(aSkillActions[i]);
         }
 
-        ProgressToNextCharacter();
+        if (TurnOrderEnemy.Count == 0)
+        {
+            EndCombat();
+        }
+        else
+        {
+            ProgressToNextCharacter();    
+        }
     }
     
     public void ProcessTurn(IEnumerator aSkillActions)
     {
         StartCoroutine(aSkillActions);
 
-        ProgressToNextCharacter();
+
+        if (TurnOrderEnemy.Count == 0)
+        {
+            EndCombat();
+        }
+        else
+        {
+            ProgressToNextCharacter();    
+        }
+        
+        
+        
     }
 
 
@@ -256,16 +287,32 @@ public class TacticsManager : Singleton<TacticsManager>
     }
     
     
-    public void RemoveDeadFromList(Creatures.Charactertype aCharactertype)
+    public void RemoveDeadFromList(Creatures aDeadCreature)
     {
-        if (aCharactertype == Creatures.Charactertype.Ally)
+        if (aDeadCreature.charactertype == Creatures.Charactertype.Ally)
         { 
             for (int i = TurnOrderAlly.Count - 1; i >= 0; i--)
             {
-                if (TurnOrderAlly[i] == null)
+                if (TurnOrderAlly[i] == aDeadCreature)
                 {    
                     TurnOrderAlly.RemoveAt(i);
                 }
+            }
+        }
+        
+        if (aDeadCreature.charactertype == Creatures.Charactertype.Enemy)
+        { 
+            for (int i = TurnOrderEnemy.Count - 1; i >= 0; i--)
+            {
+                if (TurnOrderEnemy[i] == aDeadCreature)
+                {    
+                    TurnOrderEnemy.RemoveAt(i);
+                }
+            }
+            
+            if (TurnOrderEnemy.Count == 0)
+            {
+                EndCombat();
             }
         }
 
@@ -283,6 +330,22 @@ public class TacticsManager : Singleton<TacticsManager>
         yield return new WaitForSeconds(2f);
         m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
 
+    }
+
+    public void EndCombat()
+    {
+        UiManager.instance.PopAllScreens();
+        
+        m_UiTabTurnKeeper.gameObject.SetActive(false);
+        for (int i = TurnOrderEnemy.Count - 1; i >= 0; i--)
+        {
+            TurnOrderEnemy.RemoveAt(i);
+        }
+
+        EnemyManager.instance.ResetEnemyManager();
+        
+        m_CombatArena.gameObject.SetActive(false);
+        m_CurrentFloorManager.SwitchToExploration();
     }
 
     public void EnemyMovement()

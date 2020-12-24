@@ -93,7 +93,7 @@ public class UiSkillBoard : UiScreen
         }
         
         if (m_SkillBoardCreature.charactertype == Creatures.Charactertype.Ally &&
-            m_SkillBoardCreature.m_Skills[m_CursorYCurrent].m_SkillType == Skills.SkillType.Defence)
+            m_SkillBoardCreature.m_Skills[m_CursorYCurrent].m_SkillType == Skills.SkillType.Buff)
         {
             UiSkillExecution.SelectedCreatures(UiSkillExecutionScreen.SkillExecutionSelectedCreatures.Players);
         }

@@ -17,7 +17,9 @@ public class EnemyTabs : UiTabs
     
     public Image m_ImageHightlight;
 
-    private Creatures m_CreatureInUse;
+    public Creatures m_CreatureInUse;
+
+    public bool m_InUse;
     
     public void SetupTab(Creatures aTurnHolder)
     {

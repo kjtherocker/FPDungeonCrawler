@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\Services\Preloader.cs" />
      <Compile Include="Assets\Scripts\Game\Debug\DebugMenu.cs" />
      <Compile Include="Assets\Scripts\Ui\UiTab\UiTabsPartyStatusManager.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\SkillExecutionManager.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\WaterController.cs" />
      <Compile Include="Assets\Scripts\Ui\UiManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\Attack.cs" />

@@ -18,7 +18,7 @@ public class Items : MonoBehaviour
     {
 
         m_ItemElementalType = Skills.ElementalType.Null;
-        m_ItemSkillType = Skills.SkillType.Defence;
+        m_ItemSkillType = Skills.SkillType.Buff;
         m_ItemName = "Item";
         m_ItemDescription = "If this is here something bad happened";
     }

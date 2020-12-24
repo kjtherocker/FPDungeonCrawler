@@ -27,7 +27,7 @@ public class Skills
     {
         Attack,
         Heal,
-        Defence,
+        Buff,
         Domain,
 
     }

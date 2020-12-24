@@ -53,6 +53,8 @@ public class UiStatus : UiTabs
         }
 
         Creature = Character;
+
+        ((Ally) Character).SetStatus(this);
         
         m_CurrentHealth = Creature.m_CurrentHealth;
         m_MaxHealth = Creature.m_MaxHealth;

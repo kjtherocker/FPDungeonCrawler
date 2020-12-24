@@ -41,7 +41,7 @@ public class Cavia : Ally
         m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Restrict));
         m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.LightRay));
         m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.ShadowBlast));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.HolyWater));
+        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Invigorate));
         
 
         Model = (GameObject)Resources.Load("Objects/Battle/PartyModels/Cavia/Prefab/Pref_Cavia", typeof(GameObject));
