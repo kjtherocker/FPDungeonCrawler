@@ -8,6 +8,7 @@ public class SkillList : Singleton<SkillList>
 {
     public enum SkillEnum
     {
+        
         Poison,
         Rage,
         Sleep,
@@ -122,7 +123,7 @@ public class SkillList : Singleton<SkillList>
         return m_ElementalTypes[(int) aElementalIcon];
     }
 
-    public Skills SetSkills(SkillEnum aSkills, string sourceName = "Global")
+    public Skills GetSkill(SkillEnum aSkills, string sourceName = "Global")
     {
        return m_SkillTypes[(int)aSkills];
     }

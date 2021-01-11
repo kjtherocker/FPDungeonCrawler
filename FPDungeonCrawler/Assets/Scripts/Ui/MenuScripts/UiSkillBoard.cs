@@ -69,14 +69,14 @@ public class UiSkillBoard : UiScreen
         
         m_DescriptionText.text =
             m_CurrentSkillMenuButtonsMenu[m_SkillBoardPointerPosition].m_ButtonSkill.m_SkillDescription;
-
+        AudioManager.instance.PlaySoundOneShot(AudioManager.AudioClips.Selection,AudioManager.Soundtypes.SoundEffects);
     }
 
     public void SetSkill()
     {
 
         UiSkillExecutionScreen UiSkillExecution =
-            (UiSkillExecutionScreen) UiManager.instance.GetScreen(UiManager.UiScreens.UiSkillExecutionScreen);
+            (UiSkillExecutionScreen) UiManager.instance.GetScreen(UiManager.UiScreens.SkillExecutionScreen);
         
         UiSkillExecution.SetSkill(m_SkillBoardCreature.m_Skills[m_CursorYCurrent],m_SkillBoardCreature,m_ToggleSkillRange);
 
@@ -101,7 +101,7 @@ public class UiSkillBoard : UiScreen
         
         
         UiManager.Instance.PopScreen();
-        UiManager.instance.PushScreen(UiManager.UiScreens.UiSkillExecutionScreen);
+        UiManager.instance.PushScreen(UiManager.UiScreens.SkillExecutionScreen);
         
     }
 

@@ -25,15 +25,15 @@ public class RedKnightPhase1 : Enemy
 
         SetCreature();
 
-        m_Attack = m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Attack);
+        m_Attack = m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Attack);
 
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.icerain));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.FireBall));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.LightRay));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.icerain));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.LightRay));
 
-        m_SkillLootTable.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.FireBall));
-        m_SkillLootTable.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.HolyWater));
-        m_SkillLootTable.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Restrict));
+        m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
+        m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.HolyWater));
+        m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Restrict));
         
         AmountOfTurns = 1;
         

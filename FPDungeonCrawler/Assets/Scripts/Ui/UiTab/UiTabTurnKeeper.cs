@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UiTabTurnKeeper : UiTabs
 {
-    public List<RawImage> m_Images;
+    public List<TurnWrapper> m_Images;
 
     public Material m_PlayerIcon;
     public Material m_EnemyIcon;
@@ -20,8 +20,18 @@ public class UiTabTurnKeeper : UiTabs
         
         for (int i = 0; i < m_Images.Count; i++)
         {
-            m_Images[i].material = m_IconMaterial;
+            m_Images[i].m_DefaultIcon.material = m_IconMaterial;
         }
+    }
+
+    public void SetPressTurns(List<PressTurn> aPressTurns)
+    {
+        for (int i = 0; i < aPressTurns.Count; i++)
+        {
+            m_Images[i].SetPressTurn(aPressTurns[i]);
+        }
+
+        TacticsManager.instance.m_Turns = aPressTurns.Count;
     }
 
     public void UpdateTurnIcons(int aTurns)
@@ -33,6 +43,7 @@ public class UiTabTurnKeeper : UiTabs
 
         for (int i = 0; i < aTurns; i++)
         {
+            m_Images[i].UpdateTurnWrapper();
             m_Images[i].gameObject.SetActive(true);
         }
 

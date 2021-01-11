@@ -14,31 +14,84 @@ public class AudioManager : Singleton<AudioManager>
         SoundEffects
     }
 
+    public enum AudioClips
+    {
+        Exploration,
+        Combat,
+        Fanfare,
+        Selection,
+        FireBall,
+        Encounter,
+        Accept,
+        SoundEffects
+    }
+
+    
 
     public AudioSource m_AmbientAudioSource;
     public AudioSource m_DialogueAudioSource;
     public AudioSource m_MusicAudioSource;
     public AudioSource m_SoundEffectsAudioSource;
     public Dictionary<int, AudioSource> m_AudioSources = new Dictionary<int, AudioSource>();
-    public AudioManager(GameObject gameObject)
+    public void Intialize()
     {
         AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
+        
         m_AmbientAudioSource = audioSources[0];
         m_AudioSources.Add((int)Soundtypes.Ambient,m_AmbientAudioSource );
         
         m_DialogueAudioSource = audioSources[1];
-        m_AudioSources.Add((int)Soundtypes.Ambient,m_DialogueAudioSource );
+        m_AudioSources.Add((int)Soundtypes.Dialogue,m_DialogueAudioSource );
         
         m_MusicAudioSource = audioSources[2];
-        m_AudioSources.Add((int)Soundtypes.Ambient,m_MusicAudioSource );
+        m_AudioSources.Add((int)Soundtypes.Music,m_MusicAudioSource );
         
         m_SoundEffectsAudioSource = audioSources[3];
-        m_AudioSources.Add((int)Soundtypes.Ambient,m_SoundEffectsAudioSource );
-        
+        m_AudioSources.Add((int)Soundtypes.SoundEffects,m_SoundEffectsAudioSource );
 
+  
     }
 
-    public void PlaySoundRepeating(AudioClip audioClip,Soundtypes aSoundType)
+    public AudioClip GetAudioClip(AudioClips aAudioClips)
+    {
+        string audioClipPath =  "";
+        
+        if (aAudioClips == AudioClips.Exploration)
+        {
+            audioClipPath = "Audio/Music/Little2";
+        }
+
+        if (aAudioClips == AudioClips.Combat)
+        {
+            audioClipPath = "Audio/Music/BabaYaga";
+        }
+        
+        if (aAudioClips == AudioClips.Selection)
+        {
+            audioClipPath = "Audio/SoundEffect/Selection";
+        }
+        
+        if (aAudioClips == AudioClips.FireBall)
+        {
+            audioClipPath = "Audio/SoundEffect/Fireball";
+        }
+        
+                
+        if (aAudioClips == AudioClips.Encounter)
+        {
+            audioClipPath = "Audio/SoundEffect/EnemyEncounter2";
+        }
+
+        
+        if (aAudioClips == AudioClips.Accept)
+        {
+            audioClipPath = "Audio/SoundEffect/Accept";
+        }
+        
+        return  Resources.Load<AudioClip>(audioClipPath);;
+    }
+
+    public void PlaySoundRepeating(AudioClips aAudioClip,Soundtypes aSoundType)
     {
         
         AudioSource TempAudioSource = m_AudioSources[(int)aSoundType];
@@ -49,19 +102,13 @@ public class AudioManager : Singleton<AudioManager>
             return;
         }
         
-        if (audioClip == null)
-        {
-            return;
-        }
-
-  
         TempAudioSource.loop = true;
-        TempAudioSource.clip = audioClip;
+        TempAudioSource.clip = GetAudioClip(aAudioClip);
         TempAudioSource.Play();
         
     }
 
-    public void PlaySoundOneShot(AudioClip audioClip,Soundtypes aSoundType)
+    public void PlaySoundOneShot(AudioClips aAudioClip,Soundtypes aSoundType)
     {
         AudioSource TempAudioSource = m_AudioSources[(int)aSoundType];
 
@@ -71,16 +118,11 @@ public class AudioManager : Singleton<AudioManager>
             return;
         }
         
-        if (audioClip == null)
-        {
-            return;
-        }
-        
         TempAudioSource.loop = false;
-        TempAudioSource.PlayOneShot(audioClip);
+        TempAudioSource.PlayOneShot(GetAudioClip(aAudioClip));
     }
 
-    public void PlaySoundDelayed(AudioClip audioClip, float delay,Soundtypes aSoundType)
+    public void PlaySoundDelayed(AudioClips aAudioClip, float delay,Soundtypes aSoundType)
     {
         
         AudioSource TempAudioSource = m_AudioSources[(int)aSoundType];
@@ -90,18 +132,14 @@ public class AudioManager : Singleton<AudioManager>
             Debug.Log("Audio source: " + aSoundType + " is Null");
             return;
         }
-
-        if (audioClip == null)
-        {
-            return;
-        }
+        
         TempAudioSource.loop = false;
-        TempAudioSource.clip = audioClip;
-         TempAudioSource.PlayDelayed(delay);
+        TempAudioSource.clip = GetAudioClip(aAudioClip);
+        TempAudioSource.PlayDelayed(delay);
         
     }
 
-    public void PlaySoundScheduled(AudioClip audioClip, double time,Soundtypes aSoundType)
+    public void PlaySoundScheduled(AudioClips aAudioClip, double time,Soundtypes aSoundType)
     {
         AudioSource TempAudioSource = m_AudioSources[(int)aSoundType];
 
@@ -111,12 +149,8 @@ public class AudioManager : Singleton<AudioManager>
             return;
         }
 
-        if (audioClip == null)
-        {
-            return;
-        }
         TempAudioSource.loop = false;
-        TempAudioSource.clip = audioClip;
+        TempAudioSource.clip = GetAudioClip(aAudioClip);
          TempAudioSource.PlayScheduled(time);
         
     }

@@ -25,14 +25,14 @@ public class RedKnightPhase4 : Enemy
 
         SetCreature();
 
-        m_Attack = m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Attack);
+        m_Attack = m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Attack);
 
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Attack));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.FireBall));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Attack));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
         
-        m_SkillLootTable.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.FireBall));
-        m_SkillLootTable.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.HolyWater));
-        m_SkillLootTable.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Restrict));
+        m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
+        m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.HolyWater));
+        m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Restrict));
 
 
         AmountOfTurns = 1;

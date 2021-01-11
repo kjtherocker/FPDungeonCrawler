@@ -32,7 +32,7 @@ public class Sigma : Ally {
 
         m_CreatureMovement = 8;
 		
-        m_Attack = m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Attack);
+        m_Attack = m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Attack);
 
         m_DomainList = DomainList.DomainListEnum.PatchworkChimera;
         
@@ -41,10 +41,10 @@ public class Sigma : Ally {
         m_Domain.DomainUser = Name;
         m_Domain.m_Creature = this;
 
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Invigorate));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.FireBall));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.HolyWater));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.icerain));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Invigorate));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.HolyWater));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.icerain));
 
         Model = (GameObject)Resources.Load("Objects/Battle/PartyModels/Sigma/Prefab/Pref_Sigma", typeof(GameObject));
         

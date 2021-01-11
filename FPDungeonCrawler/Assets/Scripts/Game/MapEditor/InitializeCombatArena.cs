@@ -42,6 +42,7 @@ public class InitializeCombatArena : MonoBehaviour
         m_UiMap.SetMap(m_FloorManager.m_FloorCore);
         m_FloorManager.Initialize();
         mOverworldPlayerMovementController.Initialize();
+
         // TacticsManager.Instance.CombatStsart();
     }
 

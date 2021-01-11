@@ -26,12 +26,12 @@ public class Vella : Ally
 
         SetCreature();
         
-        m_Attack = m_CreatureSkillList.SetSkills(SkillList.SkillEnum.Attack);
+        m_Attack = m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Attack);
         
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.HolyWater));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.ShadowBlast));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.PheonixSpirit));
-        m_Skills.Add(m_CreatureSkillList.SetSkills(SkillList.SkillEnum.icerain));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.HolyWater));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.ShadowBlast));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.PheonixSpirit));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.icerain));
 
         
         m_Domain = new PatchWorkChimera();

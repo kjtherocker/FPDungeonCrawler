@@ -11,6 +11,7 @@ public class Preloader : Singleton<Preloader>
         PartyManager,
         Ui,
         Input,
+        Audio,
         Finished
         
     }
@@ -45,11 +46,12 @@ public class Preloader : Singleton<Preloader>
         
         m_InitializationSteps = InitializationSteps.Ui;
         UiManager.Instance.Initialize();
-
+        PressTurnManager.instance.Initialize();
 
         UiManager.Instance.PushTab(UiManager.UiTab.PlayerStatus);
         
-        
+        m_InitializationSteps = InitializationSteps.Audio;
+        AudioManager.instance.Intialize();
 
                 
         m_InitializationSteps = InitializationSteps.Input;

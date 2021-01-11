@@ -11,20 +11,17 @@ public class Potion : Items
     
     public virtual void Initialize()
     {
-        m_ItemElementalType = Skills.ElementalType.Null;
-        m_ItemSkillType = Skills.SkillType.Heal;
-        m_ItemName = "Potion";
-        m_ItemDescription = "Recover 500 HP for one ally";
+        m_ElementalType = ElementalType.Null;
+        m_SkillType = SkillType.Heal;
+        m_SkillName = "Potion";
+        m_SkillDescription = "Recover 500 HP for one ally";
 
-        m_AddedHealth = 500;
+        m_AddedHealth = 100;
     }
     
-
-    public virtual IEnumerator UseItem(Creatures aVictum, Creatures aAttacker )
+    public override IEnumerator UseSkill(Creatures aVictum, Creatures aAttacker )
     {
-        aAttacker.IncrementHealth(m_AddedHealth);
-
-        return null;
-
+        return aVictum.IncrementHealth(m_Damage);
     }
+
 }

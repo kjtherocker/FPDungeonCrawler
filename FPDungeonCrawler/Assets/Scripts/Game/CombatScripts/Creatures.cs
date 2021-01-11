@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Random = System.Random;
 
 [Serializable]
 public class Creatures : MonoBehaviour
@@ -217,6 +218,9 @@ public class Creatures : MonoBehaviour
         
         yield return new WaitForSeconds(0.1f);
         FloatingUiElementsController.CreateFloatingText(0.ToString(), m_SpawnObject.transform, FloatingUiElementsController.UiElementType.Attackup,m_IsUi);
+        yield return new WaitForSeconds(0.7f);
+        
+        TacticsManager.instance.CharacterSkillFinished(this, PressTurnManager.PressTurnReactions.Normal);
     }
 
     public virtual void DecrementHealth(int Decremenby)
@@ -237,18 +241,22 @@ public class Creatures : MonoBehaviour
         int ConvertToInt = Mathf.CeilToInt(ConvertToFloat);
         Decrementby = ConvertToInt;
 
+        PressTurnManager.PressTurnReactions PressturnReaction = PressTurnManager.PressTurnReactions.Normal;
+        
 
         if (AttackingElement.Equals(ElementalWeakness))
        {
            Decrementby += Decrementby / 4;
            yield return new WaitForSeconds(TimeTillHoveringUiElement);
            FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), m_SpawnObject.transform, FloatingUiElementsController.UiElementType.Weak,m_IsUi);
+           PressturnReaction = PressTurnManager.PressTurnReactions.Weak;
        }
        if (AttackingElement.Equals(ElementalStrength))
        {
            Decrementby -= Decrementby / 4;
            yield return new WaitForSeconds(TimeTillHoveringUiElement);
            FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(), m_SpawnObject.transform, FloatingUiElementsController.UiElementType.Strong,m_IsUi);
+           PressturnReaction = PressTurnManager.PressTurnReactions.Strong;
        }
        
        
@@ -256,7 +264,7 @@ public class Creatures : MonoBehaviour
         
         FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(),  m_SpawnObject.transform, FloatingUiElementsController.UiElementType.Text,m_IsUi);
         m_CurrentHealth -= Decrementby;
-
+        TacticsManager.instance.CharacterSkillFinished(this,PressturnReaction );
         DeathCheck();
     }
 
@@ -268,8 +276,10 @@ public class Creatures : MonoBehaviour
 
         FloatingUiElementsController.CreateFloatingText(Increment.ToString(), m_SpawnObject.transform,
                 FloatingUiElementsController.UiElementType.Text, m_IsUi);
-
+                
+        yield return new WaitForSeconds(1.5f);
         
+        TacticsManager.instance.CharacterSkillFinished(this,PressTurnManager.PressTurnReactions.Normal);
     }
 
     public virtual Charactertype GetCharactertype()
@@ -303,7 +313,12 @@ public class Creatures : MonoBehaviour
        TacticsManager.Instance.RemoveDeadFromList(this);
     }
 
-
+    public Skills GetSkill()
+    {
+     //   float test = Random.Range(-10.0f, 10.0f);
+        
+        return m_Skills[0];
+    }
 
 
 }

@@ -64,12 +64,13 @@
      <Compile Include="Assets\Scripts\Game\TerrainScripts\WaterController.cs" />
      <Compile Include="Assets\Scripts\Ui\UiManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\Attack.cs" />
-     <Compile Include="Assets\Scripts\Game\JsonHelper.cs" />
+     <Compile Include="Assets\Scripts\Global\JsonHelper.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiScreenCommandBoard.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\NodeFormations.cs" />
      <Compile Include="Assets\Scripts\Input\InputManager.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\LevelCreator.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\Cell.cs" />
+     <Compile Include="Assets\Scripts\Ui\MenuScripts\UiItemBoard.cs" />
      <Compile Include="Assets\Scripts\Game\Sound\AudioManager.cs" />
      <Compile Include="Assets\Scripts\Game\OverworldScripts\Gimmick.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\StatusEffect\DebuffSkills\Restrict.cs" />
@@ -87,7 +88,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\Skills.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\Forest Enemys\RedEyes.cs" />
      <Compile Include="Assets\Scripts\Game\GameManager.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\TacticsManager.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Managers\TacticsManager.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\PropList.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AilmentSkills\Rage.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\StatusEffect\StatusEffects.cs" />
@@ -98,7 +99,8 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\HealSkills\HolyWater.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\items\ItemManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Party Classes\Ally.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\PartyManager.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Managers\PartyManager.cs" />
+     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\TurnWrapper.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\CommandProcessor\CommandProcessor.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\SkillList.cs" />
      <Compile Include="Assets\Scripts\Game\Props\NodeReplacement.cs" />
@@ -124,7 +126,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\Forest Enemys\RedKnight\RedKnightPhase3.cs" />
      <Compile Include="Assets\Scripts\Ui\UiTab\UiTabTurnKeeper.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\CommandProcessor\Action\Action.cs" />
-     <Compile Include="Assets\Scripts\Game\AutoSave.cs" />
+     <Compile Include="Assets\Scripts\Global\AutoSave.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\Forest Enemys\RedKnight\RedKnightPhase2.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\SkillStatus.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\CombatArena.cs" />
@@ -161,6 +163,7 @@
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiStatus.cs" />
      <Compile Include="Assets\Scripts\Input\PlayerInput.cs" />
      <Compile Include="Assets\Scripts\Game\Initializer\MainMenuInitialize.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Managers\PressTurnManager.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\FloorManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\Behaviours\Behaviour_WalkClose.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\EnemyList.cs" />

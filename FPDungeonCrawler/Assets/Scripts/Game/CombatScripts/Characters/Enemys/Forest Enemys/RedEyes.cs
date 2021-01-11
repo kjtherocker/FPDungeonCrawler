@@ -23,9 +23,9 @@ public class RedEyes : Enemy
 
         SetCreature();
 
-        m_Attack = GameManager.Instance.m_SkillList.SetSkills(SkillList.SkillEnum.Attack);
+        m_Attack = GameManager.Instance.m_SkillList.GetSkill(SkillList.SkillEnum.Attack);
 
-        m_Skills.Add(GameManager.Instance.m_SkillList.SetSkills(SkillList.SkillEnum.icerain));
+        m_Skills.Add(GameManager.Instance.m_SkillList.GetSkill(SkillList.SkillEnum.icerain));
   
 
         Model = (GameObject)Resources.Load("Prefabs/Battle/Enemy/Forest/Bosses/Prefab_RedEyes", typeof(GameObject));

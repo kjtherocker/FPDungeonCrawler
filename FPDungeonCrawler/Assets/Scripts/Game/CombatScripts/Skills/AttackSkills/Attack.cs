@@ -13,7 +13,7 @@ public class Attack : Skills
         m_ElementalType = ElementalType.Null;
         m_SkillType = SkillType.Attack;
         m_Damagetype = DamageType.Strength;
-        m_Damage = 10;
+        m_Damage = 110;
         m_SkillName = "Attack";
         m_SkillDescription = "Attack a single enemy";
         m_AnimationName = "t_IsAttack";
@@ -25,7 +25,7 @@ public class Attack : Skills
     public override IEnumerator UseSkill(Creatures aVictum, Creatures aAttacker )
     {
         
-        return aVictum.DecrementHealth(m_Damage + aAttacker.GetAllStrength(), GetElementalType(),
+        return aVictum.DecrementHealth(m_Damage + aAttacker.GetAllStrength()/4, GetElementalType(),
             0.1f, 0.1f, 1);
         
     }

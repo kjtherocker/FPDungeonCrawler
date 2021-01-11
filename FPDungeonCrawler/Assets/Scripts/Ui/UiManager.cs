@@ -10,7 +10,7 @@ public class UiManager : Singleton<UiManager>
         CommandBoard,
         SkillBoard,
         DomainBoard,
-        UiSkillExecutionScreen,
+        SkillExecutionScreen,
         DomainClash,
         Memoria,
         MainMenu,
@@ -59,7 +59,7 @@ public class UiManager : Singleton<UiManager>
         m_UiScreens = new UiScreen[15];
         m_UiScreens[(short) UiScreens.CommandBoard] = GetComponentInChildren<UiScreenCommandBoard>(true);
         m_UiScreens[(short) UiScreens.SkillBoard] = GetComponentInChildren<UiSkillBoard>(true);
-        m_UiScreens[(short) UiScreens.UiSkillExecutionScreen] = GetComponentInChildren<UiSkillExecutionScreen>(true);
+        m_UiScreens[(short) UiScreens.SkillExecutionScreen] = GetComponentInChildren<UiSkillExecutionScreen>(true);
 
         m_UiTabs= new UiTabs[15];
         //UiTabs
@@ -194,9 +194,7 @@ public class UiManager : Singleton<UiManager>
     {
         foreach (var screenPair in m_ScreenStack)
         {
-            UiScreen Screen = screenPair.Value;
-
-            Screen.OnPop();
+            screenPair.Value.OnPop();
         }
 
         m_ScreenStack.Clear();

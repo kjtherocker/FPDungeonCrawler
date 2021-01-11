@@ -60,6 +60,7 @@ public class UiScreenCommandBoard : UiScreen
     public void SelectCommand()
     {
         m_Commands[m_CursorYCurrent]();
+        AudioManager.instance.PlaySoundOneShot(AudioManager.AudioClips.Accept,AudioManager.Soundtypes.SoundEffects);
     }
 
     public override void OnPop()
@@ -87,14 +88,28 @@ public class UiScreenCommandBoard : UiScreen
 
     public override void MenuSelection(int aCursorX, int aCursorY)
     {
-        m_CommandTab[m_CursorYCurrent].ChangeColorToSelected();        
         m_CommandTab[m_CursorYPrevious].ChangeColorToDefault();
-
+        m_CommandTab[m_CursorYCurrent].ChangeColorToSelected();        
+        
+        AudioManager.instance.PlaySoundOneShot(AudioManager.AudioClips.Selection,AudioManager.Soundtypes.SoundEffects);
+        
     }
 
     public void AttackCommand()
     {
+        m_MenuControls.Disable();
+ 
+        UiManager.Instance.PopScreen();
         
+        UiSkillExecutionScreen UiSkillExecution =
+            (UiSkillExecutionScreen) UiManager.instance.GetScreen(UiManager.UiScreens.SkillExecutionScreen);
+        
+        UiSkillExecution.SetSkill(SkillList.instance.GetSkill(SkillList.SkillEnum.Attack),m_CommandboardCreature,false);
+        UiSkillExecution.SelectedCreatures(UiSkillExecutionScreen.SkillExecutionSelectedCreatures.Enemys);
+        
+        
+        UiManager.Instance.PushScreen(UiManager.UiScreens.SkillExecutionScreen);
+
     }
 
     public void SkillCommand()

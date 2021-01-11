@@ -28,13 +28,14 @@ public class FloorManager : MonoBehaviour
         m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Down, new Vector2Int(1,0));
         m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Left, new Vector2Int(0,-1));
         m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Right, new Vector2Int(0,1));
-        
+        SwitchToExploration();
     }
 
 
 
     public void SwitchToCombat()
     {
+        AudioManager.instance.PlaySoundOneShot(AudioManager.AudioClips.Encounter,AudioManager.Soundtypes.SoundEffects);
         TacticsManager.instance.StartCombat(m_CombatArena,m_FloorCore,this);
         InputManager.instance.m_MovementControls.Disable();
         gameObject.SetActive(false);
@@ -46,6 +47,10 @@ public class FloorManager : MonoBehaviour
         InputManager.instance.m_MovementControls.Enable();
         gameObject.SetActive(true);
         m_Map.gameObject.SetActive(true);
+        
+        
+        
+        AudioManager.instance.PlaySoundRepeating(AudioManager.AudioClips.Exploration,AudioManager.Soundtypes.Music);
     }
 
     public void CreateGrid()
@@ -133,9 +138,9 @@ public class FloorManager : MonoBehaviour
     public void SpawnNode(int aRow, int aColumn,int aIndex)
     {
 
-        FloorNode testo = Instantiate(m_FloorNodePrefab);
+        FloorNode tempFloorNode = Instantiate(m_FloorNodePrefab);
          
-        m_FloorNodes[aIndex] =  testo;
+        m_FloorNodes[aIndex] =  tempFloorNode;
 
         m_FloorNodes[aIndex].m_PositionInGrid = new Vector2Int(aRow,aColumn);
         m_FloorNodes[aIndex].gameObject.transform.parent = transform;
@@ -145,8 +150,5 @@ public class FloorManager : MonoBehaviour
 
         //  m_GridPathArray[x, y].m_Grid = m_Grid;
     }
-    
-
-
 }
 

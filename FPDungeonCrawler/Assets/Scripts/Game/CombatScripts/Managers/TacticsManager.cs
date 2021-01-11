@@ -33,9 +33,11 @@ public class TacticsManager : Singleton<TacticsManager>
     public List<Creatures> TurnOrderAlly;
     public List<Creatures> TurnOrderEnemy;
 
+    public List<PressTurnManager.PressTurnReactions> m_PressTurnReactions;
+    public List<Creatures> m_CreaturesInSkill;
 
     private FloorManager m_CurrentFloorManager;
-    private int m_Turns;
+    public int m_Turns;
     
     private GameObject m_MemoriaPrefab;
     public Dictionary<Creatures, Creatures> m_CreaturesWhosDomainHaveClashed;
@@ -79,6 +81,8 @@ public class TacticsManager : Singleton<TacticsManager>
     public void StartCombat(CombatArena aArena,Floor aCurrentFloor, FloorManager aFloorManager)
     {
 
+        AudioManager.instance.PlaySoundRepeating(AudioManager.AudioClips.Combat,AudioManager.Soundtypes.Music);
+        
         m_CurrentFloorManager = aFloorManager;
         EnemyManager.instance.AddEnemysToManager(aCurrentFloor.EnemySet1(),aArena);
 
@@ -96,7 +100,9 @@ public class TacticsManager : Singleton<TacticsManager>
          AddCreatureToCombat(m_PartyManager.m_CurrentParty[3], TurnOrderAlly);
 
          m_Turns = m_PartyManager.m_CurrentParty.Count;
+         PressTurnManager.instance.m_TurnKeeper = m_UiTabTurnKeeper;
          m_UiTabTurnKeeper.gameObject.SetActive(true);
+         PressTurnManager.instance.StartTurn(m_Turns);
          m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
          m_UiTabTurnKeeper.SetIconType(true);
          
@@ -109,28 +115,69 @@ public class TacticsManager : Singleton<TacticsManager>
 
     }
 
-    public void ProcessTurn(List<IEnumerator> aSkillActions)
+    public void RemoveAllCreaturesInSkill()
     {
+        for (int i = m_CreaturesInSkill.Count; i > 0; i--)
+        {
+            m_CreaturesInSkill.RemoveAt(i);
+        }
+
+    }
+
+    public void AddCreaturesInActiveSkill(Creatures aCreature)
+    {
+        m_CreaturesInSkill.Add(aCreature);
+    }
+
+    public void ProcessAction(List<IEnumerator> aSkillActions, List<Creatures> aCreatures)
+    {
+        RemoveAllCreaturesInSkill();
+        for (int i = 0; i < aCreatures.Count; i++)
+        {
+            AddCreaturesInActiveSkill(aCreatures[i]);
+        }
+
         for (int i = 0; i < aSkillActions.Count; i++)
         {
             StartCoroutine(aSkillActions[i]);
         }
-
-        if (TurnOrderEnemy.Count == 0)
-        {
-            EndCombat();
-        }
-        else
-        {
-            ProgressToNextCharacter();    
-        }
     }
     
-    public void ProcessTurn(IEnumerator aSkillActions)
+    public void ProcessAction(IEnumerator aSkillActions, Creatures aCreature)
     {
+        AddCreaturesInActiveSkill(aCreature);
         StartCoroutine(aSkillActions);
+    }
+
+    public void CharacterSkillFinished(Creatures aCreature, PressTurnManager.PressTurnReactions aPressTurnReaction )
+    {
+        m_PressTurnReactions.Add(aPressTurnReaction);
+        for (int i = 0; i < m_CreaturesInSkill.Count; i++)
+        {
+            if (m_CreaturesInSkill[i] == aCreature)
+            {
+                m_CreaturesInSkill.RemoveAt(i);
+                break;
+            }
+        }
+
+        if (m_CreaturesInSkill.Count == 0)
+        {    
+            PressTurnManager.instance.ProcessTurn(m_PressTurnReactions);
+            
+            for (int i = m_PressTurnReactions.Count - 1; i > 0; i--)
+            {
+                m_PressTurnReactions.RemoveAt(i);
+            }
+
+            ActionEnd();
+        }
+
+    }
 
 
+    public void ActionEnd()
+    {
         if (TurnOrderEnemy.Count == 0)
         {
             EndCombat();
@@ -140,9 +187,9 @@ public class TacticsManager : Singleton<TacticsManager>
             ProgressToNextCharacter();    
         }
         
-        
-        
     }
+
+
 
 
     public void UpdateCurrentTurnAmount(int aTurn,TurnStates aTurnStates )
@@ -163,10 +210,7 @@ public class TacticsManager : Singleton<TacticsManager>
 
     public void ProgressToNextCharacter()
     {
-
-        UpdateCurrentTurnAmount(-1,TurnStates.Add);
         
-        m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
         if (m_Turns > 0)
         {
             StartCoroutine(NextAlleyTurn());
@@ -199,7 +243,7 @@ public class TacticsManager : Singleton<TacticsManager>
         UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
          
         UiScreen temp = UiManager.instance.GetScreen(UiManager.UiScreens.CommandBoard);
-        ((UiScreenCommandBoard) temp).m_CommandboardCreature = m_PartyManager.m_CurrentParty[m_Turns];
+        ((UiScreenCommandBoard) temp).m_CommandboardCreature = m_PartyManager.m_CurrentParty[0];
         
     }
     
@@ -328,7 +372,7 @@ public class TacticsManager : Singleton<TacticsManager>
         UpdateCurrentTurnAmount(TurnOrderEnemy.Count,TurnStates.Set);
 
         yield return new WaitForSeconds(2f);
-        m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
+
 
     }
 
@@ -343,6 +387,7 @@ public class TacticsManager : Singleton<TacticsManager>
         }
 
         EnemyManager.instance.ResetEnemyManager();
+        AudioManager.instance.PlaySoundRepeating(AudioManager.AudioClips.Exploration,AudioManager.Soundtypes.Music);
         
         m_CombatArena.gameObject.SetActive(false);
         m_CurrentFloorManager.SwitchToExploration();
