@@ -12,7 +12,7 @@ public class UiTabTurnKeeper : UiTabs
 
     private Material m_IconMaterial;
 
-
+    public int m_Turns;
 
     public void SetIconType(bool aIsPlayer)
     {
@@ -30,8 +30,7 @@ public class UiTabTurnKeeper : UiTabs
         {
             m_Images[i].SetPressTurn(aPressTurns[i]);
         }
-
-        TacticsManager.instance.m_Turns = aPressTurns.Count;
+        
     }
 
     public void UpdateTurnIcons(int aTurns)
@@ -47,5 +46,6 @@ public class UiTabTurnKeeper : UiTabs
             m_Images[i].gameObject.SetActive(true);
         }
 
+        m_Turns = aTurns;
     }
 }

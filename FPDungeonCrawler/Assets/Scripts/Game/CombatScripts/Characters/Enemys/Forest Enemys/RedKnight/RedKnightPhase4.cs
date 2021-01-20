@@ -8,8 +8,8 @@ public class RedKnightPhase4 : Enemy
     // Use this for initialization
     public override void Initialize ()
     {
-        m_CurrentHealth = 200;
-        m_MaxHealth = 200;
+        m_CurrentHealth = 45;
+        m_MaxHealth = 45;
         BaseStrength = 75;
         BaseMagic = 40;
         BaseHit = 20;
@@ -26,10 +26,11 @@ public class RedKnightPhase4 : Enemy
         SetCreature();
 
         m_Attack = m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Attack);
-
-        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Attack));
-        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
         
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.icerain));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.LightRay));
+
         m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
         m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.HolyWater));
         m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Restrict));

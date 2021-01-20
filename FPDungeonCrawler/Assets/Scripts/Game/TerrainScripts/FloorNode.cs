@@ -17,14 +17,6 @@ public class FloorNode : Cell
         Right
     }
 
-    public enum CombatNodeTypes
-    {
-        Normal,
-        Test,
-        Wall,
-        Empty
-    }
-
     public enum WalkOntopTriggerTypes
     {
         None,
@@ -63,8 +55,7 @@ public class FloorNode : Cell
     List<FloorNode> neighbours = null;
     public Grid m_Grid;
 
-
-    public CombatNodeTypes m_CombatsNodeType;
+    
 
     
     public PropList.Props m_PropOnNode;

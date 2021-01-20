@@ -36,8 +36,9 @@ public class Enemy : Creatures
 
     public virtual Skills AiSetup()
     {
-
-        return null;
+        int RandomizedSkill = Random.Range(0, m_Skills.Count - 1);
+        
+        return m_Skills[RandomizedSkill];
     }
 
 }

@@ -229,6 +229,7 @@ public class Creatures : MonoBehaviour
         FloatingUiElementsController.CreateFloatingText(Decremenby.ToString(),  m_SpawnObject.transform, FloatingUiElementsController.UiElementType.Text,m_IsUi);
         m_CurrentHealth -= Decremenby;
     }
+    
     public virtual IEnumerator DecrementHealth(int Decrementby, Skills.ElementalType elementalType,float TimeTillInitalDamage, float TimeTillHoveringUiElement, float TimeTillDamage)
     {
 

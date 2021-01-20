@@ -8,10 +8,10 @@ public class RedKnightPhase1 : Enemy
     // Use this for initialization
     public override void Initialize ()
     {
-        m_CurrentHealth = 65;
+        m_CurrentHealth = 25;
         m_MaxHealth = m_CurrentHealth;
-        BaseStrength = 75;
-        BaseMagic = 40;
+        BaseStrength = 10;
+        BaseMagic = 10;
         BaseHit = 20;
         BaseEvasion = 20;
         BaseDefence = 20;
@@ -46,12 +46,7 @@ public class RedKnightPhase1 : Enemy
         elementalWeakness = Skills.ElementalType .Fire;
     }
 
-    public override Skills AiSetup()
-    {
-        int RandomSkillChooser = Random.Range(0, m_Skills.Count - 1);
-        
-        return m_Skills[RandomSkillChooser];
-    }
+
     
 
 }

@@ -20,7 +20,6 @@ public class LevelCreator : Singleton<LevelCreator>
 
    public EnemyList.EnemyTypes m_EnemyTypes;
    public Node.NodeTypes m_NodeType;
-   public FloorNode.CombatNodeTypes m_CombatNodeTypes;
    public PropList.NodeReplacements m_NodeReplacements;
    public PropList.Props m_PropIndex;
    

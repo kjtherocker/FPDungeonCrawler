@@ -79,11 +79,7 @@ public class Domain : Skills
             return false;
         }
 
-        // if the node can't be walked on, return -1 (an invalid tile index)
-        if (nodeIndex.m_CombatsNodeType == FloorNode.CombatNodeTypes.Empty)
-        {
-            return false;
-        }
+
 
         if (nodeIndex.m_NodeHeight > 0)
         {

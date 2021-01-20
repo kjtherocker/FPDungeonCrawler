@@ -136,6 +136,11 @@ public class UiManager : Singleton<UiManager>
 
     public void PopScreen()
     {
+        if (m_ScreenStack.Count == 0)
+        {
+            return;
+        }
+
         if (m_LastScreen.Count > 5)
         {
             m_LastScreen.RemoveAt(0);

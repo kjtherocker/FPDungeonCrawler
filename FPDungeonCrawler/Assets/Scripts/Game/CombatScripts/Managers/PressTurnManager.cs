@@ -15,7 +15,7 @@ public class PressTurnManager : Singleton<PressTurnManager>
     public List<PressTurn> m_ActivePressTurn;
 
     public UiTabTurnKeeper m_TurnKeeper;
-    
+
     public enum PressTurnReactions
     {
         Normal,
@@ -33,10 +33,10 @@ public class PressTurnManager : Singleton<PressTurnManager>
 
     public void StartTurn(int aTurnAmount)
     {
-       
-        
-        for (int i = m_ActivePressTurn.Count; i > 0; i--)
+
+        for (int i = m_ActivePressTurn.Count - 1; i > 0; i--)
         {
+            
             m_ActivePressTurn.RemoveAt(i);
         }
 
@@ -126,6 +126,7 @@ public class PressTurnManager : Singleton<PressTurnManager>
         ChangeActivePressTurn(m_ActivePressTurn[ActivePositionTurn],ActivePositionTurn,true);
         m_TurnKeeper.UpdateTurnIcons(m_ActivePressTurn.Count);
         m_TurnKeeper.SetPressTurns(m_ActivePressTurn);
+        TacticsManager.instance.ActionEnd();
     }
 
 
@@ -143,6 +144,7 @@ public class PressTurnManager : Singleton<PressTurnManager>
         {
             m_TurnKeeper.SetPressTurns(m_ActivePressTurn);
             m_TurnKeeper.UpdateTurnIcons(-1);
+            TacticsManager.instance.ActionEnd();
             return;
         }
 
@@ -151,8 +153,8 @@ public class PressTurnManager : Singleton<PressTurnManager>
             m_ActivePressTurn.RemoveAt(i);
         }
         m_TurnKeeper.SetPressTurns(m_ActivePressTurn);
-        
         m_TurnKeeper.UpdateTurnIcons(m_ActivePressTurn.Count);
+        TacticsManager.instance.ActionEnd();
 
     }
 

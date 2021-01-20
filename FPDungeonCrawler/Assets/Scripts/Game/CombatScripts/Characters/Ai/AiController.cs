@@ -365,7 +365,6 @@ public class AiController : MonoBehaviour
         if (m_MovementHasStarted == false)
         {
             Grid.instance.GetNode(m_Position).m_CreatureOnGridPoint = null;
-            Grid.instance.GetNode(m_Position).m_CombatsNodeType = FloorNode.CombatNodeTypes.Normal;
 
             m_Position = m_InitalPosition;
 

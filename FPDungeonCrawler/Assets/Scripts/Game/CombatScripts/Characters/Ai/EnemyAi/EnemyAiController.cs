@@ -138,8 +138,7 @@ public class EnemyAiController : AiController
         {
             aListOfNodes.RemoveAt(i);
         }
-
-        EnemyAttack();
+        
     }
 
 
@@ -185,42 +184,9 @@ public class EnemyAiController : AiController
                 return;
             }
         }
-
-            EnemyAttack();
     }
 
-    public void EnemyAttack()
-    {
-        m_NodeInWalkableRange =
-            GetAvailableEnemysInRange(m_Grid.m_GridPathList, Node_ObjectIsOn, m_Creature.m_Attack.m_SkillRange);
-        
 
-        List<Creatures> m_AllysInRange = new List<Creatures>();
-        foreach (FloorNode node in m_NodeInWalkableRange)
-        {
-            if (CheckIfAllyIsOnNode(node))
-            {
-                m_AllysInRange.Add(node.m_CreatureOnGridPoint);
-            }
-        }
-
-        if (m_AllysInRange.Count > 0)
-        {
-            Creatures CharacterInRange = m_Behaviour.AllyToAttack(m_AllysInRange);
-
-            Skills m_SkillToUse = m_Creature.m_Attack;
-
-            StartCoroutine(CharacterInRange.DecrementHealth
-                (m_SkillToUse.m_Damage, m_SkillToUse.m_ElementalType, 2.0f, 2.0f, 2.0f));
-        }
-        else
-        {
-            Debug.Log(m_Creature.Name + " waited");
-        }
-
-        TacticsManager.instance.EnemyMovement();
-        return;
-    }
 
     public bool CheckIfAllyIsOnNode(FloorNode aNode)
     {

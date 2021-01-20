@@ -12,9 +12,11 @@ using UnityEngine.AddressableAssets;
 public class TacticsManager : Singleton<TacticsManager>
 {
 
-    delegate void TurnProcessor();
+    delegate IEnumerator TurnProcessor();
 
-    private TurnProcessor NextTurn;
+    private TurnProcessor m_NextTurn;
+    
+    private TurnProcessor m_SwapToOtherSide;
     
     public PartyManager m_PartyManager;
     public EnemyManager m_EnemyManager;
@@ -37,7 +39,7 @@ public class TacticsManager : Singleton<TacticsManager>
     public List<Creatures> m_CreaturesInSkill;
 
     private FloorManager m_CurrentFloorManager;
-    public int m_Turns;
+    
     
     private GameObject m_MemoriaPrefab;
     public Dictionary<Creatures, Creatures> m_CreaturesWhosDomainHaveClashed;
@@ -99,12 +101,13 @@ public class TacticsManager : Singleton<TacticsManager>
          AddCreatureToCombat(m_PartyManager.m_CurrentParty[2], TurnOrderAlly);
          AddCreatureToCombat(m_PartyManager.m_CurrentParty[3], TurnOrderAlly);
 
-         m_Turns = m_PartyManager.m_CurrentParty.Count;
-         PressTurnManager.instance.m_TurnKeeper = m_UiTabTurnKeeper;
+
          m_UiTabTurnKeeper.gameObject.SetActive(true);
-         PressTurnManager.instance.StartTurn(m_Turns);
-         m_UiTabTurnKeeper.UpdateTurnIcons(m_Turns);
-         m_UiTabTurnKeeper.SetIconType(true);
+         PressTurnManager.instance.m_TurnKeeper = m_UiTabTurnKeeper;
+
+
+         StartCoroutine(AllyTurn());
+         
          
          UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
          
@@ -113,6 +116,101 @@ public class TacticsManager : Singleton<TacticsManager>
 
          aArena.gameObject.SetActive(true);
 
+    }
+    
+    public void ActionEnd()
+    {
+        if (TurnOrderEnemy.Count == 0)
+        {
+            EndCombat();
+        }
+        else
+        {
+            ProgressToNextCharacter();    
+        }
+        
+    }
+
+
+    
+    public IEnumerator EnemyTurn()
+    {
+        yield return new WaitForSeconds(2.5f);
+        UiManager.instance.PopAllScreens();
+        m_BattleStates = CombatStates.EnemyTurn;
+
+        m_NextTurn = NextEnemyTurn;
+        m_SwapToOtherSide = AllyTurn;
+        
+        m_UiTabTurnKeeper.SetIconType(false);
+        UpdateCurrentTurnAmount(TurnOrderEnemy.Count);
+        PressTurnManager.instance.StartTurn(TurnOrderEnemy.Count);
+        
+        yield return new WaitForEndOfFrame();
+        
+        StartCoroutine(m_NextTurn());
+
+    }
+    
+    public IEnumerator AllyTurn()
+    {
+        m_BattleStates = CombatStates.AllyTurn;
+        
+        m_NextTurn = NextAlleyTurn;
+        m_SwapToOtherSide = EnemyTurn;
+        
+        m_UiTabTurnKeeper.SetIconType(true);
+        foreach (Creatures creature in TurnOrderAlly)
+        {
+            creature.EndTurn();
+        }
+
+        PressTurnManager.instance.StartTurn(TurnOrderAlly.Count);
+        UpdateCurrentTurnAmount(TurnOrderAlly.Count);
+
+        
+        yield return new WaitForEndOfFrame();
+        StartCoroutine(NextAlleyTurn());
+    }
+
+    public IEnumerator NextEnemyTurn()
+    {
+
+        Skills skillToCast = ((Enemy)TurnOrderEnemy[0]).AiSetup();
+        int whoToAttack = 0;
+        
+        m_SkillExecutionManager.ExecuteSkill(skillToCast,true, whoToAttack,TurnOrderEnemy[0]);
+        
+        yield return new WaitForEndOfFrame();
+        
+    }
+    
+    public IEnumerator NextAlleyTurn()
+    {
+        UiManager.Instance.PopScreen();
+        yield return new WaitForSeconds(0.4f);
+        UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
+         
+        UiScreen temp = UiManager.instance.GetScreen(UiManager.UiScreens.CommandBoard);
+        ((UiScreenCommandBoard) temp).m_CommandboardCreature = m_PartyManager.m_CurrentParty[0];
+        
+    }
+    
+    public void EndCombat()
+    {
+        UiManager.instance.PopAllScreens();
+        
+        m_UiTabTurnKeeper.gameObject.SetActive(false);
+        for (int i = TurnOrderEnemy.Count - 1; i >= 0; i--)
+        {
+            TurnOrderEnemy.RemoveAt(i);
+        }
+
+        EnemyManager.instance.ResetEnemyManager();
+        AudioManager.instance.PlaySoundRepeating(AudioManager.AudioClips.Exploration,AudioManager.Soundtypes.Music);
+        
+        m_CombatArena.gameObject.SetActive(false);
+        m_CurrentFloorManager.SwitchToExploration();
     }
 
     public void RemoveAllCreaturesInSkill()
@@ -169,83 +267,35 @@ public class TacticsManager : Singleton<TacticsManager>
             {
                 m_PressTurnReactions.RemoveAt(i);
             }
-
-            ActionEnd();
         }
 
     }
 
 
-    public void ActionEnd()
+
+
+    public void UpdateCurrentTurnAmount(int aTurn)
     {
-        if (TurnOrderEnemy.Count == 0)
-        {
-            EndCombat();
-        }
-        else
-        {
-            ProgressToNextCharacter();    
-        }
-        
-    }
-
-
-
-
-    public void UpdateCurrentTurnAmount(int aTurn,TurnStates aTurnStates )
-    {
-
-        if (aTurnStates == TurnStates.Add)
-        {
-            m_Turns += aTurn;
-        }
-        
-        if (aTurnStates == TurnStates.Set)
-        {
-            m_Turns = aTurn;
-        }
-
-       
+        m_UiTabTurnKeeper.UpdateTurnIcons(aTurn);
     }
 
     public void ProgressToNextCharacter()
     {
         
-        if (m_Turns > 0)
+        if (m_UiTabTurnKeeper.m_Turns > 0)
         {
-            StartCoroutine(NextAlleyTurn());
+            StartCoroutine(m_NextTurn());
         }
 
-        if (m_Turns == 0)
+        if (m_UiTabTurnKeeper.m_Turns <= 0)
         {
             //swap sides
-            StartCoroutine(EnemyTurn());
+            StartCoroutine(m_SwapToOtherSide());
         }
     }
 
 
-    public IEnumerator NextEnemyTurn()
-    {
 
-        ((Enemy) TurnOrderEnemy[m_Turns]).AiSetup();
-        
-        yield return new WaitForSeconds(2.5f);
-        
-    }
-    
-    public IEnumerator NextAlleyTurn()
-    {
-
-        yield return new WaitForSeconds(2.5f);
-        
-        UiManager.Instance.PopScreen();
-        yield return new WaitForSeconds(0.4f);
-        UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
-         
-        UiScreen temp = UiManager.instance.GetScreen(UiManager.UiScreens.CommandBoard);
-        ((UiScreenCommandBoard) temp).m_CommandboardCreature = m_PartyManager.m_CurrentParty[0];
-        
-    }
     
     public void EndTurn()
     {
@@ -364,56 +414,5 @@ public class TacticsManager : Singleton<TacticsManager>
 
     }
 
-    public IEnumerator EnemyTurn()
-    {
-        m_BattleStates = CombatStates.EnemyTurn;
-        
-        m_UiTabTurnKeeper.SetIconType(false);
-        UpdateCurrentTurnAmount(TurnOrderEnemy.Count,TurnStates.Set);
-
-        yield return new WaitForSeconds(2f);
-
-
-    }
-
-    public void EndCombat()
-    {
-        UiManager.instance.PopAllScreens();
-        
-        m_UiTabTurnKeeper.gameObject.SetActive(false);
-        for (int i = TurnOrderEnemy.Count - 1; i >= 0; i--)
-        {
-            TurnOrderEnemy.RemoveAt(i);
-        }
-
-        EnemyManager.instance.ResetEnemyManager();
-        AudioManager.instance.PlaySoundRepeating(AudioManager.AudioClips.Exploration,AudioManager.Soundtypes.Music);
-        
-        m_CombatArena.gameObject.SetActive(false);
-        m_CurrentFloorManager.SwitchToExploration();
-    }
-
-    public void EnemyMovement()
-    {
-
-    }
-
-    public IEnumerator AllyTurn()
-    {
-        m_BattleStates = CombatStates.AllyTurn;
-        
-
-        m_UiTabTurnKeeper.SetIconType(true);
-        foreach (Creatures creature in TurnOrderAlly)
-        {
-            creature.EndTurn();
-        }
-        
-        UpdateCurrentTurnAmount(TurnOrderAlly.Count,TurnStates.Set);
-        
-        yield return new WaitForSeconds(2f);
-        m_TurnSwitchText.gameObject.SetActive(false);
-    }
-    
 
 }

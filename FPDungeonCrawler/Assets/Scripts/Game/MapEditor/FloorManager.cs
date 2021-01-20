@@ -15,7 +15,7 @@ public class FloorManager : MonoBehaviour
     public Floor m_FloorCore;
     public FloorNode[] m_FloorNodes;
     public FloorNode m_FloorNodePrefab;
-    private Dictionary<FloorNode.CardinalNodeDirections, Vector2Int> m_CardinalPositions;
+    private Dictionary<FloorNode.CardinalNodeDirections, Vector2Int>  m_CardinalPositions;
 
     public GameObject m_Map;
     
