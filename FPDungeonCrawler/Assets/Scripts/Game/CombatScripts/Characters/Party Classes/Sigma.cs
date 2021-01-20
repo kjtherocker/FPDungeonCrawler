@@ -11,7 +11,7 @@ public class Sigma : Ally {
 	public override void Initialize ()
 	{
 
-		m_MaxHealth = 50;
+		m_MaxHealth = 300;
 		m_CurrentHealth = m_MaxHealth;
 
         MaxMana = 100;

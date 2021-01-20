@@ -137,7 +137,7 @@ public class TacticsManager : Singleton<TacticsManager>
     {
         
         UiManager.instance.PopAllScreens();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         
         m_BattleStates = CombatStates.EnemyTurn;
 
@@ -266,7 +266,7 @@ public class TacticsManager : Singleton<TacticsManager>
         {    
             PressTurnManager.instance.ProcessTurn(m_PressTurnReactions);
             
-            for (int i = m_PressTurnReactions.Count - 1; i > 0; i--)
+            for (int i = m_PressTurnReactions.Count - 1; i > -1; i--)
             {
                 m_PressTurnReactions.RemoveAt(i);
             }

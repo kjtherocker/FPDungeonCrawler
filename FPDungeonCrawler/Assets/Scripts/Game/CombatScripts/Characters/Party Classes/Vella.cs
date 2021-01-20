@@ -9,8 +9,8 @@ public class Vella : Ally
     // Use this for initialization
     public override void Initialize ()
     {
-        m_CurrentHealth = 50;
-        m_MaxHealth = 50;
+        m_CurrentHealth = 300;
+        m_MaxHealth = 300;
         MaxMana = 180;
         CurrentMana = MaxMana;
         

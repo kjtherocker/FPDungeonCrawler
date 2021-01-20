@@ -35,7 +35,7 @@ public class PressTurnManager : Singleton<PressTurnManager>
     public void StartTurn(int aTurnAmount)
     {
 
-        for (int i = m_ActivePressTurn.Count - 1; i > 0; i--)
+        for (int i = m_ActivePressTurn.Count - 1 ; i > -1; i--)
         {
             
             m_ActivePressTurn.RemoveAt(i);
@@ -150,9 +150,7 @@ public class PressTurnManager : Singleton<PressTurnManager>
 
     public void ConsumeTurn(int aAmountOfTurnsConsumned)
     {
-        int TurnsRemaining = 0;
-
-        TurnsRemaining =  (m_ActivePressTurn.Count - 1)  - aAmountOfTurnsConsumned;
+        int TurnsRemaining =  (m_ActivePressTurn.Count - 1)  - aAmountOfTurnsConsumned;
 
         
        
