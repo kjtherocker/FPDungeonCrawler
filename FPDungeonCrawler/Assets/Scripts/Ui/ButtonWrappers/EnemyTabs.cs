@@ -40,5 +40,10 @@ public class EnemyTabs : UiTabs
         
         float SliderPercentage = (float) m_CreatureInUse.m_CurrentHealth / (float)m_CreatureInUse.m_MaxHealth;
         m_Healthbar.value = SliderPercentage;
+
+        if (SliderPercentage <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

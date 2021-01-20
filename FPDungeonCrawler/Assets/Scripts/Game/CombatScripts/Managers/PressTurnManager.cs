@@ -22,7 +22,8 @@ public class PressTurnManager : Singleton<PressTurnManager>
         Weak,
         Strong,
         Dodge,
-        Null
+        Null,
+        Pass
     }
 
     public void Initialize()
@@ -44,6 +45,7 @@ public class PressTurnManager : Singleton<PressTurnManager>
         {
             m_ActivePressTurn.Add(m_PressTurn[i]);
         }
+        m_TurnKeeper.SetPressTurns(m_ActivePressTurn);
     }
 
     
@@ -80,7 +82,8 @@ public class PressTurnManager : Singleton<PressTurnManager>
         
         foreach (PressTurnReactions reaction in aAllTurnReactions)
         {
-            if (reaction == PressTurnReactions.Weak)
+            if (reaction == PressTurnReactions.Weak || 
+                reaction == PressTurnReactions.Pass)
             {
                 WeaknessPressTurn();
                 return;
@@ -113,6 +116,7 @@ public class PressTurnManager : Singleton<PressTurnManager>
     {
         EmpoweredTurn();
     }
+    
 
 
     public void EndTurn()
@@ -122,11 +126,19 @@ public class PressTurnManager : Singleton<PressTurnManager>
 
     public void EmpoweredTurn()
     {
+        
         int ActivePositionTurn = m_ActivePressTurn.Count - 1;
-        ChangeActivePressTurn(m_ActivePressTurn[ActivePositionTurn],ActivePositionTurn,true);
-        m_TurnKeeper.UpdateTurnIcons(m_ActivePressTurn.Count);
-        m_TurnKeeper.SetPressTurns(m_ActivePressTurn);
-        TacticsManager.instance.ActionEnd();
+        
+        if (m_ActivePressTurn[ActivePositionTurn].m_IsEmpowered == false)
+        {
+            ChangeActivePressTurn(m_ActivePressTurn[ActivePositionTurn], ActivePositionTurn, true);
+            m_TurnKeeper.SetPressTurns(m_ActivePressTurn);
+            TacticsManager.instance.ActionEnd();
+        }
+        else
+        {
+            ConsumeTurn(1);
+        }
     }
 
 
@@ -138,9 +150,13 @@ public class PressTurnManager : Singleton<PressTurnManager>
 
     public void ConsumeTurn(int aAmountOfTurnsConsumned)
     {
-        int TurnsRemaining =  (m_ActivePressTurn.Count - 1)  - aAmountOfTurnsConsumned;
+        int TurnsRemaining = 0;
 
-        if (TurnsRemaining <= 0)
+        TurnsRemaining =  (m_ActivePressTurn.Count - 1)  - aAmountOfTurnsConsumned;
+
+        
+       
+        if (TurnsRemaining < 0)
         {
             m_TurnKeeper.SetPressTurns(m_ActivePressTurn);
             m_TurnKeeper.UpdateTurnIcons(-1);

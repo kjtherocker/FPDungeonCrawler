@@ -13,6 +13,7 @@ public class TurnWrapper : MonoBehaviour
     public void SetPressTurn(PressTurn aPressTurn)
     {
         m_PressTurn = aPressTurn;
+        UpdateTurnWrapper();
     }
 
     public void UpdateTurnWrapper()

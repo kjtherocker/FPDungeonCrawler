@@ -28,6 +28,7 @@ public class UiScreenCommandBoard : UiScreen
        m_Commands.Add(DomainCommand);
        m_Commands.Add(ItemCommand);
        m_Commands.Add(EscapeCommand);
+       m_Commands.Add(PassCommand);
        
        
         m_MenuControls.Disable();
@@ -163,5 +164,12 @@ public class UiScreenCommandBoard : UiScreen
     public void EscapeCommand()
     {
         
+    }
+    
+    public void PassCommand()
+    {
+        OnPop();
+        TacticsManager.instance.AddCreaturesInActiveSkill(m_CommandboardCreature);
+        TacticsManager.instance.CharacterSkillFinished(m_CommandboardCreature, PressTurnManager.PressTurnReactions.Pass);
     }
 }

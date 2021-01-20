@@ -135,8 +135,10 @@ public class TacticsManager : Singleton<TacticsManager>
     
     public IEnumerator EnemyTurn()
     {
-        yield return new WaitForSeconds(2.5f);
+        
         UiManager.instance.PopAllScreens();
+        yield return new WaitForSeconds(1.5f);
+        
         m_BattleStates = CombatStates.EnemyTurn;
 
         m_NextTurn = NextEnemyTurn;
@@ -176,12 +178,13 @@ public class TacticsManager : Singleton<TacticsManager>
     public IEnumerator NextEnemyTurn()
     {
 
+        yield return new WaitForSeconds(2.5f);
         Skills skillToCast = ((Enemy)TurnOrderEnemy[0]).AiSetup();
         int whoToAttack = 0;
         
         m_SkillExecutionManager.ExecuteSkill(skillToCast,true, whoToAttack,TurnOrderEnemy[0]);
         
-        yield return new WaitForEndOfFrame();
+        
         
     }
     

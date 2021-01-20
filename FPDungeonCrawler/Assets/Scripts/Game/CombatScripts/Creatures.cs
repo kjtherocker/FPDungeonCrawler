@@ -261,18 +261,26 @@ public class Creatures : MonoBehaviour
        }
        
        
-        yield return new WaitForSeconds(TimeTillDamage);
+        yield return new WaitForSeconds(TimeTillInitalDamage);
         
         FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(),  m_SpawnObject.transform, FloatingUiElementsController.UiElementType.Text,m_IsUi);
         m_CurrentHealth -= Decrementby;
-        TacticsManager.instance.CharacterSkillFinished(this,PressturnReaction );
         DeathCheck();
+        
+        yield return new WaitForSeconds(TimeTillDamage);
+        TacticsManager.instance.CharacterSkillFinished(this,PressturnReaction );
     }
 
 
     public virtual IEnumerator IncrementHealth(int Increment)
     {
         m_CurrentHealth += Increment;
+
+        if (m_CurrentHealth == m_MaxHealth)
+        {
+            m_CurrentHealth = m_MaxHealth;
+        }
+
         yield return new WaitForSeconds(0.5f);
 
         FloatingUiElementsController.CreateFloatingText(Increment.ToString(), m_SpawnObject.transform,
