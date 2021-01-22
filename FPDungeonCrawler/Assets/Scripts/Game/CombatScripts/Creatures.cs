@@ -218,7 +218,7 @@ public class Creatures : MonoBehaviour
         
         yield return new WaitForSeconds(0.1f);
         FloatingUiElementsController.CreateFloatingText(0.ToString(), m_SpawnObject.transform, FloatingUiElementsController.UiElementType.Attackup,m_IsUi);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(2.7f);
         
         TacticsManager.instance.CharacterSkillFinished(this, PressTurnManager.PressTurnReactions.Normal);
     }
@@ -267,7 +267,7 @@ public class Creatures : MonoBehaviour
         m_CurrentHealth -= Decrementby;
         DeathCheck();
         
-        yield return new WaitForSeconds(TimeTillDamage);
+        yield return new WaitForSeconds(3.0f);
         TacticsManager.instance.CharacterSkillFinished(this,PressturnReaction );
     }
 

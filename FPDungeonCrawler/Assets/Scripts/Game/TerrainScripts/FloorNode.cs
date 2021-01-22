@@ -55,8 +55,8 @@ public class FloorNode : Cell
     List<FloorNode> neighbours = null;
     public Grid m_Grid;
 
-    
 
+    private OverworldEnemyCore m_OverworldEnemyCore;
     
     public PropList.Props m_PropOnNode;
 
@@ -102,75 +102,19 @@ public class FloorNode : Cell
 
     }
 
-
-    public void DestroyEnemy()
+    public void SetOverWorldEnemy(OverworldEnemyCore aOverworldEnemy)
     {
-        if (m_CreatureOnGridPoint == null)
-        {
-            return;
-        }
-
-        DestroyImmediate(m_CreatureOnGridPoint.gameObject);
-        m_CreatureOnGridPoint = null;
-        m_IsCovered = false;
+        m_OverworldEnemyCore = aOverworldEnemy;
+        m_WalkOnTopTriggerTypes = WalkOntopTriggerTypes.Enemy;
     }
     
-    public void SpawnEnemy()
+    public void RemoveOverWorldEnemy()
     {
-        
-        if (m_EnemyOnNodeTemp == m_EnemyOnNode)
-        {
-            return;
-        }
-        else
-        {
-            DestroyEnemy();
-        }
-        
-        if (m_EnemyOnNode == EnemyList.EnemyTypes.None)
-        {
-            return;
-        }
-
-        if (LevelCreator.instance.m_EnemyList == null)
-        {
-            LevelCreator.instance.StartEditor();
-        }
-
-        m_EnemyOnNodeTemp = m_EnemyOnNode;
-        
-        Vector3 CreatureOffset = new Vector3(0, Constants.Constants.m_HeightOffTheGrid, 0);
-        
-
-        GameObject Enemy = PrefabUtility.
-            InstantiatePrefab(LevelCreator.Instance.m_EnemyList.ReturnEnemyData(m_EnemyOnNode)) as GameObject;
-
-
-        Creatures m_EnemysCreature = Enemy.GetComponent<Creatures>();
-       
-        m_CreatureOnGridPoint = m_EnemysCreature;
-     //  NodesGridFormation.m_EnemysInGrid.Add(m_EnemysCreature);
-     //  
-     //  Enemy.transform.parent = NodesGridFormation.Enemy.transform;
-        Enemy.transform.position = gameObject.transform.position + CreatureOffset;
-        Enemy.transform.rotation = Quaternion.Euler(0.0f, 180, 0.0f);
-
-        EnemyAiController m_CreatureAi = (EnemyAiController)m_EnemysCreature.m_CreatureAi;
-
-        m_CreatureAi.Node_ObjectIsOn = this;
-        m_CreatureAi.Node_MovingTo = this;
-        m_CreatureAi.m_Position = m_PositionInGrid;
-        m_CreatureAi.m_Grid = m_Grid;
-            
-        
-        m_IsCovered = true;
-
+        m_OverworldEnemyCore = null;
+        m_WalkOnTopTriggerTypes = WalkOntopTriggerTypes.None;
     }
 
-
-
-
-   public void SetCreatureOnTopOfNode(Creatures aCreatures)
+    public void SetCreatureOnTopOfNode(Creatures aCreatures)
    {
        m_CreatureOnGridPoint = aCreatures;
 
@@ -187,7 +131,7 @@ public class FloorNode : Cell
 
                break;
            case WalkOntopTriggerTypes.Enemy:
-               m_NodeFloorManager.SwitchToCombat();
+               m_NodeFloorManager.SwitchToCombat(m_OverworldEnemyCore);
                m_WalkOnTopTriggerTypes = WalkOntopTriggerTypes.None;
                break;
            case WalkOntopTriggerTypes.RelicTower:

@@ -57,10 +57,7 @@ public class PlayerMovementController : MonoBehaviour {
 
     public void Update()
     {
-        if (Input.GetKeyDown("q"))
-        {
-            m_CurrentFloorManager.SwitchToCombat();
-        }
+      
     }
 
     public  IEnumerator InterpolateRotationSmooth(Transform aObject, Vector3 aTargetRotation, float aTimeUntilDone)

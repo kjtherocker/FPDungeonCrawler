@@ -58,12 +58,12 @@ public class SkillExecutionManager
         if (aAttacker.charactertype == Creatures.Charactertype.Ally)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderAlly[aSkillPosition], aAttacker),TacticsManager.instance.TurnOrderAlly[aSkillPosition]);
+                (TacticsManager.instance.m_TurnOrderAlly[aSkillPosition], aAttacker),TacticsManager.instance.m_TurnOrderAlly[aSkillPosition]);
         }
         else if (aAttacker.charactertype == Creatures.Charactertype.Enemy)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderEnemy[aSkillPosition], aAttacker),TacticsManager.instance.TurnOrderEnemy[aSkillPosition]);
+                (TacticsManager.instance.m_TurnOrderEnemy[aSkillPosition], aAttacker),TacticsManager.instance.m_TurnOrderEnemy[aSkillPosition]);
         }
     }
     
@@ -73,12 +73,12 @@ public class SkillExecutionManager
         if (aAttacker.charactertype == Creatures.Charactertype.Ally)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderAlly, aAttacker),TacticsManager.instance.TurnOrderAlly);
+                (TacticsManager.instance.m_TurnOrderAlly, aAttacker),TacticsManager.instance.m_TurnOrderAlly);
         }
         else if (aAttacker.charactertype == Creatures.Charactertype.Enemy)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderEnemy, aAttacker),TacticsManager.instance.TurnOrderEnemy);
+                (TacticsManager.instance.m_TurnOrderEnemy, aAttacker),TacticsManager.instance.m_TurnOrderEnemy);
         }
     }
     
@@ -87,12 +87,12 @@ public class SkillExecutionManager
         if (aAttacker.charactertype == Creatures.Charactertype.Ally)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderEnemy[aSkillPosition], aAttacker),TacticsManager.instance.TurnOrderEnemy[aSkillPosition]);
+                (TacticsManager.instance.m_TurnOrderEnemy[aSkillPosition], aAttacker),TacticsManager.instance.m_TurnOrderEnemy[aSkillPosition]);
         }
         else if (aAttacker.charactertype == Creatures.Charactertype.Enemy)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderAlly[aSkillPosition], aAttacker),TacticsManager.instance.TurnOrderAlly[aSkillPosition]);
+                (TacticsManager.instance.m_TurnOrderAlly[aSkillPosition], aAttacker),TacticsManager.instance.m_TurnOrderAlly[aSkillPosition]);
         }
     }
     
@@ -102,12 +102,12 @@ public class SkillExecutionManager
         if (aAttacker.charactertype == Creatures.Charactertype.Ally)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderEnemy, aAttacker),TacticsManager.instance.TurnOrderEnemy);
+                (TacticsManager.instance.m_TurnOrderEnemy, aAttacker),TacticsManager.instance.m_TurnOrderEnemy);
         }
         else if (aAttacker.charactertype == Creatures.Charactertype.Enemy)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderAlly, aAttacker),TacticsManager.instance.TurnOrderAlly);
+                (TacticsManager.instance.m_TurnOrderAlly, aAttacker),TacticsManager.instance.m_TurnOrderAlly);
         }
     }
     public void SingleTargetHeal(Skills aSkill, Creatures aAttacker, int aSkillPosition)
@@ -115,12 +115,12 @@ public class SkillExecutionManager
         if (aAttacker.charactertype == Creatures.Charactertype.Ally)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderAlly[aSkillPosition], aAttacker),TacticsManager.instance.TurnOrderAlly[aSkillPosition]);
+                (TacticsManager.instance.m_TurnOrderAlly[aSkillPosition], aAttacker),TacticsManager.instance.m_TurnOrderAlly[aSkillPosition]);
         }
         else if (aAttacker.charactertype == Creatures.Charactertype.Enemy)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderEnemy[aSkillPosition], aAttacker),TacticsManager.instance.TurnOrderEnemy[aSkillPosition]);
+                (TacticsManager.instance.m_TurnOrderEnemy[aSkillPosition], aAttacker),TacticsManager.instance.m_TurnOrderEnemy[aSkillPosition]);
         }
     }
 
@@ -129,12 +129,12 @@ public class SkillExecutionManager
         if (aAttacker.charactertype == Creatures.Charactertype.Ally)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderAlly, aAttacker),TacticsManager.instance.TurnOrderAlly );
+                (TacticsManager.instance.m_TurnOrderAlly, aAttacker),TacticsManager.instance.m_TurnOrderAlly );
         }
         else if (aAttacker.charactertype == Creatures.Charactertype.Enemy)
         {
             m_TacticsManager.ProcessAction(aSkill.UseSkill
-                (TacticsManager.instance.TurnOrderEnemy, aAttacker),TacticsManager.instance.TurnOrderEnemy);
+                (TacticsManager.instance.m_TurnOrderEnemy, aAttacker),TacticsManager.instance.m_TurnOrderEnemy);
         }
     }
 

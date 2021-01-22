@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class OverworldEnemyCore : MonoBehaviour
 {
-   private InitializeOverWorldEnemy m_OverworldEnemy;
+   public InitializeOverWorldEnemy m_OverworldEnemy;
    private FloorManager m_FloorManager;
-   public FloorNode m_CurrentNode;
-   public FloorNode m_PreviousNode;
-   
+   private FloorNode m_CurrentNode;
+   private FloorNode m_PreviousNode;
+
    private bool m_FollowingPath;
    private int m_PositionInPath;
 
@@ -40,8 +40,8 @@ public class OverworldEnemyCore : MonoBehaviour
    
    public void EnemyMovement()
    {
-      
-       m_PreviousNode.m_WalkOnTopTriggerTypes = FloorNode.WalkOntopTriggerTypes.None;
+
+       m_PreviousNode.RemoveOverWorldEnemy();
 
        FloorNode NextNode = GetNextNode();
        
@@ -68,7 +68,7 @@ public class OverworldEnemyCore : MonoBehaviour
            aTargetNode.transform.position.z);
 
        float elapsedTime = 0.0f;
-       aTargetNode.m_WalkOnTopTriggerTypes = FloorNode.WalkOntopTriggerTypes.Enemy;
+       aTargetNode.SetOverWorldEnemy(this);
        m_Animator.SetBool("b_IsWalking",true);
        while (elapsedTime < TimeUntilDone) 
        {

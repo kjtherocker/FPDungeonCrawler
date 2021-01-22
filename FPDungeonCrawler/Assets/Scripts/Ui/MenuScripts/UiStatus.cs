@@ -15,7 +15,7 @@ public class UiStatus : UiTabs
     
     public RawImage Image_Portrait;
     public Creatures Creature;
-
+    public RawImage m_Background;
     public Image m_ElementalStrength;
     public Image m_ElementalWeakness;
     
@@ -40,8 +40,11 @@ public class UiStatus : UiTabs
         m_IsSelected = false;
     }
 
-    
-    
+    public void RedTest()
+    {
+        m_Background.color = Color.red;
+    }
+
     public void SetCharacter(Creatures Character)
     {
         

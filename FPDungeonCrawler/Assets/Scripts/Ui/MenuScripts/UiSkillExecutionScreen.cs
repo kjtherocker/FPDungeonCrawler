@@ -43,7 +43,7 @@ public class UiSkillExecutionScreen : UiScreen
         
         if (m_SelectedCreatures == SkillExecutionSelectedCreatures.Enemys)
         {
-            m_CursorXMax = TacticsManager.instance.TurnOrderEnemy.Count - 1;
+            m_CursorXMax = TacticsManager.instance.m_TurnOrderEnemy.Count - 1;
 
 
             for (int i = 0; i < m_EnemyTabsPool.Count; i++)
@@ -55,7 +55,7 @@ public class UiSkillExecutionScreen : UiScreen
 
         if (m_SelectedCreatures == SkillExecutionSelectedCreatures.Players)
         {
-            m_CursorXMax = TacticsManager.instance.TurnOrderAlly.Count - 1;
+            m_CursorXMax = TacticsManager.instance.m_TurnOrderAlly.Count - 1;
             
             for (int i = 0; i < m_UiStatus.m_Playerstatus.Count; i++)
             {
@@ -114,7 +114,7 @@ public class UiSkillExecutionScreen : UiScreen
 
             if (m_SkillRange)
             {
-                m_CursorXMax = TacticsManager.instance.TurnOrderAlly.Count - 1;
+                m_CursorXMax = TacticsManager.instance.m_TurnOrderAlly.Count - 1;
             
                 for (int i = 0; i < m_UiStatus.m_Playerstatus.Count; i++)
                 {
@@ -197,7 +197,7 @@ public class UiSkillExecutionScreen : UiScreen
     public void SetEnemyTabs()
     {
 
-        List <Creatures> CurrentEnemysInScene  = TacticsManager.instance.TurnOrderEnemy;
+        List <Creatures> CurrentEnemysInScene  = TacticsManager.instance.m_TurnOrderEnemy;
         Camera Camera = TacticsManager.instance.m_CombatCamera;
         for (int i = 0; i < CurrentEnemysInScene.Count; i++)
         {

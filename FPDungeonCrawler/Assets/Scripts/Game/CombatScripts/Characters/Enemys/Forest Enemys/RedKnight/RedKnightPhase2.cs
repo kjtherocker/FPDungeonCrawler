@@ -31,6 +31,8 @@ public class RedKnightPhase2 : Enemy
         m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.icerain));
         m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
         m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.LightRay));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.Invigorate));
+        m_Skills.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.HolyWater));
 
         m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.FireBall));
         m_SkillLootTable.Add(m_CreatureSkillList.GetSkill(SkillList.SkillEnum.HolyWater));

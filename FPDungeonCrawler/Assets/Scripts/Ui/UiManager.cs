@@ -28,6 +28,7 @@ public class UiManager : Singleton<UiManager>
     public enum UiTab
     {
         PlayerStatus,
+        EnemyAction,
         MapUi,
         EnemyStatus,
         DebugUi,
@@ -62,9 +63,11 @@ public class UiManager : Singleton<UiManager>
         m_UiScreens[(short) UiScreens.SkillExecutionScreen] = GetComponentInChildren<UiSkillExecutionScreen>(true);
 
         m_UiTabs= new UiTabs[15];
+        
         //UiTabs
         m_UiTabs[(short) UiTab.PlayerStatus] = GetComponentInChildren<UiTabsPartyStatusManager>(true);
-        
+        m_UiTabs[(short) UiTab.EnemyAction] = GetComponentInChildren<UiTabEnemyAction>(true);
+
         
         for (int i = 0; i < m_UiScreens.Length - 1; i++)
         {
@@ -94,6 +97,10 @@ public class UiManager : Singleton<UiManager>
     public void PushTab(UiTab aUiTab)
     {
          m_UiTabs[(int)aUiTab].gameObject.SetActive(true);
+    }
+    public void PopTab(UiTab aUiTab)
+    {
+        m_UiTabs[(int)aUiTab].gameObject.SetActive(false);
     }
 
 

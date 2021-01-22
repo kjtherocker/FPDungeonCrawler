@@ -37,10 +37,10 @@ public class FloorManager : MonoBehaviour
 
     
     
-    public void SwitchToCombat()
+    public void SwitchToCombat(OverworldEnemyCore aOverworldEnemyCores)
     {
         AudioManager.instance.PlaySoundOneShot(AudioManager.AudioClips.Encounter,AudioManager.Soundtypes.SoundEffects);
-        TacticsManager.instance.StartCombat(m_CombatArena,m_FloorCore,this);
+        TacticsManager.instance.StartCombat(m_CombatArena,m_FloorCore,this,aOverworldEnemyCores);
         InputManager.instance.m_MovementControls.Disable();
         gameObject.SetActive(false);
         m_Map.gameObject.SetActive(false);
@@ -55,6 +55,19 @@ public class FloorManager : MonoBehaviour
         
         
         AudioManager.instance.PlaySoundRepeating(AudioManager.AudioClips.Exploration,AudioManager.Soundtypes.Music);
+    }
+
+    public void RemoveEnemy(OverworldEnemyCore aOverworldEnemy)
+    {
+        for (int i = m_EnemysInFloor.Count - 1; i >= 0; i--)
+        {
+            if (m_EnemysInFloor[i] == aOverworldEnemy)
+            {
+                Destroy(m_EnemysInFloor[i].gameObject);
+                m_EnemysInFloor.RemoveAt(i);
+            }
+        }
+
     }
 
     public void CreateGrid()
