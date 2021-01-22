@@ -32,7 +32,14 @@ public class Floor : MonoBehaviour
     public short GridDimensionY = 10;
     public short[] FloorBlueprint;
     public bool[] FloorRevealed;
+    public OverWorldEnemy m_Prefab;
 
+    public List<OverWorldEnemy> m_Enemy;
+    
+    delegate void EnemySpawners();
+
+    private List<EnemySpawners> m_EnemySpawners;
+    
     public float EnemySpawnRate;
 
     public Vector2Int m_DefaultSpawnPosition;
@@ -114,7 +121,11 @@ public class Floor : MonoBehaviour
 
         SpawnGimmicks();
     }
-    
+
+    public void InitializeEnemys()
+    {
+        EnemysThatCanSpawn();
+    }
 
     public int GetIndex(int aRow, int aColumn)
     {
@@ -133,7 +144,98 @@ public class Floor : MonoBehaviour
 
     public void EnemysThatCanSpawn()
     {
+        m_EnemySpawners.Add(Enemy1);
+        m_EnemySpawners.Add(Enemy2);
+        m_EnemySpawners.Add(Enemy3);
+        m_EnemySpawners.Add(Enemy4);
+        m_EnemySpawners.Add(Enemy5);
+        m_EnemySpawners.Add(Enemy6);
+
+        foreach (EnemySpawners enemySpawners in m_EnemySpawners)
+        {
+            enemySpawners();
+        }
     }
+
+
+    public void Enemy1()
+    {
+        List<Vector2Int> m_PositionsEnemyCanMove = new List<Vector2Int>();
+        
+        m_PositionsEnemyCanMove.Add(new Vector2Int(9,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(8,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(7,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
+        
+        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+    }
+    
+    public void Enemy2()
+    {
+        List<Vector2Int> m_PositionsEnemyCanMove = new List<Vector2Int>();
+        
+        m_PositionsEnemyCanMove.Add(new Vector2Int(9,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(8,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(7,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
+        
+        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+    }
+    
+    public void Enemy3()
+    {
+        List<Vector2Int> m_PositionsEnemyCanMove = new List<Vector2Int>();
+        
+        m_PositionsEnemyCanMove.Add(new Vector2Int(9,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(8,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(7,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
+        
+        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+    }
+    
+    public void Enemy4()
+    {
+        List<Vector2Int> m_PositionsEnemyCanMove = new List<Vector2Int>();
+        
+        m_PositionsEnemyCanMove.Add(new Vector2Int(9,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(8,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(7,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
+        
+        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+    }
+    
+    public void Enemy5()
+    {
+        List<Vector2Int> m_PositionsEnemyCanMove = new List<Vector2Int>();
+        
+        m_PositionsEnemyCanMove.Add(new Vector2Int(9,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(8,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(7,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
+        
+        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+    }
+    
+    public void Enemy6()
+    {
+        List<Vector2Int> m_PositionsEnemyCanMove = new List<Vector2Int>();
+        
+        m_PositionsEnemyCanMove.Add(new Vector2Int(9,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(8,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(7,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
+        m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
+        
+        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+    }
+
 
     public List<EnemyList.EnemyTypes> EnemySet1()
     {
