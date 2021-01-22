@@ -32,9 +32,8 @@ public class Floor : MonoBehaviour
     public short GridDimensionY = 10;
     public short[] FloorBlueprint;
     public bool[] FloorRevealed;
-    public OverWorldEnemy m_Prefab;
 
-    public List<OverWorldEnemy> m_Enemy;
+    public List<InitializeOverWorldEnemy> m_Enemy;
     
     delegate void EnemySpawners();
 
@@ -144,12 +143,14 @@ public class Floor : MonoBehaviour
 
     public void EnemysThatCanSpawn()
     {
+        m_Enemy = new List<InitializeOverWorldEnemy>();
+        m_EnemySpawners = new List<EnemySpawners>();
         m_EnemySpawners.Add(Enemy1);
-        m_EnemySpawners.Add(Enemy2);
-        m_EnemySpawners.Add(Enemy3);
-        m_EnemySpawners.Add(Enemy4);
-        m_EnemySpawners.Add(Enemy5);
-        m_EnemySpawners.Add(Enemy6);
+      // m_EnemySpawners.Add(Enemy2);
+      // m_EnemySpawners.Add(Enemy3);
+      // m_EnemySpawners.Add(Enemy4);
+      // m_EnemySpawners.Add(Enemy5);
+      // m_EnemySpawners.Add(Enemy6);
 
         foreach (EnemySpawners enemySpawners in m_EnemySpawners)
         {
@@ -168,7 +169,7 @@ public class Floor : MonoBehaviour
         m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
         m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
         
-        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+        m_Enemy.Add(new InitializeOverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
     }
     
     public void Enemy2()
@@ -181,7 +182,7 @@ public class Floor : MonoBehaviour
         m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
         m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
         
-        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+        m_Enemy.Add(new InitializeOverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
     }
     
     public void Enemy3()
@@ -194,7 +195,7 @@ public class Floor : MonoBehaviour
         m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
         m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
         
-        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+        m_Enemy.Add(new InitializeOverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
     }
     
     public void Enemy4()
@@ -207,7 +208,7 @@ public class Floor : MonoBehaviour
         m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
         m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
         
-        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+        m_Enemy.Add(new InitializeOverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
     }
     
     public void Enemy5()
@@ -220,7 +221,7 @@ public class Floor : MonoBehaviour
         m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
         m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
         
-        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+        m_Enemy.Add(new InitializeOverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
     }
     
     public void Enemy6()
@@ -233,7 +234,7 @@ public class Floor : MonoBehaviour
         m_PositionsEnemyCanMove.Add(new Vector2Int(6,3));
         m_PositionsEnemyCanMove.Add(new Vector2Int(5,3));
         
-        m_Enemy.Add(new OverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
+        m_Enemy.Add(new InitializeOverWorldEnemy(new Vector2Int( 9,3),m_PositionsEnemyCanMove ));
     }
 
 

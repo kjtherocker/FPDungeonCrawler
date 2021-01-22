@@ -17,6 +17,8 @@ public class FloorManager : MonoBehaviour
     public FloorNode m_FloorNodePrefab;
     private Dictionary<FloorNode.CardinalNodeDirections, Vector2Int>  m_CardinalPositions;
 
+    private List<OverworldEnemyCore> m_EnemysInFloor;
+    public OverworldEnemyCore m_OverworldEnemyCorePrefab;
     public GameObject m_Map;
     
     public void Initialize()
@@ -29,10 +31,12 @@ public class FloorManager : MonoBehaviour
         m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Left, new Vector2Int(0,-1));
         m_CardinalPositions.Add(FloorNode.CardinalNodeDirections.Right, new Vector2Int(0,1));
         SwitchToExploration();
+        SpawnEnemys();
     }
 
 
-
+    
+    
     public void SwitchToCombat()
     {
         AudioManager.instance.PlaySoundOneShot(AudioManager.AudioClips.Encounter,AudioManager.Soundtypes.SoundEffects);
@@ -74,7 +78,35 @@ public class FloorManager : MonoBehaviour
         m_FloorNodes = new FloorNode[m_FloorCore.GridDimensionX * m_FloorCore.GridDimensionY];
         SetLevelNodes(m_FloorCore.FloorBlueprint);
         SpawnGimmicks();
+
     }
+
+    public void SpawnEnemys()
+    {
+        if (m_OverworldEnemyCorePrefab == null)
+        {
+            Debug.Log("OverworldEnemyPrefab is not attached");
+            return;
+        }
+
+        m_EnemysInFloor = new List<OverworldEnemyCore>();
+        m_FloorCore.InitializeEnemys();
+        foreach (InitializeOverWorldEnemy aEnemy in m_FloorCore.m_Enemy)
+        {
+            OverworldEnemyCore tempEnemy = Instantiate(m_OverworldEnemyCorePrefab,transform);
+            tempEnemy.SetEnemy(aEnemy,this);
+            m_EnemysInFloor.Add(tempEnemy);
+        }
+    }
+
+    public void MoveEnemys()
+    {
+        foreach (var aEnemy in m_EnemysInFloor)
+        {
+            aEnemy.EnemyMovement();
+        }
+    }
+
 
     public void SetLevelNodes(short[] aLevelBlueprint)
     {

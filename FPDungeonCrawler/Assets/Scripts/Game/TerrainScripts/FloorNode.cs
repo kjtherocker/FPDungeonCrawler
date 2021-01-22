@@ -187,8 +187,8 @@ public class FloorNode : Cell
 
                break;
            case WalkOntopTriggerTypes.Enemy:
-               
-               
+               m_NodeFloorManager.SwitchToCombat();
+               m_WalkOnTopTriggerTypes = WalkOntopTriggerTypes.None;
                break;
            case WalkOntopTriggerTypes.RelicTower:
                break ;

@@ -119,6 +119,7 @@ public class PlayerMovementController : MonoBehaviour {
 
                 if (currentFloorNode.IsDirectionWalkable(CurrentDirection))
                 {
+                    m_CurrentFloorManager.MoveEnemys();
                     MoveForward();
                     StepCounter++;
                 }

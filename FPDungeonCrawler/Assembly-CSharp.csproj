@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Game\MapEditor\LevelCreator.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\Cell.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiItemBoard.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\OverworldEnemyCore.cs" />
      <Compile Include="Assets\Scripts\Game\Sound\AudioManager.cs" />
      <Compile Include="Assets\Scripts\Game\OverworldScripts\Gimmick.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\StatusEffect\DebuffSkills\Restrict.cs" />
@@ -104,6 +105,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\CommandProcessor\CommandProcessor.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\SkillList.cs" />
      <Compile Include="Assets\Scripts\Game\Props\NodeReplacement.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\InitializeOverWorldEnemy.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\Forest Enemys\RedKnight\RedKnightPhase4.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\FloorNode.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\GridEditor.cs" />
@@ -185,7 +187,6 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\EnemyManager.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\OverWorldEnemy.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
