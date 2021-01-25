@@ -22,6 +22,8 @@ public class PlayerMovementController : MonoBehaviour {
 
     public Vector2Int CurrentPosition;
 
+    public GameObject m_BouncePosition;
+    
     private bool m_IsRotating;
     private bool m_IsMoving;
     
@@ -110,6 +112,48 @@ public class PlayerMovementController : MonoBehaviour {
     }
 
     
+    public  IEnumerator WallBounceMovement(Transform aObject, Vector3  aTargetPosition, float aTimeUntilDone)
+    {
+        Vector3 initialPosition = new Vector3(aObject.transform.position.x,aObject.transform.position.y,
+            aObject.transform.position.z);
+        
+        float timeTaken = 0.0f;
+        m_IsMoving = true;
+        
+        
+        while (aTimeUntilDone - timeTaken > 0)
+        {
+            if (Vector3.Distance(aObject.transform.position, aTargetPosition) < 0.05f)
+            {
+                timeTaken = aTimeUntilDone;
+            }
+
+            timeTaken += Time.deltaTime;
+            aObject.position = Vector3.Lerp(aObject.position, aTargetPosition, timeTaken /aTimeUntilDone );
+            yield return null;
+        }
+        
+        timeTaken = 0.0f; 
+        
+        while (aTimeUntilDone - timeTaken > 0)
+        {
+            if (Vector3.Distance(aObject.transform.position, initialPosition) < 0.05f)
+            {
+                timeTaken = aTimeUntilDone;
+            }
+
+            timeTaken += Time.deltaTime;
+            aObject.position = Vector3.Lerp(aObject.position, initialPosition, timeTaken /aTimeUntilDone );
+            yield return null;
+        }
+
+        aObject.position = initialPosition;
+        m_IsMoving = false;
+        yield return 0;
+    }
+
+    
+    
     public void PlayerMovement(Vector2 aDirection)
     {
         if (m_IsRotating == false)
@@ -127,6 +171,10 @@ public class PlayerMovementController : MonoBehaviour {
                     m_CurrentFloorManager.MoveEnemys();
                     MoveForward();
                     StepCounter++;
+                }
+                else
+                {
+                    StartCoroutine(WallBounceMovement(transform, m_BouncePosition.transform.position, 0.5f));
                 }
 
             }
