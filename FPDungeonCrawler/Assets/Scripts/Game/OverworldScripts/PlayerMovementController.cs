@@ -22,8 +22,8 @@ public class PlayerMovementController : MonoBehaviour {
 
     public Vector2Int CurrentPosition;
 
-    private bool Testo;
-    private bool Testo2;
+    private bool m_IsRotating;
+    private bool m_IsMoving;
     
     public FloorManager m_CurrentFloorManager;
     private Dictionary<FloorNode.CardinalNodeDirections, Vector3> m_DirectionRotations;
@@ -62,22 +62,25 @@ public class PlayerMovementController : MonoBehaviour {
 
     public  IEnumerator InterpolateRotationSmooth(Transform aObject, Vector3 aTargetRotation, float aTimeUntilDone)
     {
-        Vector3 CurrentPostion = new Vector3(aObject.localRotation.eulerAngles.x,aObject.localRotation.eulerAngles.y,aObject.localRotation.eulerAngles.z);
-        float elapsedTime = 0.0f;
-        
-        Quaternion targetQuaternion = Quaternion.Euler(0, aTargetRotation.y, 0);
-        Testo = true;
-        for(var t = 0f; t < 1; t += Time.deltaTime/aTimeUntilDone)
-        {
-      
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetQuaternion, t * 10);
-            
-            yield return new WaitForFixedUpdate();
-        }
+        m_IsRotating = true;
+        float timeTaken = 0f;
 
-        Testo = false;
+        Quaternion targetRotation = Quaternion.Euler(aTargetRotation);
+
+        while (aTimeUntilDone - timeTaken > 0)
+        {
+            if (Quaternion.Angle(aObject.transform.localRotation, targetRotation) < 0.5f)
+            {
+                timeTaken = aTimeUntilDone;
+            }
+            
+            aObject.transform.localRotation = Quaternion.Lerp( aObject.transform.localRotation, targetRotation, timeTaken/aTimeUntilDone);
+            timeTaken += Time.deltaTime;
+            yield return null;
+        }
         aObject.localEulerAngles = aTargetRotation;
-        yield return 0;
+        m_IsRotating = false;
+        yield return null;
     }
     public  IEnumerator DirectMovement(Transform MainObject, FloorNode  aTargetNode, float TimeUntilDone)
     {
@@ -85,7 +88,7 @@ public class PlayerMovementController : MonoBehaviour {
             aTargetNode.transform.position.z);
 
         float elapsedTime = 0.0f;
-        Testo2 = true;
+        m_IsMoving = true;
         while (elapsedTime < TimeUntilDone) 
         {
             
@@ -97,19 +100,19 @@ public class PlayerMovementController : MonoBehaviour {
         MainObject.position = NewNodePosition;
         currentFloorNode = aTargetNode;
         aTargetNode.ActivateWalkOnTopTrigger();
-        Testo2 = false;
+        m_IsMoving = false;
         yield return 0;
     }
 
     
     public void PlayerMovement(Vector2 aDirection)
     {
-        if (Testo == false)
+        if (m_IsRotating == false)
         {
             RotatePlayer((int) aDirection.x);
         }
 
-        if (Testo2 == false)
+        if (m_IsMoving == false)
         {
             if (aDirection.y > 0)
             {
@@ -144,7 +147,7 @@ public class PlayerMovementController : MonoBehaviour {
         
         Vector3 NewRotation = m_DirectionRotations[CurrentDirection];
 
-        StartCoroutine(InterpolateRotationSmooth(transform, NewRotation,0.3f));
+        StartCoroutine(InterpolateRotationSmooth(transform, NewRotation,0.9f));
     }
 
     public void MoveForward()
