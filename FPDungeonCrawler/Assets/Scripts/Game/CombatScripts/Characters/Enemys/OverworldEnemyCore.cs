@@ -51,7 +51,7 @@ public class OverworldEnemyCore : MonoBehaviour
            return;
        }
         
-       StartCoroutine(DirectMovement(transform, NextNode, 0.3f));
+       StartCoroutine(DirectMovement(transform, NextNode, 0.6f));
        
    }
 
@@ -62,25 +62,29 @@ public class OverworldEnemyCore : MonoBehaviour
        return TargetNode;
    }
 
-   public  IEnumerator DirectMovement(Transform MainObject, FloorNode  aTargetNode, float TimeUntilDone)
+   public  IEnumerator DirectMovement(Transform aObject, FloorNode  aTargetNode, float aTimeUntilDone)
    {
        Vector3 NewNodePosition = new Vector3(aTargetNode.transform.position.x,aTargetNode.transform.position.y,
            aTargetNode.transform.position.z);
 
-       float elapsedTime = 0.0f;
+       float timeTaken = 0.0f;
        aTargetNode.SetOverWorldEnemy(this);
        m_Animator.SetBool("b_IsWalking",true);
-       while (elapsedTime < TimeUntilDone) 
+       while (aTimeUntilDone - timeTaken > 0)
        {
-           
-           yield return new WaitForFixedUpdate();
-           elapsedTime += Time.deltaTime;
-           MainObject.position = Vector3.Lerp(MainObject.position, NewNodePosition, elapsedTime /TimeUntilDone );
+           if (Vector3.Distance(aObject.transform.position, NewNodePosition) < 0.05f)
+           {
+               timeTaken = aTimeUntilDone;
+           }
+
+           timeTaken += Time.deltaTime;
+           aObject.position = Vector3.Lerp(aObject.position, NewNodePosition, timeTaken /aTimeUntilDone );
+           yield return null;
        }
 
        m_CurrentNode = aTargetNode;
        m_Animator.SetBool("b_IsWalking",false);
-       MainObject.position = NewNodePosition;
+       aObject.position = NewNodePosition;
        MovementEnd();
        yield return 0;
    }
@@ -99,6 +103,8 @@ public class OverworldEnemyCore : MonoBehaviour
        }
        
        m_PreviousNode = m_CurrentNode;
+       
+     
        
        FloorNode NextNode = GetNextNode();
        Vector3 relativePos = NextNode.gameObject.transform.position - transform.position;

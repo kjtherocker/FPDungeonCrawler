@@ -82,22 +82,27 @@ public class PlayerMovementController : MonoBehaviour {
         m_IsRotating = false;
         yield return null;
     }
-    public  IEnumerator DirectMovement(Transform MainObject, FloorNode  aTargetNode, float TimeUntilDone)
+    public  IEnumerator DirectMovement(Transform aObject, FloorNode  aTargetNode, float aTimeUntilDone)
     {
         Vector3 NewNodePosition = new Vector3(aTargetNode.transform.position.x,aTargetNode.transform.position.y + Constants.Constants.m_HeightOffTheGrid,
             aTargetNode.transform.position.z);
 
-        float elapsedTime = 0.0f;
+        float timeTaken = 0.0f;
         m_IsMoving = true;
-        while (elapsedTime < TimeUntilDone) 
-        {
-            
-            yield return new WaitForFixedUpdate();
-            elapsedTime += Time.deltaTime;
-            MainObject.position = Vector3.Lerp(MainObject.position, NewNodePosition, elapsedTime /TimeUntilDone );
-        }
         
-        MainObject.position = NewNodePosition;
+        while (aTimeUntilDone - timeTaken > 0)
+        {
+            if (Vector3.Distance(aObject.transform.position, NewNodePosition) < 0.05f)
+            {
+                timeTaken = aTimeUntilDone;
+            }
+
+            timeTaken += Time.deltaTime;
+            aObject.position = Vector3.Lerp(aObject.position, NewNodePosition, timeTaken /aTimeUntilDone );
+            yield return null;
+        }
+
+        aObject.position = NewNodePosition;
         currentFloorNode = aTargetNode;
         aTargetNode.ActivateWalkOnTopTrigger();
         m_IsMoving = false;
@@ -159,7 +164,7 @@ public class PlayerMovementController : MonoBehaviour {
             return;
         }
         
-        StartCoroutine(DirectMovement(transform, TargetNode, 0.3f));
+        StartCoroutine(DirectMovement(transform, TargetNode, 0.6f));
 
         int index = m_CurrentFloorManager.m_FloorCore.GetIndex(TargetNode.m_PositionInGrid.x,
             TargetNode.m_PositionInGrid.y);

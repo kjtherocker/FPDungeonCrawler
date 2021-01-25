@@ -46,7 +46,7 @@ public class UiMap : UiScreen
                 }
 
                 //Every time I tried to use a variable it just wouldnt work correctly
-                Vector3 Spawnposition = new Vector3(m_StartingPoint.transform.position.x + 18 * x, m_StartingPoint.transform.position.y +18 * y,0);
+                Vector3 Spawnposition = new Vector3(m_StartingPoint.transform.position.x + 18 * x, m_StartingPoint.transform.position.y +19 * y,0);
                 
                 
                 _MapNodes[nodeindex] = Instantiate(m_MapTextureNode,SpawnPoint.transform);
