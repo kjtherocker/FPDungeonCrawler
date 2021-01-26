@@ -23,6 +23,8 @@ public class AudioManager : Singleton<AudioManager>
         FireBall,
         Encounter,
         Accept,
+        FootStep,
+        WallBounce,
         SoundEffects
     }
 
@@ -58,12 +60,12 @@ public class AudioManager : Singleton<AudioManager>
         
         if (aAudioClips == AudioClips.Exploration)
         {
-            audioClipPath = "Audio/Music/Little2";
+            audioClipPath = "Audio/Music/Overworld";
         }
 
         if (aAudioClips == AudioClips.Combat)
         {
-            audioClipPath = "Audio/Music/BabaYaga";
+            audioClipPath = "Audio/Music/Encounter";
         }
         
         if (aAudioClips == AudioClips.Selection)
@@ -87,6 +89,17 @@ public class AudioManager : Singleton<AudioManager>
         {
             audioClipPath = "Audio/SoundEffect/Accept";
         }
+        
+        if (aAudioClips == AudioClips.FootStep)
+        {
+            audioClipPath = "Audio/SoundEffect/FootSteps";
+        }
+        
+        if (aAudioClips == AudioClips.WallBounce)
+        {
+            audioClipPath = "Audio/SoundEffect/WallBounce";
+        }
+
         
         return  Resources.Load<AudioClip>(audioClipPath);;
     }

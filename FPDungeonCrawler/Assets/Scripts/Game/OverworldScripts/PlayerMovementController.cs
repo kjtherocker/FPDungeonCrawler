@@ -32,8 +32,6 @@ public class PlayerMovementController : MonoBehaviour {
 
     public UiMap m_Map;
 
-    public float StepCounter;
-    
     public void Initialize ()
     {
         CardinalDirections = new []
@@ -120,7 +118,7 @@ public class PlayerMovementController : MonoBehaviour {
         float timeTaken = 0.0f;
         m_IsMoving = true;
         
-        
+        AudioManager.instance.PlaySoundOneShot(AudioManager.AudioClips.WallBounce,AudioManager.Soundtypes.SoundEffects);        
         while (aTimeUntilDone - timeTaken > 0)
         {
             if (Vector3.Distance(aObject.transform.position, aTargetPosition) < 0.05f)
@@ -133,6 +131,7 @@ public class PlayerMovementController : MonoBehaviour {
             yield return null;
         }
         
+
         timeTaken = 0.0f; 
         
         while (aTimeUntilDone - timeTaken > 0)
@@ -147,6 +146,7 @@ public class PlayerMovementController : MonoBehaviour {
             yield return null;
         }
 
+        currentFloorNode.ActivateWalkOnTopTrigger();
         aObject.position = initialPosition;
         m_IsMoving = false;
         yield return 0;
@@ -168,23 +168,19 @@ public class PlayerMovementController : MonoBehaviour {
 
                 if (currentFloorNode.IsDirectionWalkable(CurrentDirection))
                 {
-                    m_CurrentFloorManager.MoveEnemys();
+                    AudioManager.instance.PlaySoundOneShot(AudioManager.AudioClips.FootStep,AudioManager.Soundtypes.SoundEffects);
                     MoveForward();
-                    StepCounter++;
                 }
                 else
                 {
                     StartCoroutine(WallBounceMovement(transform, m_BouncePosition.transform.position, 0.5f));
                 }
+                m_CurrentFloorManager.MoveEnemys();
 
             }
 
         }
-
-        if (StepCounter >= 10)
-        {
-          //  m_CurrentFloorManager.SwitchToCombat();    
-        }
+        
     }
 
     public void RotatePlayer(int aRotateDirection)

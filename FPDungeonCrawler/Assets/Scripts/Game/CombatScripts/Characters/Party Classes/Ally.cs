@@ -63,7 +63,7 @@ public class Ally : Creatures
         FloatingUiElementsController.CreateFloatingText(Decrementby.ToString(),  m_SpawnObject.transform, FloatingUiElementsController.UiElementType.Text,m_IsUi);
         m_CurrentHealth -= Decrementby;
         DeathCheck();
-        m_Status.RedTest();
+       // m_Status.RedTest();
         yield return new WaitForSeconds(3.0f);
         TacticsManager.instance.CharacterSkillFinished(this,PressturnReaction );
     }
