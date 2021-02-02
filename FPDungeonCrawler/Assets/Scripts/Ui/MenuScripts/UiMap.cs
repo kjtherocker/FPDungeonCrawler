@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -8,25 +9,35 @@ public class UiMap : UiScreen
 {
     private Floor m_FloorCore;
 
+    private Vector2Int m_MapDimensions;
+    
     public GameObject m_MapTextureNode;
     
     public GameObject[]  _MapNodes;
 
     public Texture[] MapNodeTexture;
     
-    public GameObject m_StartingPoint;
+    public GameObject m_SpawnPosition;
 
-    public GameObject SpawnPoint;
+    public GameObject m_Grid;
 
     public GameObject PlayerNode;
 
+    public GameObject m_NodePlayerIsOn;
+
+    private float m_WidthHeight;
+    
     private float MapNodeOffset;
+    
+    
+    
     public void SetMap(Floor aFloorCore)
     {
         m_FloorCore = aFloorCore;
+        m_WidthHeight = 17;
         GenerateMap();
         MapNodeOffset = 25;
-
+       
     }
 
     public void GenerateMap()
@@ -45,11 +56,15 @@ public class UiMap : UiScreen
                     continue;
                 }
 
+
+                float temp = 17;
                 //Every time I tried to use a variable it just wouldnt work correctly
-                Vector3 Spawnposition = new Vector3(m_StartingPoint.transform.position.x + 17 * x, m_StartingPoint.transform.position.y + 17 * y,0);
+                Vector3 Spawnposition = new Vector3(m_SpawnPosition.transform.position.x + m_WidthHeight * x, m_SpawnPosition.transform.position.y + m_WidthHeight * y,0);
                 
                 
-                _MapNodes[nodeindex] = Instantiate(m_MapTextureNode,SpawnPoint.transform);
+                _MapNodes[nodeindex] = Instantiate(m_MapTextureNode,m_Grid.transform);
+                _MapNodes[nodeindex].name = x + " " + y;
+                
                 _MapNodes[nodeindex].GetComponent<RawImage>().texture =
                     MapNodeTexture[m_FloorCore.FloorBlueprint[nodeindex]];
                 _MapNodes[nodeindex].transform.position = Spawnposition;
@@ -62,6 +77,16 @@ public class UiMap : UiScreen
 
     }
 
+    public void Update()
+    {
+
+    }
+
+    public void CenterMapToPlayer()
+    {
+        Vector2 PlayerPosition = new Vector2(m_NodePlayerIsOn.transform.localPosition.x, m_NodePlayerIsOn.transform.localPosition.y);
+        m_Grid.transform.localPosition =  new Vector3(-PlayerPosition.y,PlayerPosition.x,0);
+    }
 
     public void IsNodeRevealed(int aIndex)
     {
@@ -89,7 +114,10 @@ public class UiMap : UiScreen
 
     public void SetPlayerNode(int index)
     {
-        PlayerNode.transform.position = _MapNodes[index].transform.position; 
+        m_NodePlayerIsOn = _MapNodes[index];
+        CenterMapToPlayer();
+        PlayerNode.transform.position = m_NodePlayerIsOn.transform.position; 
+        
         SetMapRevealed(index, true);
     }
 

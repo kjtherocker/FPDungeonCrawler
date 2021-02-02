@@ -54,12 +54,7 @@ public class PlayerMovementController : MonoBehaviour {
         InputManager.Instance.m_MovementControls.Player.Movement.performed += movement => PlayerMovement(movement.ReadValue<Vector2>());
 
     }
-
-    public void Update()
-    {
-      
-    }
-
+    
     public  IEnumerator InterpolateRotationSmooth(Transform aObject, Vector3 aTargetRotation, float aTimeUntilDone)
     {
         m_IsRotating = true;

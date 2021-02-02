@@ -28,7 +28,7 @@ public class Switch : MonoBehaviour
 
         m_SwitchMovementLength = 1;
         
-        Interact(true);
+        Interact(false);
     }
 
     public void Update()

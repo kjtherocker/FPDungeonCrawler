@@ -14,7 +14,7 @@ public class Floor_Rubedo1 : Floor
 
         for (int i = FloorRevealed.Length - 1; i >= 0; i--)
         {
-            FloorRevealed[i] = true; 
+            FloorRevealed[i] = false; 
         }
 
 
