@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Items : Skills
 {
-
+    public bool m_SkillRange;
 
 }

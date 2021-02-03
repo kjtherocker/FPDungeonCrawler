@@ -7,8 +7,8 @@ public class UiMemoria : UiScreen
 {
 
     public Creatures m_MemoriaCreature;
-    public List<ButtonSkillWrapper> m_MemoriaSkills;
-    public List<ButtonSkillWrapper> m_CreatureSkills;
+    public List<SkillWrapper> m_MemoriaSkills;
+    public List<SkillWrapper> m_CreatureSkills;
     public Animator m_Animator_SkillGroup;
 
     public TextMeshProUGUI m_DescriptionText;

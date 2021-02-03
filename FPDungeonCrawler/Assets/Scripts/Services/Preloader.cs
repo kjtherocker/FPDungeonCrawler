@@ -37,7 +37,8 @@ public class Preloader : Singleton<Preloader>
         GameManager.Instance.Initialize();
         SkillList.instance.Initialize();
         EnemyList.instance.Initialize();
-
+        ItemList.instance.Initialize();
+        ItemManager.instance.Initialize();
         
         m_InitializationSteps = InitializationSteps.PartyManager;
         PartyManager.instance.Initialize();

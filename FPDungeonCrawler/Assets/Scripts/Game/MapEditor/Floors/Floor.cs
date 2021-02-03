@@ -35,12 +35,16 @@ public class Floor : MonoBehaviour
 
     public List<InitializeOverWorldEnemy> m_Enemy;
     
+    public List<InitializeItemMarkers> m_ItemMarkers;
+    
     delegate void EnemySpawners();
 
     private List<EnemySpawners> m_EnemySpawners;
     
     public float EnemySpawnRate;
 
+
+    
     public Vector2Int m_DefaultSpawnPosition;
 
     // Start is called before the first frame update
@@ -117,8 +121,7 @@ public class Floor : MonoBehaviour
         
 
         SpawnCamera();
-
-        SpawnGimmicks();
+        
     }
 
     public void InitializeEnemys()
@@ -136,10 +139,19 @@ public class Floor : MonoBehaviour
         m_DefaultSpawnPosition = new Vector2Int(0,1);
     }
     
-    public void SpawnGimmicks()
+    public void initializeGimmicks()
     {
+        m_ItemMarkers = new List<InitializeItemMarkers>();
+        SpawnItemMarker(ItemList.instance.GetItem(ItemList.ItemEnum.Potion), new Vector2Int(1,3));
+        
         
     }
+
+    public void SpawnItemMarker(Items aItem, Vector2Int aPosition)
+    {
+        m_ItemMarkers.Add(new InitializeItemMarkers(aItem, aPosition));
+    }
+
 
     public void EnemysThatCanSpawn()
     {

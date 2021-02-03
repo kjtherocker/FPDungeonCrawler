@@ -158,7 +158,18 @@ public class UiScreenCommandBoard : UiScreen
 
     public void ItemCommand()
     {
+        m_MenuControls.Disable();
+ 
+        UiManager.Instance.PopScreen();
+      
+        UiScreen ScreenTemp =
+            UiManager.Instance.GetScreen(UiManager.UiScreens.ItemBoard) ;
+
+        ((UiItemBoard)ScreenTemp).SpawnSkills(m_CommandboardCreature);
         
+        
+        UiManager.Instance.PushScreen(UiManager.UiScreens.ItemBoard);
+
     }
     
     public void EscapeCommand()

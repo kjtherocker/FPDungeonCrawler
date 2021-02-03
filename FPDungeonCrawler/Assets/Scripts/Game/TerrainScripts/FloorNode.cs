@@ -9,6 +9,10 @@ using UnityEngine;
 public class FloorNode : Cell
 {
 
+    public delegate void WalkOnTopActivation();
+
+    public WalkOnTopActivation m_WalkOnTopDelegate;
+    
     public enum CardinalNodeDirections
     {
         Up,
@@ -88,6 +92,11 @@ public class FloorNode : Cell
         SetWalkableDirections(aWalkableDirections);
     }
 
+    public void SetWalkOnTopDelegate(WalkOnTopActivation aWalkOnTopFunction)
+    {
+        m_WalkOnTopDelegate = aWalkOnTopFunction;
+    }
+
     public void SetLevelNode(List<CardinalNodeDirections> aWalkableDirections)
     {
         for(int i = NodeWalls.Count; i < 0;i++)
@@ -104,18 +113,6 @@ public class FloorNode : Cell
 
     }
 
-    public void SetOverWorldEnemy(OverworldEnemyCore aOverworldEnemy)
-    {
-        m_OverworldEnemyCore = aOverworldEnemy;
-        m_WalkOnTopTriggerTypes = WalkOntopTriggerTypes.Enemy;
-    }
-    
-    public void RemoveOverWorldEnemy()
-    {
-        m_OverworldEnemyCore = null;
-        m_WalkOnTopTriggerTypes = WalkOntopTriggerTypes.None;
-    }
-
     public void SetCreatureOnTopOfNode(Creatures aCreatures)
    {
        m_CreatureOnGridPoint = aCreatures;
@@ -127,14 +124,16 @@ public class FloorNode : Cell
 
    public void ActivateWalkOnTopTrigger()
    {
+
+       if (m_WalkOnTopDelegate != null)
+       {
+           m_WalkOnTopDelegate();
+       }
+
        switch (m_WalkOnTopTriggerTypes)
        {
            case WalkOntopTriggerTypes.None:
 
-               break;
-           case WalkOntopTriggerTypes.Enemy:
-               m_NodeFloorManager.SwitchToCombat(m_OverworldEnemyCore);
-               m_WalkOnTopTriggerTypes = WalkOntopTriggerTypes.None;
                break;
            case WalkOntopTriggerTypes.RelicTower:
                break ;

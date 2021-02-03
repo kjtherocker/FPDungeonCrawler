@@ -10,6 +10,7 @@ public class UiManager : Singleton<UiManager>
         CommandBoard,
         SkillBoard,
         DomainBoard,
+        ItemBoard,
         SkillExecutionScreen,
         DomainClash,
         Memoria,
@@ -61,7 +62,10 @@ public class UiManager : Singleton<UiManager>
         m_UiScreens[(short) UiScreens.CommandBoard] = GetComponentInChildren<UiScreenCommandBoard>(true);
         m_UiScreens[(short) UiScreens.SkillBoard] = GetComponentInChildren<UiSkillBoard>(true);
         m_UiScreens[(short) UiScreens.SkillExecutionScreen] = GetComponentInChildren<UiSkillExecutionScreen>(true);
-
+        m_UiScreens[(short) UiScreens.SkillExecutionScreen] = GetComponentInChildren<UiSkillExecutionScreen>(true);
+        m_UiScreens[(short) UiScreens.ItemBoard] = GetComponentInChildren<UiItemBoard>(true);
+        
+        
         m_UiTabs= new UiTabs[15];
         
         //UiTabs

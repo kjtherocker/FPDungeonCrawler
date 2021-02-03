@@ -41,7 +41,7 @@ public class OverworldEnemyCore : MonoBehaviour
    public void EnemyMovement()
    {
 
-       m_PreviousNode.RemoveOverWorldEnemy();
+       m_PreviousNode.SetWalkOnTopDelegate(null);
 
        FloorNode NextNode = GetNextNode();
        
@@ -62,13 +62,20 @@ public class OverworldEnemyCore : MonoBehaviour
        return TargetNode;
    }
 
+   public void WalkOnTopActivation()
+   {
+       m_FloorManager.SwitchToCombat(this);
+   }
+
+
    public  IEnumerator DirectMovement(Transform aObject, FloorNode  aTargetNode, float aTimeUntilDone)
    {
        Vector3 NewNodePosition = new Vector3(aTargetNode.transform.position.x,aTargetNode.transform.position.y,
            aTargetNode.transform.position.z);
 
        float timeTaken = 0.0f;
-       aTargetNode.SetOverWorldEnemy(this);
+       aTargetNode.SetWalkOnTopDelegate(WalkOnTopActivation);
+       m_CurrentNode = aTargetNode;
        m_Animator.SetBool("b_IsWalking",true);
        while (aTimeUntilDone - timeTaken > 0)
        {
@@ -82,7 +89,7 @@ public class OverworldEnemyCore : MonoBehaviour
            yield return null;
        }
 
-       m_CurrentNode = aTargetNode;
+     
        m_Animator.SetBool("b_IsWalking",false);
        aObject.position = NewNodePosition;
        MovementEnd();

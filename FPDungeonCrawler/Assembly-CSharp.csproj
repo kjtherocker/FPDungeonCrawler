@@ -77,7 +77,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\StatusEffect\DebuffSkills\Restrict.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\CommandProcessor\Action\Action_Move.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Domain\Null\PatchWorkChimera.cs" />
-     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\ButtonSkillWrapper.cs" />
+     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\SkillWrapper.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Wrappers\TurnIndicatorWrapper.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\Behaviours\Behaviour.cs" />
      <Compile Include="Assets\Scripts\Ui\ButtonWrappers\DomainWrapper.cs" />
@@ -189,6 +189,9 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\EnemyManager.cs" />
+     <Compile Include="Assets\Scripts\Game\OverworldScripts\ItemMarker.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\ItemList.cs" />
+     <Compile Include="Assets\Scripts\Ui\ButtonWrappers\ItemWrapper.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

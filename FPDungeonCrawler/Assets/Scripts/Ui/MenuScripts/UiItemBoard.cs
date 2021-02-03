@@ -7,8 +7,7 @@ public class UiItemBoard : UiScreen
 {
 
     public Creatures m_SkillBoardCreature;
-    public List<ButtonSkillWrapper> m_CurrentSkillMenuButtonsMenu;
-
+    public List<ItemWrapper> m_CurrentSkillMenuButtonsMenu;
     public TextMeshProUGUI m_DescriptionText;
     public int m_SkillBoardPointerPosition;
     public bool m_ToggleSkillRange;
@@ -26,9 +25,10 @@ public class UiItemBoard : UiScreen
     }
     // Update is called once per frame
     
+
     public override void ResetCursorPosition()
     {
-        m_CursorYMax = m_CreatureSkillCount;
+        m_CursorYMax = ItemManager.instance.m_AllItems.Count;
         m_CursorYCurrent = 0;
         m_ToggleSkillRange = false;
 
@@ -66,8 +66,10 @@ public class UiItemBoard : UiScreen
 
         UiSkillExecutionScreen UiSkillExecution =
             (UiSkillExecutionScreen) UiManager.instance.GetScreen(UiManager.UiScreens.SkillExecutionScreen);
+
+        Items Tempitem = ItemManager.instance.m_AllItems[m_CursorYCurrent].m_Items;
         
-        UiSkillExecution.SetSkill(m_SkillBoardCreature.m_Skills[m_CursorYCurrent],m_SkillBoardCreature,m_ToggleSkillRange);
+        UiSkillExecution.SetSkill( Tempitem,m_SkillBoardCreature,Tempitem.m_SkillRange);
 
         if (m_SkillBoardCreature.charactertype == Creatures.Charactertype.Ally &&
             m_SkillBoardCreature.m_Skills[m_CursorYCurrent].m_SkillType == Skills.SkillType.Attack)
@@ -135,11 +137,14 @@ public class UiItemBoard : UiScreen
 
     public void SetUpButtons()
     {
-        for (int i = 0; i < m_SkillBoardCreature.m_Skills.Count; i++)
+        List<ItemCore> TempItemCore = ItemManager.instance.m_AllItems;
+        
+        
+        for (int i = 0; i < TempItemCore.Count; i++)
         {
             m_CurrentSkillMenuButtonsMenu[i].gameObject.SetActive(true);
             m_CurrentSkillMenuButtonsMenu[i].SkillHoveredOver(true);
-            m_CurrentSkillMenuButtonsMenu[i].SetupButton(m_SkillBoardCreature, m_SkillBoardCreature.m_Skills[i],m_ToggleSkillRange);
+            m_CurrentSkillMenuButtonsMenu[i].SetupButton(m_SkillBoardCreature, TempItemCore[i]);
         }
         m_CurrentSkillMenuButtonsMenu[m_CursorYCurrent].SkillHoveredOver(false);
     }

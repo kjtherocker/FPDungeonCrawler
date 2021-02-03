@@ -7,7 +7,7 @@ public class UiSkillBoard : UiScreen
 {
 
     public Creatures m_SkillBoardCreature;
-    public List<ButtonSkillWrapper> m_CurrentSkillMenuButtonsMenu;
+    public List<SkillWrapper> m_CurrentSkillMenuButtonsMenu;
 
     public TextMeshProUGUI m_SkillRange;
     public TextMeshProUGUI m_DescriptionText;
@@ -98,7 +98,6 @@ public class UiSkillBoard : UiScreen
             UiSkillExecution.SelectedCreatures(UiSkillExecutionScreen.SkillExecutionSelectedCreatures.Players);
         }
 
-        
         
         UiManager.Instance.PopScreen();
         UiManager.instance.PushScreen(UiManager.UiScreens.SkillExecutionScreen);

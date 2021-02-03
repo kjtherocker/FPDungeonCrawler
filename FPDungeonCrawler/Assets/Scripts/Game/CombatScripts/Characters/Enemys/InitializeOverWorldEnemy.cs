@@ -16,3 +16,17 @@ public struct InitializeOverWorldEnemy
         m_Enemyset = aEnemySet;
     }
 }
+
+
+public struct InitializeItemMarkers
+{
+    public Vector2Int m_PositionInGrid;
+    public Items m_Item;
+    
+    public InitializeItemMarkers(Items aItem, Vector2Int aSpawnPosition)
+    {
+        m_PositionInGrid = aSpawnPosition;
+        m_Item = aItem;
+
+    }
+}

@@ -2,32 +2,50 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
-public class ItemManager : MonoBehaviour
+public struct ItemCore
 {
-    // Start is called before the first frame update
+    public Items m_Items;
+    public int m_Amount;
+    public  ItemCore(Items aItem, int aAmount)
+    {
+        m_Items = aItem;
+        m_Amount = aAmount;
+    }
+    public void AddMoreItem(int aAddedAmount )
+    {
+        m_Amount += aAddedAmount;
+        Debug.Log(m_Items.ToString() + " was added and the current amount is " + m_Amount);
+    }
+}
 
-    private Dictionary<Items, int> m_AllItems;
+
+public class ItemManager : Singleton<ItemManager>
+{
+    public List<ItemCore> m_AllItems;
+
+    public void Initialize()
+    {
+        m_AllItems = new List<ItemCore>();
+    }
 
 
     public void AddItems(Items aNewItem)
     {
-        if(m_AllItems.ContainsKey(aNewItem))
+
+        foreach (var aItem in m_AllItems)
         {
-        //    m_AllItems[aNewItem] = m_AllItems.;
+            if (aItem.m_Items == aNewItem)
+            {
+                aItem.AddMoreItem(1);
             
+                return;
+            }
         }
-
-    }
-
-    void Start()
-    {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        m_AllItems.Add(new ItemCore(aNewItem,1));
         
+        
+        Debug.Log(aNewItem.ToString() + " was added ");
+
     }
 }
