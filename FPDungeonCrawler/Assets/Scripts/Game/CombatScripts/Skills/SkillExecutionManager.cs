@@ -12,7 +12,7 @@ public class SkillExecutionManager
 
     public void ExecuteSkill(Skills aSkill, bool aSkillRange,int aSkillPosition, Creatures aAttacker)
     {
-        aAttacker.CurrentMana -= aSkillRange ? aSkill.m_MultiTargetCost : aSkill.m_SingleTargetCost;
+        aAttacker.m_CurrentMana -= aSkillRange ? aSkill.m_MultiTargetCost : aSkill.m_SingleTargetCost;
         
         //Single Target Attack
         if (aSkill.m_SkillType == Skills.SkillType.Attack && !aSkillRange)

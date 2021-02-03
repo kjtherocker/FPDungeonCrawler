@@ -11,8 +11,8 @@ public class Vella : Ally
     {
         m_CurrentHealth = 300;
         m_MaxHealth = 300;
-        MaxMana = 180;
-        CurrentMana = MaxMana;
+        m_MaxMana = 180;
+        m_CurrentMana = m_MaxMana;
         
         BaseStrength = 75;
         BaseMagic = 40;

@@ -14,8 +14,8 @@ public class Sigma : Ally {
 		m_MaxHealth = 300;
 		m_CurrentHealth = m_MaxHealth;
 
-        MaxMana = 100;
-        CurrentMana = MaxMana;
+        m_MaxMana = 100;
+        m_CurrentMana = m_MaxMana;
         
         BaseStrength = 75;
         BaseMagic = 40;

@@ -14,7 +14,7 @@ public class Potion : Items
         m_ElementalType = ElementalType.Null;
         m_SkillType = SkillType.Heal;
         m_SkillName = "Potion";
-        m_SkillDescription = "Recover 500 HP for one ally";
+        m_SkillDescription = "Recover 100 HP for one ally";
 
         m_SkillRange = false;
         

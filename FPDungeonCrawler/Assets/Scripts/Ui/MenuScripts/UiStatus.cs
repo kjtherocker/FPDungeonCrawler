@@ -63,8 +63,8 @@ public class UiStatus : UiTabs
         m_MaxHealth = Creature.m_MaxHealth;
         m_HealthText.text = m_CurrentHealth.ToString();
         
-        m_CurrentMana = Creature.CurrentMana;
-        m_MaxMana = Creature.MaxMana;
+        m_CurrentMana = Creature.m_CurrentMana;
+        m_MaxMana = Creature.m_MaxMana;
         m_ManaText.text = m_CurrentMana.ToString();
 
 
@@ -136,8 +136,8 @@ public class UiStatus : UiTabs
         m_MaxHealth = Creature.m_MaxHealth;
         m_HealthText.text = m_CurrentHealth.ToString();
         
-        m_CurrentMana = Creature.CurrentMana;
-        m_MaxMana = Creature.MaxMana;
+        m_CurrentMana = Creature.m_CurrentMana;
+        m_MaxMana = Creature.m_MaxMana;
         m_ManaText.text = m_CurrentMana.ToString();
 
         SetSliders(ref m_CurrentHealth, m_MaxHealth, m_HealthbarSlider);

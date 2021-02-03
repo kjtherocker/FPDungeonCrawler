@@ -50,8 +50,8 @@ public class Creatures : MonoBehaviour
     public int m_CurrentHealth;
     public int m_MaxHealth;
 
-    public int CurrentMana;
-    public int MaxMana;
+    public int m_CurrentMana;
+    public int m_MaxMana;
     
     
     public int BaseStrength;
@@ -276,7 +276,7 @@ public class Creatures : MonoBehaviour
     {
         m_CurrentHealth += Increment;
 
-        if (m_CurrentHealth == m_MaxHealth)
+        if (m_CurrentHealth >= m_MaxHealth)
         {
             m_CurrentHealth = m_MaxHealth;
         }
@@ -285,6 +285,25 @@ public class Creatures : MonoBehaviour
 
         FloatingUiElementsController.CreateFloatingText(Increment.ToString(), m_SpawnObject.transform,
                 FloatingUiElementsController.UiElementType.Text, m_IsUi);
+                
+        yield return new WaitForSeconds(1.5f);
+        
+        TacticsManager.instance.CharacterSkillFinished(this,PressTurnManager.PressTurnReactions.Normal);
+    }
+    
+    public virtual IEnumerator IncrementMana(int Increment)
+    {
+        m_CurrentMana += Increment;
+
+        if (m_CurrentMana >= m_MaxMana)
+        {
+            m_CurrentMana = m_MaxMana;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        FloatingUiElementsController.CreateFloatingText(Increment.ToString(), m_SpawnObject.transform,
+            FloatingUiElementsController.UiElementType.Text, m_IsUi);
                 
         yield return new WaitForSeconds(1.5f);
         

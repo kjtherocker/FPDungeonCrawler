@@ -8,9 +8,11 @@ public class ItemList : Singleton<ItemList>
 {
     public enum ItemEnum
     {
-        
         None,
-        Potion
+        Potion,
+        HighPotion,
+        Ether,
+        HighEther
     }
 
     //public List<Skills> m_SkillTypes;
@@ -28,8 +30,12 @@ public class ItemList : Singleton<ItemList>
     {
         m_SkillTypes = new Dictionary<int, Items>();
         
-        //AlimentEffects
+        //Regen Effects
         m_SkillTypes.Add((int)ItemEnum.Potion, new Potion());
+        m_SkillTypes.Add((int)ItemEnum.HighPotion, new HighPotion());
+
+        m_SkillTypes.Add((int) ItemEnum.Ether, new Ether());
+        m_SkillTypes.Add((int)ItemEnum.HighEther, new HighEther());
 
         foreach (var aItem in m_SkillTypes)
         {

@@ -6,7 +6,7 @@ using TMPro;
 public class UiItemBoard : UiScreen
 {
 
-    public Creatures m_SkillBoardCreature;
+    public Creatures m_ItemBoardCreature;
     public List<ItemWrapper> m_CurrentSkillMenuButtonsMenu;
     public TextMeshProUGUI m_DescriptionText;
     public int m_SkillBoardPointerPosition;
@@ -69,22 +69,22 @@ public class UiItemBoard : UiScreen
 
         Items Tempitem = ItemManager.instance.m_AllItems[m_CursorYCurrent].m_Items;
         
-        UiSkillExecution.SetSkill( Tempitem,m_SkillBoardCreature,Tempitem.m_SkillRange);
+        UiSkillExecution.SetSkill( Tempitem,m_ItemBoardCreature,Tempitem.m_SkillRange);
 
-        if (m_SkillBoardCreature.charactertype == Creatures.Charactertype.Ally &&
-            m_SkillBoardCreature.m_Skills[m_CursorYCurrent].m_SkillType == Skills.SkillType.Attack)
+        if (m_ItemBoardCreature.charactertype == Creatures.Charactertype.Ally &&
+            Tempitem.m_SkillType == Skills.SkillType.Attack)
         {
             UiSkillExecution.SelectedCreatures(UiSkillExecutionScreen.SkillExecutionSelectedCreatures.Enemys);
         }
         
-        if (m_SkillBoardCreature.charactertype == Creatures.Charactertype.Ally &&
-            m_SkillBoardCreature.m_Skills[m_CursorYCurrent].m_SkillType == Skills.SkillType.Heal)
+        if (m_ItemBoardCreature.charactertype == Creatures.Charactertype.Ally &&
+            Tempitem.m_SkillType == Skills.SkillType.Heal)
         {
             UiSkillExecution.SelectedCreatures(UiSkillExecutionScreen.SkillExecutionSelectedCreatures.Players);
         }
         
-        if (m_SkillBoardCreature.charactertype == Creatures.Charactertype.Ally &&
-            m_SkillBoardCreature.m_Skills[m_CursorYCurrent].m_SkillType == Skills.SkillType.Buff)
+        if (m_ItemBoardCreature.charactertype == Creatures.Charactertype.Ally &&
+            Tempitem.m_SkillType == Skills.SkillType.Buff)
         {
             UiSkillExecution.SelectedCreatures(UiSkillExecutionScreen.SkillExecutionSelectedCreatures.Players);
         }
@@ -115,11 +115,11 @@ public class UiItemBoard : UiScreen
     public void SpawnSkills(Creatures aCreatures)
     {
 
-        m_SkillBoardCreature = aCreatures;
+        m_ItemBoardCreature = aCreatures;
 
         
         
-        for (int i = 0; i < m_CurrentSkillMenuButtonsMenu.Count; i++)
+        for (int i = 0; i < ItemManager.instance.m_AllItems.Count; i++)
         {
             m_CurrentSkillMenuButtonsMenu[i].gameObject.SetActive(false);
             m_CurrentSkillMenuButtonsMenu[i].m_ButtonSkill = null;
@@ -129,7 +129,7 @@ public class UiItemBoard : UiScreen
 
         SetUpButtons();
         
-        m_CreatureSkillCount = m_SkillBoardCreature.m_Skills.Count - 1;
+        m_CreatureSkillCount = m_ItemBoardCreature.m_Skills.Count - 1;
         
        ResetCursorPosition();
 
@@ -144,7 +144,7 @@ public class UiItemBoard : UiScreen
         {
             m_CurrentSkillMenuButtonsMenu[i].gameObject.SetActive(true);
             m_CurrentSkillMenuButtonsMenu[i].SkillHoveredOver(true);
-            m_CurrentSkillMenuButtonsMenu[i].SetupButton(m_SkillBoardCreature, TempItemCore[i]);
+            m_CurrentSkillMenuButtonsMenu[i].SetupButton(m_ItemBoardCreature, TempItemCore[i]);
         }
         m_CurrentSkillMenuButtonsMenu[m_CursorYCurrent].SkillHoveredOver(false);
     }

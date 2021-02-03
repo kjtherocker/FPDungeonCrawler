@@ -13,8 +13,8 @@ public class Cavia : Ally
         m_MaxHealth = 300;
         
         
-        MaxMana = 80;
-        CurrentMana = MaxMana;
+        m_MaxMana = 80;
+        m_CurrentMana = m_MaxMana;
         
         BaseStrength = 75;
         BaseMagic = 40;

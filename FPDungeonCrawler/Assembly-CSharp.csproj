@@ -192,6 +192,9 @@
      <Compile Include="Assets\Scripts\Game\OverworldScripts\ItemMarker.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\ItemList.cs" />
      <Compile Include="Assets\Scripts\Ui\ButtonWrappers\ItemWrapper.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\items\Ether.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\items\High Potion.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\items\HighEther.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -59,11 +59,11 @@ public class SkillWrapper : MonoBehaviour
 
         int SkillSize = aSkillSize ?  m_ButtonSkill.m_MultiTargetCost : m_ButtonSkill.m_SingleTargetCost ;
         
-        if (m_ButtonTurnHolder.CurrentMana <= SkillSize)
+        if (m_ButtonTurnHolder.m_CurrentMana <= SkillSize)
         {
             m_Text_NameOfSkill.color = m_Color_HalfTransparentWhite;
         }
-        else if (m_ButtonTurnHolder.CurrentMana >= SkillSize)
+        else if (m_ButtonTurnHolder.m_CurrentMana >= SkillSize)
         {
             m_Text_NameOfSkill.color = m_Color_White;
         }
