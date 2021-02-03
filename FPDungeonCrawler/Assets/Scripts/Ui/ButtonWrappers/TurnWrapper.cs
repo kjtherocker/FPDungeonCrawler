@@ -16,6 +16,34 @@ public class TurnWrapper : MonoBehaviour
         UpdateTurnWrapper();
     }
 
+    public  IEnumerator SetIconOpacity( int aOpacity, float aTimeUntilDone)
+    {
+
+      // float timeTaken = 0f;
+
+
+      // Color newColor = m_DefaultIcon.color;
+      // 
+      // while (aTimeUntilDone - timeTaken > 0)
+      // {
+      //     if (Quaternion.(aObject.transform.localRotation, targetRotation) < 0.5f)
+      //     {
+      //         timeTaken = aTimeUntilDone;
+      //     }
+
+
+      //     float testo = newColor.a;
+      //     
+      //     
+      //     newColor.a = Vector3.Lerp(testo, aOpacity, timeTaken/aTimeUntilDone);
+      //     timeTaken += Time.deltaTime;
+      //     yield return null;
+      // }
+      // aObject.localEulerAngles = aTargetRotation;
+  
+        yield return null;
+    }
+    
     public void UpdateTurnWrapper()
     {
         if (m_PressTurn.m_IsEmpowered)

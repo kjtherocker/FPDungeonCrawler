@@ -145,7 +145,7 @@ public class Floor : MonoBehaviour
     {
         m_Enemy = new List<InitializeOverWorldEnemy>();
         m_EnemySpawners = new List<EnemySpawners>();
-        m_EnemySpawners.Add(Enemy1);
+       // m_EnemySpawners.Add(Enemy1);
         m_EnemySpawners.Add(Enemy2);
       // m_EnemySpawners.Add(Enemy3);
       // m_EnemySpawners.Add(Enemy4);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 
-public class Switch : MonoBehaviour
+public class Switch : Gimmick
 {
     enum SwitchState
     {

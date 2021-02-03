@@ -66,6 +66,8 @@ public class FloorNode : Cell
     public PropList.NodeReplacements m_NodeReplacementOnNode;
 
     public List<CardinalNodeDirections> m_WalkableDirections;
+    
+    public List<CardinalNodeDirections> m_InteractableDirections;
 
     public List<GameObject> NodeWalls;
     
