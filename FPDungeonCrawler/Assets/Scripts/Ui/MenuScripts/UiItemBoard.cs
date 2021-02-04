@@ -28,7 +28,7 @@ public class UiItemBoard : UiScreen
 
     public override void ResetCursorPosition()
     {
-        m_CursorYMax = ItemManager.instance.m_AllItems.Count;
+        m_CursorYMax = ItemManager.instance.m_AllItems.Count - 1;
         m_CursorYCurrent = 0;
         m_ToggleSkillRange = false;
 
@@ -119,7 +119,7 @@ public class UiItemBoard : UiScreen
 
         
         
-        for (int i = 0; i < ItemManager.instance.m_AllItems.Count; i++)
+        for (int i = 0; i < m_CurrentSkillMenuButtonsMenu.Count; i++)
         {
             m_CurrentSkillMenuButtonsMenu[i].gameObject.SetActive(false);
             m_CurrentSkillMenuButtonsMenu[i].m_ButtonSkill = null;

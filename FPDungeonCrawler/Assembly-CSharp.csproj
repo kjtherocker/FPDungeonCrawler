@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiScreenCommandBoard.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\NodeFormations.cs" />
      <Compile Include="Assets\Scripts\Input\InputManager.cs" />
+     <Compile Include="Assets\Scripts\Game\OverworldScripts\ItemMarker.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\LevelCreator.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\Cell.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiItemBoard.cs" />
@@ -91,6 +92,7 @@
      <Compile Include="Assets\Scripts\Game\GameManager.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Managers\TacticsManager.cs" />
      <Compile Include="Assets\Scripts\Game\MapEditor\PropList.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\items\High Potion.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AilmentSkills\Rage.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\StatusEffect\StatusEffects.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Party Classes\Cavia.cs" />
@@ -136,7 +138,9 @@
      <Compile Include="Assets\Scripts\DialogScripts\Light\LightMixerBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\OverworldScripts\OverworldCamera.cs" />
      <Compile Include="Assets\Scripts\Game\TerrainScripts\DomainSphere.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\ItemList.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\items\Potion.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\items\HighEther.cs" />
      <Compile Include="Assets\Scripts\Services\Singleton.cs" />
      <Compile Include="Assets\Scripts\Ui\ButtonWrappers\EnemyTabs.cs" />
      <Compile Include="Assets\Scripts\DialogScripts\Light\LightBehaviour.cs" />
@@ -179,6 +183,7 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\Creatures.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\BloodSkills\BloodRelief.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\PartyMenu.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\items\Ether.cs" />
      <Compile Include="Assets\Scripts\Ui\MenuScripts\UiSkillExecutionScreen.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Text\FloatingUiElements.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\MovementTypes\Movement_Normal.cs" />
@@ -188,13 +193,8 @@
      <Compile Include="Assets\Scripts\Game\CombatScripts\items\Items.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Ai\Core\GraphNode.cs" />
      <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\AttackSkills\IceRain.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\EnemyManager.cs" />
-     <Compile Include="Assets\Scripts\Game\OverworldScripts\ItemMarker.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\Skills\ItemList.cs" />
      <Compile Include="Assets\Scripts\Ui\ButtonWrappers\ItemWrapper.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\items\Ether.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\items\High Potion.cs" />
-     <Compile Include="Assets\Scripts\Game\CombatScripts\items\HighEther.cs" />
+     <Compile Include="Assets\Scripts\Game\CombatScripts\Characters\Enemys\EnemyManager.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\TestCellShading.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

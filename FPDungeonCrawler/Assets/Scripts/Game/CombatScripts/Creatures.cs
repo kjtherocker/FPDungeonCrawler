@@ -305,7 +305,7 @@ public class Creatures : MonoBehaviour
         FloatingUiElementsController.CreateFloatingText(Increment.ToString(), m_SpawnObject.transform,
             FloatingUiElementsController.UiElementType.Text, m_IsUi);
                 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.8f);
         
         TacticsManager.instance.CharacterSkillFinished(this,PressTurnManager.PressTurnReactions.Normal);
     }

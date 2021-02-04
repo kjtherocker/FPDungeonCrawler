@@ -45,6 +45,8 @@ public class TacticsManager : Singleton<TacticsManager>
     
     public CombatStates m_BattleStates;
     public int m_CurrentTurnHolder;
+
+    private float m_TimeInBetweenActions;
     
     public enum CombatStates
     {
@@ -66,6 +68,8 @@ public class TacticsManager : Singleton<TacticsManager>
         m_PartyManager = PartyManager.Instance;
         //CombatStart();
         m_SkillExecutionManager = new SkillExecutionManager(this);
+
+        m_TimeInBetweenActions = 0.8f;
     }
 
     public void StartCombat(CombatArena aArena,Floor aCurrentFloor, FloorManager aFloorManager, OverworldEnemyCore aOverworldEnemyCore)
@@ -126,7 +130,7 @@ public class TacticsManager : Singleton<TacticsManager>
     {
         
         UiManager.instance.PopAllScreens();
-        yield return new WaitForSeconds(0.5f);
+
         m_CurrentTurnHolder = 0;
         m_BattleStates = CombatStates.EnemyTurn;
 
@@ -136,7 +140,7 @@ public class TacticsManager : Singleton<TacticsManager>
         m_UiTabTurnKeeper.SetIconType(false);
         UpdateCurrentTurnAmount(m_TurnOrderEnemy.Count);
         PressTurnManager.instance.StartTurn(m_TurnOrderEnemy.Count);
-        
+
         yield return new WaitForEndOfFrame();
         
         StartCoroutine(m_NextTurn());
@@ -171,7 +175,7 @@ public class TacticsManager : Singleton<TacticsManager>
        UiManager.instance.PopTab(UiManager.UiTab.EnemyAction);
 
 
-       yield return new WaitForSeconds(2.5f);
+
         Skills skillToCast = ((Enemy)m_TurnOrderEnemy[m_CurrentTurnHolder]).AiSetup();
         
         int whoToAttack = 0;
@@ -187,6 +191,8 @@ public class TacticsManager : Singleton<TacticsManager>
         {
             m_CurrentTurnHolder = 0;
         }
+
+        yield return null;
     }
     
     public IEnumerator NextAlleyTurn()
@@ -250,12 +256,21 @@ public class TacticsManager : Singleton<TacticsManager>
             AddCreaturesInActiveSkill(aCreatures[i]);
         }
 
+        StartCoroutine(ExecuteAction(aSkillActions));
+    }
+
+    public IEnumerator ExecuteAction(List<IEnumerator> aSkillActions)
+    {
         for (int i = 0; i < aSkillActions.Count; i++)
         {
             StartCoroutine(aSkillActions[i]);
+            yield return new WaitForSeconds(m_TimeInBetweenActions);
         }
+
+        yield return null;
     }
-    
+
+
     public void ProcessAction(IEnumerator aSkillActions, Creatures aCreature)
     {
         AddCreaturesInActiveSkill(aCreature);
