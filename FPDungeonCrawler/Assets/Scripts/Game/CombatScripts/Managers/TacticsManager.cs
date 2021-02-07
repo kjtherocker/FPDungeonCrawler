@@ -199,10 +199,15 @@ public class TacticsManager : Singleton<TacticsManager>
     {
         UiManager.Instance.PopScreen();
         yield return new WaitForSeconds(0.2f);
-        UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
-         
+ 
         UiScreen temp = UiManager.instance.GetScreen(UiManager.UiScreens.CommandBoard);
         ((UiScreenCommandBoard) temp).m_CommandboardCreature = m_PartyManager.m_CurrentParty[m_CurrentTurnHolder];
+        
+        UiManager.instance.PushScreen(UiManager.UiScreens.CommandBoard);
+         
+ 
+        
+        
         
         m_CurrentTurnHolder++;
         if (m_CurrentTurnHolder >= m_TurnOrderAlly.Count)

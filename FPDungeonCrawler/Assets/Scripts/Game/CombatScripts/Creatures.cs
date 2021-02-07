@@ -46,7 +46,8 @@ public class Creatures : MonoBehaviour
     public Charactertype charactertype;
     public Skills.ElementalType elementalStrength;
     public Skills.ElementalType  elementalWeakness;
-
+    public UiStatus m_Status;
+    
     public int m_CurrentHealth;
     public int m_MaxHealth;
 

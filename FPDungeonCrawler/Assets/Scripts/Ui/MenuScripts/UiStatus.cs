@@ -11,8 +11,8 @@ public class UiStatus : UiTabs
     
     public delegate void OnUiStatusUpdate();
     public event OnUiStatusUpdate onUiStatusUpdate;
-    
-    
+
+    public GameObject m_Character;
     public RawImage Image_Portrait;
     public Creatures Creature;
     public RawImage m_Background;
@@ -43,6 +43,13 @@ public class UiStatus : UiTabs
     public void RedTest()
     {
         m_Background.color = Color.red;
+    }
+
+    public void SetStatus(bool Active)
+    {
+        m_Character.SetActive(Active);
+        Highlight.color = Active ? m_Highlight : m_NotHighlight;
+
     }
 
     public void SetCharacter(Creatures Character)

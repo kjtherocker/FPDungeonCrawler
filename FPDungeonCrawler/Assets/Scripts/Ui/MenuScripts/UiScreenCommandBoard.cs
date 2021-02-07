@@ -39,7 +39,18 @@ public class UiScreenCommandBoard : UiScreen
         m_CommandboardCreature = aCreature;
         //     m_CommandObjects.transform.position = screenPosition;
     }
-    
+
+    public void SetStatus(bool aStatusBool)
+    {
+        if (m_CommandboardCreature != null)
+        {
+            UiTabsPartyStatusManager UiPartyStatusManager = (UiTabsPartyStatusManager)UiManager.instance.GetUiTab(UiManager.UiTab.PlayerStatus);
+
+            UiPartyStatusManager.m_Portrait.gameObject.SetActive(aStatusBool);
+            m_CommandboardCreature.m_Status.SetStatus(aStatusBool);
+        }
+    }
+
     public override void ResetCursorPosition()
     {
         m_CursorYMax = m_CommandTab.Count - 1;
@@ -68,6 +79,7 @@ public class UiScreenCommandBoard : UiScreen
     {
         base.OnPop();
         m_MenuControls.Disable();
+        SetStatus(false);
     }
 
     
@@ -76,6 +88,7 @@ public class UiScreenCommandBoard : UiScreen
     {
         ResetCursorPosition();
         base.OnPush();
+        SetStatus(true);
     }
 
     public override void MoveMenuCursorPosition(Vector2 aMovement)
@@ -101,7 +114,6 @@ public class UiScreenCommandBoard : UiScreen
         m_MenuControls.Disable();
  
         UiManager.Instance.PopScreen();
-        
         UiSkillExecutionScreen UiSkillExecution =
             (UiSkillExecutionScreen) UiManager.instance.GetScreen(UiManager.UiScreens.SkillExecutionScreen);
         

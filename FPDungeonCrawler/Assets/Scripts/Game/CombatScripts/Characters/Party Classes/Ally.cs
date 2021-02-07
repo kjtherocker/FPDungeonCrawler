@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ally : Creatures
 {
-    private UiStatus m_Status;
+
     public void SetCreature()
     {
         m_Skills = new List<Skills>();
