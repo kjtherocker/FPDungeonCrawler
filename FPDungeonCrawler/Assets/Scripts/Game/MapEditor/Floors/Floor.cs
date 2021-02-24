@@ -143,8 +143,8 @@ public class Floor : MonoBehaviour
     {
         m_ItemMarkers = new List<InitializeItemMarkers>();
         SpawnItemMarker(ItemList.instance.GetItem(ItemList.ItemEnum.Potion), new Vector2Int(1,3));
-        SpawnItemMarker(ItemList.instance.GetItem(ItemList.ItemEnum.Ether), new Vector2Int(1,2));
-        SpawnItemMarker(ItemList.instance.GetItem(ItemList.ItemEnum.HighPotion), new Vector2Int(2,3));
+        SpawnItemMarker(ItemList.instance.GetItem(ItemList.ItemEnum.Potion), new Vector2Int(1,2));
+        SpawnItemMarker(ItemList.instance.GetItem(ItemList.ItemEnum.Potion), new Vector2Int(2,3));
         SpawnItemMarker(ItemList.instance.GetItem(ItemList.ItemEnum.HighEther), new Vector2Int(3,3));
     }
 

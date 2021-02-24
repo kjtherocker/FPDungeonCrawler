@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-public struct ItemCore
+public class ItemCore
 {
     public Items m_Items;
     public int m_Amount;
@@ -10,6 +10,7 @@ public struct ItemCore
     {
         m_Items = aItem;
         m_Amount = aAmount;
+        Debug.Log(m_Items.ToString() + " was added");
     }
     public void AddMoreItem(int aAddedAmount )
     {
@@ -44,8 +45,6 @@ public class ItemManager : Singleton<ItemManager>
         
         m_AllItems.Add(new ItemCore(aNewItem,1));
         
-        
-        Debug.Log(aNewItem.ToString() + " was added ");
 
     }
 }
